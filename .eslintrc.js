@@ -50,7 +50,7 @@ module.exports = {
     'no-console': 'warn',
     'react/jsx-filename-extension': 'off',
     'no-use-before-define': 'off',
-    'max-len': [2, {code: 80}],
+    'max-len': [2, { code: 80 }],
     'react/style-prop-object': 'off',
     'no-trailing-spaces': 'error',
     'eol-last': 2,
@@ -65,5 +65,6 @@ module.exports = {
     'import/newline-after-import': 'error',
     'func-names': 'off',
     'require-jsdoc': 'off',
+    'object-curly-spacing': ['error', 'always'],
   },
 };
