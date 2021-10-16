@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Chip } from 'components';
+import Layout from 'styles/common/layout';
+
 
 const Home = () => {
   return (
-    <View>
-      <Text>Hello World</Text>
+    <View style={Layout.flexRow}>
+      <Chip label="Most Popular" />
+      <Chip label="Most Popular 2" />
     </View>
   );
 };

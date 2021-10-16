@@ -1,13 +1,15 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
-import Home from '_screens/home';
+
+import Home from 'screens/home';
+import AppContainerStyles from 'styles/App';
 import store from './store';
 
 const AppContainer = () => {
   return (
     <Provider store={store}>
-      <SafeAreaView>
+      <SafeAreaView style={AppContainerStyles.container}>
         <Home />
       </SafeAreaView>
     </Provider>
