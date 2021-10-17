@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors, Sizes } from 'constants';
 
-const chipStyles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.WHITE,
@@ -12,5 +12,3 @@ const chipStyles = StyleSheet.create({
     color: Colors.WHITE,
   },
 });
-
-export default chipStyles;

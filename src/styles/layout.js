@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const Layout = StyleSheet.create({
-  flexColumn: {
+  flexCol: {
     flex: 1,
     flexDirection: 'column',
   },

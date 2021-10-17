@@ -1,9 +1,10 @@
+// ACTIONS
 const INCREMENT = 'INCREMENT';
-
 const DECREMENT = 'DECREMENT';
-
 const CHANGE_BY_AMOUNT = 'CHANGE_BY_AMOUNT';
 
+
+// DISPATCHERS
 export const incrementAction = () => ({
   type: INCREMENT,
 });
@@ -17,10 +18,14 @@ export const changeByAmount = (val) => ({
   payload: val,
 });
 
+
+// INITIAL STATE
 const initialState = {
   counter: { amount: 0 },
 };
 
+
+// REDUCER
 export default (state = initialState, action) => {
   switch (action.type) {
   case INCREMENT:

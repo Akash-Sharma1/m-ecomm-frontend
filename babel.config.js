@@ -9,6 +9,7 @@ module.exports = function(api) {
           'root': ['./src'],
           'alias': {
             'assets': './src/assets',
+            'hoc': './src/hoc',
             'screens': './src/screens',
             'components': './src/components',
             'constants': './src/constants',

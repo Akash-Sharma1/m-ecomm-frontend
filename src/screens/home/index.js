@@ -1,13 +1,24 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import Layout from 'styles/common/layout';
+import { useSelector } from 'react-redux';
+import { SafeAreaView, View } from 'react-native';
+
+import { ProductList, TopBar } from 'components';
+import styles from './styles';
+import Title from './components/Title';
+// import Tabs from './components/Tabs';
 
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const { products } = useSelector((state) => state.products);
+
   return (
-    <View style={Layout.flexRow}>
-      <Text>HERE 1 2 3</Text>
-    </View>
+    <SafeAreaView style={styles.container} >
+      <TopBar navigation={navigation} />
+      <View style={styles.container}>
+        <Title />
+        <ProductList variant="wide" products={products} />
+      </View>
+    </SafeAreaView>
   );
 };
 

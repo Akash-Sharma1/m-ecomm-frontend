@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import chipStyles from 'styles/components/chip';
+
+import chipStyles from './styles';
 
 const Chip = ({ label, onClick, styles, active = false }) => {
   const [isSelected, setSelected] = useState(active);

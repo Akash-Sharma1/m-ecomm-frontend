@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "components": ["src/components/*"],
+      "hoc": ["src/hoc/*"],
       "constants": ["src/constants/*"],
       "assets": ["src/assets/*"],
       "screens": ["src/screens/*"],

@@ -24,9 +24,10 @@ module.exports = {
   'settings': {
     'import/resolver': {
       node: {
-        paths: ['src'],
+        paths: ['./src'],
         alias: {
           components: './src/components',
+          hoc: './src/hoc',
           constants: './src/constants',
           assets: './src/assets',
           screens: './src/screens',
@@ -46,7 +47,6 @@ module.exports = {
     'react-native/no-inline-styles': 2,
     'react-native/no-color-literals': 'off',
     'react-native/no-raw-text': 2,
-    'react-native/no-single-element-style-arrays': 2,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/prop-types': 'off',
@@ -74,5 +74,6 @@ module.exports = {
     'no-use-before-define': 'error',
     'import/no-unresolved': 'error',
     'no-restricted-imports': 'error',
+    'valid-jsdoc': 'off',
   },
 };
