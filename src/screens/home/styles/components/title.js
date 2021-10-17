@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Fonts, Sizes } from 'constants';
+
+import { Colors, Fonts, Sizes } from 'styles';
 
 const homeTitleStyles = StyleSheet.create({
   title: {

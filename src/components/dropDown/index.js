@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { CheckIcon, Select } from 'native-base';
-import { Colors } from 'constants';
+
+import { Colors } from 'styles';
 
 /**
  * @param {string} variant
