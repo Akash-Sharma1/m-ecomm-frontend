@@ -2,9 +2,9 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Animated from 'react-native-reanimated';
 
-import Home from 'screens/home';
-import ProductDetails from 'screens/product';
-import styles from '../styles/stack';
+import { Home, ProductDetails } from 'screens';
+import { Routes } from 'constants';
+import styles from './styles';
 
 
 const Stack = createStackNavigator();
@@ -17,10 +17,10 @@ const StackNavigator = ({ navigation = null, style = {} }) => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="Home"
+        initialRouteName={Routes.HOME}
       >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Product" component={ProductDetails} />
+        <Stack.Screen name={Routes.HOME} component={Home} />
+        <Stack.Screen name={Routes.PRODUCT} component={ProductDetails} />
       </Stack.Navigator>
     </Animated.View>
   );

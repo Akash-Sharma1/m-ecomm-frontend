@@ -25,18 +25,6 @@ module.exports = {
     'import/resolver': {
       node: {
         paths: ['./src'],
-        alias: {
-          components: './src/components',
-          hoc: './src/hoc',
-          constants: './src/constants',
-          assets: './src/assets',
-          screens: './src/screens',
-          navigations: './src/navigations',
-          store: './src/store',
-          apis: './src/apis',
-          styles: './src/styles',
-          utils: './src/utils',
-        },
       },
     },
   },

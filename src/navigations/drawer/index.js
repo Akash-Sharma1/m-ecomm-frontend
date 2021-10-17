@@ -1,27 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  createDrawerNavigator,
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Layout } from 'styles';
 import StackNavigator from 'navigations/stack';
+import DrawerContent from './drawerContent';
+
 
 const Drawer = createDrawerNavigator();
-
-
-const DrawerContent = (props) => {
-  return (
-    <DrawerContentScrollView {...props} scrollEnabled={false}>
-      <DrawerItem
-        label="Home"
-        onPress={() => props.navigation.navigate('Home')}
-      />
-    </DrawerContentScrollView>
-  );
-};
 
 
 const DrawerNavigation = () => {

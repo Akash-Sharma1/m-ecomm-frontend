@@ -4,13 +4,15 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
+import { Routes } from 'constants';
+
 
 const DrawerContent = (props) => {
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
       <DrawerItem
-        label="Home"
-        onPress={() => props.navigation.navigate('Home')}
+        label={Routes.HOME}
+        onPress={() => props.navigation.navigate(Routes.HOME)}
       />
     </DrawerContentScrollView>
   );

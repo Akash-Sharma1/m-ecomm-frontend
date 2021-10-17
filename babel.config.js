@@ -7,18 +7,6 @@ module.exports = function(api) {
         'module-resolver',
         {
           'root': ['./src'],
-          'alias': {
-            'assets': './src/assets',
-            'hoc': './src/hoc',
-            'screens': './src/screens',
-            'components': './src/components',
-            'constants': './src/constants',
-            'navigations': './src/navigations',
-            'apis': './src/apis',
-            'store': './src/store',
-            'styles': './src/styles',
-            'utils': './src/utils',
-          },
         },
       ],
     ],

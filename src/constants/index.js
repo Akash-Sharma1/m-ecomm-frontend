@@ -1,8 +1,11 @@
-import Icons from './icons';
-import Images from './images';
-import Colors from './colors';
-import { Fonts, Sizes } from './typography';
+// ASSETS
+export { default as Icons } from './icons';
+export { default as Images } from './images';
 
-export {
-  Icons, Images, Colors, Sizes, Fonts,
-};
+// STYLES
+export { default as Colors } from './styles/colors';
+export { Fonts as Fonts } from './styles/typography';
+export { Sizes as Sizes } from './styles/typography';
+
+// NAVIGATION
+export { default as Routes } from './routes';

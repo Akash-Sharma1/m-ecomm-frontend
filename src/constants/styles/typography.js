@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native';
-import Mixins from 'styles/mixins';
+import { Mixins } from 'styles';
 
 
 const { scaleFont } = Mixins;

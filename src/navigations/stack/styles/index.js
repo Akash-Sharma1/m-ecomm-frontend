@@ -1,4 +1,3 @@
-
 import { Colors, Sizes } from 'constants';
 import { StyleSheet } from 'react-native';
 
