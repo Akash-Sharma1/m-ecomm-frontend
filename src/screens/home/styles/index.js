@@ -6,6 +6,7 @@ import { Layout } from 'styles';
 const homeScreenStyles = StyleSheet.create({
   container: {
     ...Layout.flexCol,
+
   },
 });
 

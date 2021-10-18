@@ -35,7 +35,7 @@ const DropDown = ({
       placeholder={placeholder}
       isDisabled={isDisabled}
       _selectedItem={{
-        bg: Colors.LIGHT_SECONDARY,
+        bg: Colors.SECONDARY_MUTED,
         endIcon: <CheckIcon size="5" />,
       }}
       mt={1}

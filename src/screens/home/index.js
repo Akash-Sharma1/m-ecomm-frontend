@@ -16,7 +16,7 @@ const Home = ({ navigation }) => {
       <TopBar navigation={navigation} />
       <View style={styles.container}>
         <Title />
-        <ProductList variant="wide" products={products} />
+        <ProductList variant="small" products={products} />
       </View>
     </SafeAreaView>
   );

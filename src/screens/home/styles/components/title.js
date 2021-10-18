@@ -8,11 +8,11 @@ const homeTitleStyles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: Sizes.PADDING,
     alignItems: 'center',
+    marginHorizontal: Sizes.PADDING,
   },
   titleText: {
-    ...Fonts.BOLD,
     ...Fonts.TITLE,
-    color: Colors.DEFAULT_FONT_COLOR,
+    ...Fonts.BOLD,
   },
 });
 

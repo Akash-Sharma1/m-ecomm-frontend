@@ -8,6 +8,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: Sizes.PADDING,
+    marginHorizontal: Sizes.PADDING,
   },
   avatarContainer: {
     flexDirection: 'row',
@@ -20,11 +22,9 @@ export default StyleSheet.create({
     // alignItems: 'center',
   },
   avatarText: {
-    color: Colors.DEFAULT_FONT_COLOR,
     ...Fonts.H6,
   },
   avatarTextBold: {
-    color: Colors.DEFAULT_FONT_COLOR,
     ...Fonts.H5,
     ...Fonts.BOLD,
   },

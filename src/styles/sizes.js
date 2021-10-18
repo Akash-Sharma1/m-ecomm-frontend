@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 export default {
   // global sizes
   BASE: scaleFont(8),
-  DEFAULT_FONT: scaleFont(14),
+  DEFAULT_FONT_SIZE: scaleFont(14),
 
   RADIUS: scaleFont(10),
   RADIUS2: scaleFont(30),

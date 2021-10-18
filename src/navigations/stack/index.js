@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 
 import { Home, ProductDetails } from 'screens';
 import { Routes } from 'constants';
-import styles from './styles';
+import { Layout } from 'styles';
 
 
 const Stack = createStackNavigator();
@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 const StackNavigator = ({ navigation = null, style = {} }) => {
   return (
-    <Animated.View style={[styles.container, style]}>
+    <Animated.View style={[Layout.flexCol, style]}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
