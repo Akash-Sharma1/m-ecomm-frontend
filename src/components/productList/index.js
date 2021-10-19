@@ -1,13 +1,15 @@
 import React from 'react';
-
-import ProductListItemSmall from './SmallItem';
-import ProductListItemMedium from './MediumItem';
-import ProductListItemWide from './WideItem';
 import { FlatList } from 'native-base';
+
+import ProductListItemSmall from './layout/Small';
+import ProductListItemMedium from './layout/Medium';
+import ProductListItemWide from './layout/Wide';
 
 const Item = ({ variant, product, ...remainingProps }) => {
   if (variant === 'small') {
-    return <ProductListItemSmall product={product} {...remainingProps} />;
+    return (
+      <ProductListItemSmall product={product} {...remainingProps} />
+    );
   } else if (variant === 'medium') {
     return <ProductListItemMedium product={product} {...remainingProps} />;
   } else if (variant === 'wide') {
@@ -30,9 +32,12 @@ const ProductList = ({
 
   return (
     <FlatList
-      data={products}
-      renderItem={({ item }) => <Item product={item} {...props} />}
-      keyExtractor={(item) => item.id.toString()}
+      data={Object.keys(products)}
+      renderItem={({ item: productId }) => (
+        <Item product={products[productId]} {...props} />
+      )}
+      keyExtractor={(_, index) => index.toString()}
+      numColumns={2}
     />
   );
 };

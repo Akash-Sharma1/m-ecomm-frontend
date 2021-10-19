@@ -5,8 +5,8 @@ import Sizes from './sizes';
 const { scaleFont } = Mixins;
 
 // FONT FAMILY
-const FONT_FAMILY_REGULAR = 'Nexa-Light';
-const FONT_FAMILY_BOLD = 'Nexa-Bold';
+const FONT_FAMILY_REGULAR = 'Montserrat-Black';
+const FONT_FAMILY_BOLD = 'Montserrat-Bold';
 
 // FONT WEIGHT
 const FONT_WEIGHT_REGULAR = '400';

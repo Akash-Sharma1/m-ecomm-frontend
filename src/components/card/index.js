@@ -1,7 +1,8 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Box } from 'native-base';
 
-import styles from './styles';
+import { Colors, Sizes } from 'styles';
 
 const Card = ({
   noShadow,
@@ -22,5 +23,17 @@ const Card = ({
     </Box>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    flex: 1,
+    backgroundColor: Colors.WHITE,
+    paddingHorizontal: Sizes.PADDING,
+    paddingVertical: Sizes.PADDING_2,
+  },
+  rounded: {
+    borderRadius: Sizes.RADIUS_2,
+  },
+});
 
 export default Card;

@@ -59,7 +59,6 @@ module.exports = {
     'no-duplicate-imports': 'error',
     'no-undef': 'error',
     'no-unused-vars': 'error',
-    'no-use-before-define': 'error',
     'import/no-unresolved': 'error',
     'no-restricted-imports': 'error',
     'valid-jsdoc': 'off',

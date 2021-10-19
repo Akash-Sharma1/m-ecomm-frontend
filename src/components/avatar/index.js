@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-import styles from './styles';
+import { Colors, Fonts, Sizes } from 'styles';
 
 // TODO: USERNAME AUTO
 const Avatar = ({ username }) => {
@@ -11,5 +11,22 @@ const Avatar = ({ username }) => {
     </View>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    width: Sizes.size(50),
+    height: Sizes.size(50),
+    backgroundColor: Colors.SECONDARY,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: Sizes.RADIUS,
+  },
+  text: {
+    ...Fonts.H3,
+    ...Fonts.BOLD,
+  },
+});
 
 export default Avatar;

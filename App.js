@@ -7,8 +7,8 @@ import { NativeBaseProvider } from 'native-base';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'Nexa-Light': require('assets/fonts/Nexa-Light.otf'),
-    'Nexa-Bold': require('assets/fonts/Nexa-Bold.otf'),
+    'Montserrat-Black': require('assets/fonts/Montserrat-Black.ttf'),
+    'Montserrat-Bold': require('assets/fonts/Montserrat-Bold.ttf'),
   });
 
   if (!fontsLoaded) {

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { DropDownPopover } from 'components';
-import styles from '../styles/components/title';
 import { sortByOptions } from 'utils/constants';
-
+import { Fonts, Sizes } from 'styles';
 
 const Title = () => {
   const [sortBy, setSortBy] = useState(null);
@@ -25,5 +24,18 @@ const Title = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: Sizes.PADDING,
+    alignItems: 'center',
+  },
+  titleText: {
+    ...Fonts.TITLE,
+    ...Fonts.BOLD,
+  },
+});
 
 export default Title;

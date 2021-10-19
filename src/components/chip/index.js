@@ -1,43 +1,66 @@
 import React, { useCallback, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-import chipStyles from './styles';
+import { Colors, Fonts, Sizes } from 'styles';
 
-const Chip = ({ label, onClick, styles, active = false }) => {
+const Chip = ({
+  label,
+  onClick,
+  active = false,
+  containerStyle,
+  style,
+}) => {
   const [isSelected, setSelected] = useState(active);
 
   const handleClick = useCallback(() => {
     setSelected((prev) => !prev);
-    onClick(!isSelected);
+    onClick && onClick(!isSelected);
   }, [onClick, isSelected]);
 
-  if (onClick) {
-    return (
-      <TouchableOpacity
-        style={[
-          chipStyles.container,
-          styles,
-          isSelected ? chipStyles.isActive : {},
-        ]}
-        onClick={handleClick}
-      >
-        <Label label={label} />
-      </TouchableOpacity>
-    );
-  } else {
-    return (
-      <View style={[chipStyles.container, styles]}>
-      </View>
-    );
-  }
-};
-
-const Label = ({ label }) => {
   return (
-    <Text>
-      {label}
-    </Text>
+    <TouchableOpacity
+      style={[
+        styles.container,
+        isSelected ? styles.isActive : {},
+        containerStyle,
+      ]}
+      onClick={handleClick}
+      activeOpacity={!onClick}
+    >
+      <Text
+        style={[
+          styles.text,
+          isSelected ? styles.isActiveText : {},
+          style,
+        ]}
+      >
+        {label}
+      </Text>
+    </TouchableOpacity>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: Colors.GREY_MEDIUM,
+    borderWidth: Sizes.size(1),
+    borderRadius: Sizes.RADIUS,
+    paddingHorizontal: Sizes.size(6),
+    paddingVertical: Sizes.size(5),
+  },
+  isActive: {
+    backgroundColor: Colors.DEFAULT_FONT_COLOR,
+  },
+  isActiveText: {
+    color: Colors.WHITE,
+  },
+  text: {
+    ...Fonts.H5,
+  },
+});
 
 export default Chip;

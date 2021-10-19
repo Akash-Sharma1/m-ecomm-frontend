@@ -10,13 +10,14 @@ export default {
   DEFAULT_FONT_SIZE: scaleFont(14),
 
   RADIUS: scaleFont(10),
-  RADIUS2: scaleFont(30),
+  RADIUS_2: scaleFont(20),
 
   PADDING: scaleFont(10),
-  PADDING_2: scaleFont(12),
+  PADDING_2: scaleFont(14),
 
   MARGIN: scaleFont(10),
   MARGIN_2: scaleFont(12),
+  EDGE_HORIZONTAL_MARGIN: scaleFont(20),
 
   // font sizes
   LARGE_TITLE: scaleFont(30),

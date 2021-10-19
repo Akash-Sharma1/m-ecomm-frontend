@@ -1,12 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { ProductList, TopBar } from 'components';
-import styles from './styles';
+import { Sizes } from 'styles';
 import Title from './components/Title';
-// import Tabs from './components/Tabs';
-
 
 const Home = ({ navigation }) => {
   const { products } = useSelector((state) => state.products);
@@ -14,12 +12,22 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container} >
       <TopBar navigation={navigation} />
-      <View style={styles.container}>
+      <View style={styles.content}>
         <Title />
         <ProductList variant="small" products={products} />
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
+  },
+  content: {
+    flex: 1,
+  },
+});
 
 export default Home;
