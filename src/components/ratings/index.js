@@ -1,40 +1,37 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
 
-import Star from './Star';
+import List from './List';
 
-const Ratings = ({ rating, showSubText, style }) => {
-  const completeStars = Math.floor(rating);
-  const emptyStarts = Math.floor(5 - rating);
-  const halfStar = 5 - completeStars - emptyStarts;
+/**
+ * @param {variant} string [default, compact]
+ */
+const Ratings = ({
+  rating = 0, showSubText, style, variant='default',
+}) => {
+  let completeStars = 0;
+  let emptyStars = 0;
+  let halfStar = 0;
 
-  const starInfos = [
-    ...[...Array(completeStars)].map(() => 'complete'),
-    ...[...Array(halfStar)].map(() => 'half'),
-    ...[...Array(emptyStarts)].map(() => 'empty'),
+  if (variant === 'default') {
+    completeStars = Math.floor(rating);
+    emptyStars = Math.floor(5 - rating);
+    halfStar = 5 - completeStars - emptyStars;
+  } else if (variant === 'compact') {
+    completeStars = Math.floor(rating) && 1;
+    halfStar = ((rating - Math.floor(rating)) && 1 - completeStars);
+    emptyStars = 1 - (completeStars || halfStar);
+  }
+
+  const starDetailsArray = [
+    ...(completeStars ? [...Array(completeStars)].map(() => 'complete'): []),
+    ...(halfStar ? [...Array(halfStar)].map(() => 'half') : []),
+    ...(emptyStars ? [...Array(emptyStars)].map(() => 'empty') : []),
     showSubText && rating,
   ];
 
   return (
-    <FlatList
-      contentContainerStyle={styles.container}
-      style={styles.list}
-      horizontal
-      data={starInfos}
-      renderItem={({ item: starinfo }) => (
-        <Star style={style} type={starinfo} />
-      )}
-      keyExtractor={(_, index) => index.toString()}
-    />
+    <List starDetailsArray={starDetailsArray} style={style} />
   );
 };
-
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default Ratings;

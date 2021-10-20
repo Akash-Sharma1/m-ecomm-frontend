@@ -3,11 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Colors, Fonts, Sizes } from 'styles';
 
-const ProductPrice = ({ amount, style }) => {
+const ProductPrice = ({ amount, style, textStyle, currencyStyle }) => {
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.currency}>{'\u20B9'}</Text>
-      <Text style={styles.text}>{`${amount}.00`}</Text>
+      <Text style={[styles.currency, currencyStyle]}>{'\u20B9'}</Text>
+      <Text style={[styles.text, textStyle]}>{`${amount}.00`}</Text>
     </View>
   );
 };
@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     ...Fonts.H5,
     ...Fonts.BOLD,
     color: Colors.PRIMARY,
-    paddingTop: Sizes.size(7),
+    paddingTop: Sizes.size(2),
     paddingHorizontal: Sizes.size(2),
   },
   text: {
-    ...Fonts.H1,
+    ...Fonts.H4,
     ...Fonts.BOLD,
     color: Colors.PRIMARY,
   },

@@ -5,7 +5,7 @@ import { Bookmark } from 'actions';
 import { Sizes } from 'styles';
 import Card from 'components/card';
 import DiscountChip from 'components/productList/components/Discount';
-import ProductImage from 'components/productList/components/Image';
+import ProductImage from 'components/productImage';
 import SmallItemTextContent from './TextContent';
 
 const ProductListItemSmall = ({
@@ -17,12 +17,14 @@ const ProductListItemSmall = ({
     <View style={[styles.container, style]}>
       <Card rounded>
         <View style={styles.header}>
-          <DiscountChip discount={product.discount} />
+          {product.discount ? (
+            <DiscountChip discount={product.discount} />
+          ) : <View />}
           <Bookmark productId={product.id} />
         </View>
 
         <View style={styles.imageContainer}>
-          <ProductImage uri={product.image} index={product.id} />
+          <ProductImage.Medium uri={product.image} index={product.id} />
         </View>
 
         <View style={styles.detailsContainer}>
@@ -34,9 +36,8 @@ const ProductListItemSmall = ({
 };
 
 
-const SMALL_ITEM_HEIGHT = Sizes.size(250);
+const SMALL_ITEM_HEIGHT = Sizes.size(280);
 const SMALL_ITEM_IMAGE_WIDTH = Sizes.size(145);
-// const SMALL_ITEM_IMAGE_HEIGHT = Sizes.size(120);
 
 const styles = StyleSheet.create({
   container: {
@@ -48,10 +49,10 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1.5,
     width: Sizes.size(SMALL_ITEM_IMAGE_WIDTH),
-    // height: Sizes.size(SMALL_ITEM_IMAGE_HEIGHT),
   },
   detailsContainer: {
     flex: 1,
+    paddingVertical: Sizes.PADDING,
   },
   header: {
     flex: 0.5,

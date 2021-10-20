@@ -2,8 +2,8 @@ import React from 'react';
 import { FlatList } from 'native-base';
 
 import ProductListItemSmall from './layout/small';
-import ProductListItemMedium from './layout/Medium';
-import ProductListItemWide from './layout/Wide';
+import ProductListItemMedium from './layout/medium';
+import ProductListItemWide from './layout/wide';
 import { StyleSheet } from 'react-native';
 import { Sizes } from 'styles';
 
@@ -17,9 +17,20 @@ const Item = ({ variant, product, ...remainingProps }) => {
       />
     );
   } else if (variant === 'medium') {
-    return <ProductListItemMedium product={product} {...remainingProps} />;
+    return (
+      <ProductListItemMedium
+        product={product}
+        {...remainingProps}
+      />
+    );
   } else if (variant === 'wide') {
-    return <ProductListItemWide product={product} {...remainingProps} />;
+    return (
+      <ProductListItemWide
+        product={product}
+        style={styles.wideItem}
+        {...remainingProps}
+      />
+    );
   }
 };
 
@@ -36,6 +47,8 @@ const ProductList = ({
     onPress,
   };
 
+  const numColumns = variant === 'small' ? 2 : null;
+
   return (
     <FlatList
       data={Object.keys(products)}
@@ -43,14 +56,17 @@ const ProductList = ({
         <Item product={products[productId]} {...props} />
       )}
       keyExtractor={(_, index) => index.toString()}
-      numColumns={2}
+      numColumns={numColumns}
     />
   );
 };
 
 const styles = StyleSheet.create({
   smallItem: {
-    marginBottom: Sizes.size(15),
+    marginBottom: Sizes.MARGIN_2,
+  },
+  wideItem: {
+    marginBottom: Sizes.MARGIN_2,
   },
 });
 

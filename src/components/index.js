@@ -6,3 +6,5 @@ export { default as Avatar } from './avatar';
 export { default as ProductList } from './productList';
 export { default as Card } from './card';
 export { default as Ratings } from './ratings';
+export { default as BackgroundFloater } from './backgroundFloater';
+export { default as ProductImage } from './productImage';

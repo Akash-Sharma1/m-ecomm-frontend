@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ProductList, TopBar } from 'components';
 import { Sizes } from 'styles';
@@ -11,11 +11,16 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} >
-      <TopBar navigation={navigation} />
-      <View style={styles.content}>
-        <Title />
-        <ProductList variant="small" products={products} />
-      </View>
+      <ScrollView style={styles.scrollableContainer}>
+        <TopBar navigation={navigation} />
+        <View style={styles.content}>
+          <Title />
+          <View>
+            <ProductList variant="wide" products={products} />
+          </View>
+          <ProductList variant="small" products={products} />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -23,7 +28,10 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
+  },
+  scrollableContainer: {
+    flex: 1,
+    paddingHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
   },
   content: {
     flex: 1,

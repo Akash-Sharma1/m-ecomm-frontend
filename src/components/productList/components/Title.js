@@ -1,15 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Colors, Fonts } from 'styles';
 
-const ProductTitle = ({ title, style }) => {
+const ProductTitle = ({ title, style, textStyle }) => {
   return (
-    <Text style={[styles.title, style]}>{title}</Text>
+    <View style={[styles.container, style]}>
+      <Text style={[styles.title, textStyle]}>{title}</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   title: {
     ...Fonts.H4,
     ...Fonts.BOLD,

@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 0,
   },
   discountText: {
+    ...Fonts.H5,
     ...Fonts.BOLD,
   },
 });

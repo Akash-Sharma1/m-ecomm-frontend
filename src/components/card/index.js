@@ -9,7 +9,7 @@ const Card = ({
   shadow = 1,
   rounded,
   children,
-  style = {},
+  style,
 }) => {
   const shadowVar = noShadow ? null : shadow;
 

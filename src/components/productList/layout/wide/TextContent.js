@@ -9,9 +9,16 @@ import { Sizes } from 'styles';
 const SmallItemTextContent = ({ product }) => {
   return (
     <View style={styles.container}>
-      <ProductTitle title={product.title} style={styles.title} />
-      <ProductPrice amount={product.price} style={styles.price} />
-      <ProductRatings rating={product.rating} style={styles.rating} />
+      <View style={styles.header}>
+        <ProductTitle title={product.title} />
+        <View>
+          <ProductRatings
+            variant="compact"
+            rating={product.rating}
+          />
+        </View>
+      </View>
+      <ProductPrice amount={product.price} />
     </View>
   );
 };
@@ -20,18 +27,12 @@ export default SmallItemTextContent;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
+    marginLeft: Sizes.size(20),
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  title: {
-    flex: 1,
-  },
-  price: {
-    flex: 1,
-    paddingTop: Sizes.size(2),
-  },
-  rating: {
-    flex: 1,
   },
 });
