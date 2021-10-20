@@ -15,7 +15,7 @@ const Star = ({ type, style }) => {
     );
   } else if (type === 'empty') {
     return (
-      <FontAwesome name="star-o" style={[styles.star, style]} />
+      <FontAwesome name="star" style={[styles.star, styles.emptyStar, style]} />
     );
   } else if (type !== null) {
     return (
@@ -35,9 +35,13 @@ const styles = StyleSheet.create({
     fontSize: Sizes.H5,
     paddingRight: Sizes.size(5),
   },
+  emptyStar: {
+    color: Colors.YELLOW_MUTED,
+    opacity: 0.8,
+  },
   text: {
     color: Colors.GRAY_DARK,
-    fontSize: Sizes.H5,
+    fontSize: Sizes.H6,
   },
 });
 

@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Sizes } from 'styles';
-import Ratings from '../../ratings/index';
+import Ratings from 'components/ratings';
 
-const ProductRatings = ({ rating }) => {
+const ProductRatings = ({ rating, style }) => {
   return (
-    <View style={styles.ratingContainer}>
+    <View style={[styles.ratingContainer, style]}>
       <Ratings rating={rating} showSubText />
     </View>
   );
@@ -14,8 +13,7 @@ const ProductRatings = ({ rating }) => {
 
 const styles = StyleSheet.create({
   ratingContainer: {
-    padding: Sizes.size(5),
-    flex: 0.8,
+    flex: 1,
   },
 });
 

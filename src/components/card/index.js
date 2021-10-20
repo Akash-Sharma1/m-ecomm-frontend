@@ -6,7 +6,7 @@ import { Colors, Sizes } from 'styles';
 
 const Card = ({
   noShadow,
-  shadow = 4,
+  shadow = 1,
   rounded,
   children,
   style = {},
@@ -28,8 +28,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: Colors.WHITE,
-    paddingHorizontal: Sizes.PADDING,
-    paddingVertical: Sizes.PADDING_2,
+    padding: Sizes.PADDING,
   },
   rounded: {
     borderRadius: Sizes.RADIUS_2,

@@ -3,19 +3,18 @@ import { StyleSheet, View } from 'react-native';
 
 import { Bookmark } from 'actions';
 import { Sizes } from 'styles';
-import Card from '../../card';
-import DiscountChip from '../components/Discount';
-import Price from '../components/Price';
-import Ratings from '../components/Ratings';
-import Title from '../components/Title';
-import ProductImage from '../components/Image';
+import Card from 'components/card';
+import DiscountChip from 'components/productList/components/Discount';
+import ProductImage from 'components/productList/components/Image';
+import SmallItemTextContent from './TextContent';
 
 const ProductListItemSmall = ({
   onPress,
   product,
+  style,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Card rounded>
         <View style={styles.header}>
           <DiscountChip discount={product.discount} />
@@ -23,13 +22,11 @@ const ProductListItemSmall = ({
         </View>
 
         <View style={styles.imageContainer}>
-          <ProductImage uri={product.image} />
+          <ProductImage uri={product.image} index={product.id} />
         </View>
 
         <View style={styles.detailsContainer}>
-          <Title title={product.title} />
-          <Price amount={product.price} />
-          <Ratings rating={product.rating} />
+          <SmallItemTextContent product={product} />
         </View>
       </Card>
     </View>
@@ -37,8 +34,9 @@ const ProductListItemSmall = ({
 };
 
 
-const SMALL_ITEM_HEIGHT = Sizes.size(300);
+const SMALL_ITEM_HEIGHT = Sizes.size(250);
 const SMALL_ITEM_IMAGE_WIDTH = Sizes.size(145);
+// const SMALL_ITEM_IMAGE_HEIGHT = Sizes.size(120);
 
 const styles = StyleSheet.create({
   container: {
@@ -48,15 +46,15 @@ const styles = StyleSheet.create({
     height: Sizes.size(SMALL_ITEM_HEIGHT),
   },
   imageContainer: {
-    flex: 2,
+    flex: 1.5,
     width: Sizes.size(SMALL_ITEM_IMAGE_WIDTH),
+    // height: Sizes.size(SMALL_ITEM_IMAGE_HEIGHT),
   },
   detailsContainer: {
     flex: 1,
-    alignItems: 'center',
   },
   header: {
-    flex: 0.3,
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

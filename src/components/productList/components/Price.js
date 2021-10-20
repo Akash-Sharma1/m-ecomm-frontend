@@ -3,9 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Colors, Fonts, Sizes } from 'styles';
 
-const Price = ({ amount }) => {
+const ProductPrice = ({ amount, style }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.currency}>{'\u20B9'}</Text>
       <Text style={styles.text}>{`${amount}.00`}</Text>
     </View>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Price;
+export default ProductPrice;

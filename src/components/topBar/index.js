@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Fonts, Sizes } from 'styles';
-import Avatar from '../avatar';
+import Avatar from 'components/avatar';
 
 const TopBar = ({ navigation, contents }) => {
   const fullName = 'Akash Sharma'; // TODO: Change Later

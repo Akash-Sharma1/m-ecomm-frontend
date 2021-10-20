@@ -1,17 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import Drawer from 'navigations/drawer';
-import store from 'store';
-
 import { NavigationContainer } from '@react-navigation/native';
+import store from 'store';
+import DrawerContent from './navigations/drawer';
 
 
 const AppContainer = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Drawer />
+        <DrawerContent />
       </NavigationContainer>
     </Provider>
   );

@@ -11,6 +11,7 @@ export default {
 
   RADIUS: scaleFont(10),
   RADIUS_2: scaleFont(20),
+  RADIUS_CIRCLE: scaleFont(100),
 
   PADDING: scaleFont(10),
   PADDING_2: scaleFont(14),

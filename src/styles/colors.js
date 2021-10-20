@@ -28,6 +28,11 @@ export default {
 
   TRANSPARENT: 'transparent',
 
+  PINK_MUTED: '#FACACA',
+  BLUE_MUTED: '#98CAF5',
+  GREEN_MUTED: '#A7E3CA',
+  YELLOW_MUTED: '#FCDC9F',
+
   // FONT COLOR
   DEFAULT_FONT_COLOR: '#101626',
 };
