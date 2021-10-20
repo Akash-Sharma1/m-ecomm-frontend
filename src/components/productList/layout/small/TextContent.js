@@ -13,7 +13,12 @@ const SmallItemTextContent = ({ product }) => {
         amount={product.price}
         style={styles.price}
       />
-      <ProductRatings rating={product.rating} style={styles.rating} />
+      <View style={styles.rating}>
+        <ProductRatings
+          rating={product.rating}
+          productId={product.id}
+        />
+      </View>
     </View>
   );
 };

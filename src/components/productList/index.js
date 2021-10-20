@@ -2,24 +2,19 @@ import React from 'react';
 import { FlatList } from 'native-base';
 
 import ProductListItemSmall from './layout/small';
-import ProductListItemMedium from './layout/medium';
 import ProductListItemWide from './layout/wide';
 import { StyleSheet } from 'react-native';
 import { Sizes } from 'styles';
 
-const Item = ({ variant, product, ...remainingProps }) => {
+const Item = ({ variant, product, horizontal, ...remainingProps }) => {
   if (variant === 'small') {
     return (
       <ProductListItemSmall
         product={product}
-        style={styles.smallItem}
-        {...remainingProps}
-      />
-    );
-  } else if (variant === 'medium') {
-    return (
-      <ProductListItemMedium
-        product={product}
+        style={[
+          styles.smallItem,
+          horizontal && styles.horizontal,
+        ]}
         {...remainingProps}
       />
     );
@@ -40,23 +35,34 @@ const Item = ({ variant, product, ...remainingProps }) => {
 const ProductList = ({
   products,
   variant,
+  horizontal,
   onPress,
+  unqiueIndex,
+  LisHeaderComponent,
+  ListFooterComponent,
 }) => {
   const props = {
     variant,
     onPress,
+    horizontal,
   };
 
-  const numColumns = variant === 'small' ? 2 : null;
+  const numColumns = !horizontal && (variant === 'small') ? 2 : null;
 
   return (
     <FlatList
       data={Object.keys(products)}
+      horizontal={horizontal}
       renderItem={({ item: productId }) => (
         <Item product={products[productId]} {...props} />
       )}
       keyExtractor={(_, index) => index.toString()}
       numColumns={numColumns}
+      listKey={`productList-${unqiueIndex}`}
+      LisHeaderComponent={LisHeaderComponent}
+      ListFooterComponent={ListFooterComponent}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
@@ -68,10 +74,12 @@ const styles = StyleSheet.create({
   wideItem: {
     marginBottom: Sizes.MARGIN_2,
   },
+  horizontal: {
+    marginRight: Sizes.MARGIN_2,
+  },
 });
 
 ProductList.SmallItem = ProductListItemSmall;
-ProductList.MediumItem = ProductListItemMedium;
 ProductList.WideItem = ProductListItemWide;
 
 export default ProductList;

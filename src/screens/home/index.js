@@ -11,15 +11,26 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} >
-      <ScrollView style={styles.scrollableContainer}>
+      <View style={styles.header}>
         <TopBar navigation={navigation} />
-        <View style={styles.content}>
-          <Title />
-          <View>
-            <ProductList variant="wide" products={products} />
-          </View>
-          <ProductList variant="small" products={products} />
+      </View>
+
+      <ScrollView
+        style={styles.scrollableContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <Title />
+        <View>
+          <ProductList
+            variant="small"
+            products={products} unqiueIndex={3}
+            horizontal
+          />
         </View>
+        <View>
+          <ProductList variant="wide" products={products} unqiueIndex={1} />
+        </View>
+        <ProductList variant="small" products={products} unqiueIndex={2} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -27,13 +38,13 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
     flex: 1,
+  },
+  header: {
+    paddingBottom: Sizes.PADDING,
   },
   scrollableContainer: {
-    flex: 1,
-    paddingHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
-  },
-  content: {
     flex: 1,
   },
 });

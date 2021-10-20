@@ -4,9 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import ProductTitle from 'components/productList/components/Title';
 import ProductPrice from 'components/productList/components/Price';
 import ProductRatings from 'components/productList/components/Ratings';
-import { Sizes } from 'styles';
-import { Fonts } from 'styles';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Colors, Fonts, Sizes } from 'styles';
 
 const SmallItemTextContent = ({ product }) => {
   return (
@@ -17,6 +15,7 @@ const SmallItemTextContent = ({ product }) => {
           <ProductRatings
             variant="compact"
             rating={product.rating}
+            productId={product.id}
           />
         </View>
       </View>
@@ -52,6 +51,6 @@ const styles = StyleSheet.create({
   },
   discount: {
     ...Fonts.H6,
-    color: Colors.GRAY_MEDIUM,
+    color: Colors.GRAY_DARK,
   },
 });

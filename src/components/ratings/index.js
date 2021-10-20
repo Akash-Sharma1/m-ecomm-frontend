@@ -6,7 +6,7 @@ import List from './List';
  * @param {variant} string [default, compact]
  */
 const Ratings = ({
-  rating = 0, showSubText, style, variant='default',
+  rating = 0, showSubText, style, variant='default', listKeyIndex,
 }) => {
   let completeStars = 0;
   let emptyStars = 0;
@@ -30,7 +30,11 @@ const Ratings = ({
   ];
 
   return (
-    <List starDetailsArray={starDetailsArray} style={style} />
+    <List
+      starDetailsArray={starDetailsArray}
+      style={style}
+      listKeyIndex={listKeyIndex}
+    />
   );
 };
 

@@ -4,7 +4,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import Star from './Star';
 
 const StarList = ({
-  style, starDetailsArray,
+  style, starDetailsArray, listKeyIndex,
 }) => {
   return (
     <FlatList
@@ -15,6 +15,7 @@ const StarList = ({
         <Star style={style} type={starinfo} />
       )}
       keyExtractor={(_, index) => index.toString()}
+      listKeyIndex={`ratings-${listKeyIndex}`}
     />
   );
 };
