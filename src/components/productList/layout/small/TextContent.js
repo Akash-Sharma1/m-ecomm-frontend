@@ -4,13 +4,15 @@ import { StyleSheet, View } from 'react-native';
 import ProductTitle from 'components/productList/components/Title';
 import ProductPrice from 'components/productList/components/Price';
 import ProductRatings from 'components/productList/components/Ratings';
-import { Sizes } from 'styles';
 
 const SmallItemTextContent = ({ product }) => {
   return (
     <View style={styles.container}>
       <ProductTitle title={product.title} style={styles.title} />
-      <ProductPrice amount={product.price} style={styles.price} />
+      <ProductPrice
+        amount={product.price}
+        style={styles.price}
+      />
       <ProductRatings rating={product.rating} style={styles.rating} />
     </View>
   );
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
   },
   price: {
     flex: 1,
-    paddingTop: Sizes.size(2),
+    alignItems: 'center',
   },
   rating: {
     flex: 1,

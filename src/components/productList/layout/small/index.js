@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { Bookmark } from 'actions';
 import { Sizes } from 'styles';
 import Card from 'components/card';
-import DiscountChip from 'components/productList/components/Discount';
+import DiscountChip from 'components/productList/components/DiscountChip';
 import ProductImage from 'components/productImage';
 import SmallItemTextContent from './TextContent';
 
@@ -36,7 +36,7 @@ const ProductListItemSmall = ({
 };
 
 
-const SMALL_ITEM_HEIGHT = Sizes.size(280);
+const SMALL_ITEM_HEIGHT = Sizes.size(270);
 const SMALL_ITEM_IMAGE_WIDTH = Sizes.size(145);
 
 const styles = StyleSheet.create({

@@ -20,14 +20,13 @@ const styles = StyleSheet.create({
   currency: {
     ...Fonts.H5,
     ...Fonts.BOLD,
-    color: Colors.PRIMARY,
-    paddingTop: Sizes.size(2),
+    color: Colors.GRAY_DARK,
     paddingHorizontal: Sizes.size(2),
   },
   text: {
-    ...Fonts.H4,
+    ...Fonts.H5,
     ...Fonts.BOLD,
-    color: Colors.PRIMARY,
+    color: Colors.GRAY_DARK,
   },
 });
 
