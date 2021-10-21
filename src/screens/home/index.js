@@ -5,6 +5,7 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { ProductList, TopBar } from 'components';
 import { Sizes } from 'styles';
 import Title from './components/Title';
+import CategoryChips from './components/CategoryChips';
 
 const Home = ({ navigation }) => {
   const { products } = useSelector((state) => state.products);
@@ -20,6 +21,7 @@ const Home = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         <Title />
+        <CategoryChips />
         <View>
           <ProductList
             variant="small"

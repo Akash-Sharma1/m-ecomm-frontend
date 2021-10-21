@@ -11,8 +11,8 @@ const DrawerContent = (props) => {
   return (
     <DrawerContentScrollView {...props} scrollEnabled={false}>
       <DrawerItem
-        label={Routes.HOME}
-        onPress={() => props.navigation.navigate(Routes.HOME)}
+        label={Routes.STACK}
+        onPress={() => props.navigation.navigate(Routes.STACK)}
       />
     </DrawerContentScrollView>
   );
