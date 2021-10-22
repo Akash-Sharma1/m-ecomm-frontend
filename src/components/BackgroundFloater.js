@@ -3,15 +3,17 @@ import { StyleSheet, View } from 'react-native';
 
 import { Colors, Sizes } from 'styles';
 
-const BackgroundFloater = ({ style, color=0, scale=1 }) => {
+const BackgroundFloater = ({ style, containerStyle, color=0, scale=1 }) => {
   return (
-    <View style={[
-      styles.floater,
-      scaleSize(scale),
-      availableBackgroundlors[color%availableBackgroundlors.length],
-      style,
-    ]}>
-      <View style={styles.insideBorderedCircle} />
+    <View style={[styles.container, containerStyle]}>
+      <View style={[
+        styles.floater,
+        scaleSize(scale),
+        availableBackgroundlors[color%availableBackgroundlors.length],
+        style,
+      ]}>
+        <View style={styles.insideBorderedCircle} />
+      </View>
     </View>
   );
 };
@@ -19,6 +21,13 @@ const BackgroundFloater = ({ style, color=0, scale=1 }) => {
 const FLOATER_SIZE = 90;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
   floater: {
     borderRadius: Sizes.RADIUS_CIRCLE,
     justifyContent: 'center',

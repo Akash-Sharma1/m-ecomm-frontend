@@ -5,9 +5,9 @@ import { Sizes } from 'styles';
 import Card from 'components/Card';
 import ProductListItemHeader from 'components/productList/components/Header';
 import ProductImage, { productImageSizes } from 'components/productImage';
-import SmallItemTextContent from './TextContent';
+import SmallItemTextContent from '../small/TextContent';
 
-const ProductListItemSmall = ({
+const ProductListItemMedium = ({
   product,
   style,
 }) => {
@@ -21,7 +21,7 @@ const ProductListItemSmall = ({
         <ProductImage
           uri={product.image}
           ndex={product.id}
-          scale={productImageSizes.MEDIUM}
+          scale={productImageSizes.MEDIUM_2}
         />
       </View>
 
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductListItemSmall;
+export default ProductListItemMedium;

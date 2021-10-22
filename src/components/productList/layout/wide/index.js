@@ -2,12 +2,11 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Sizes } from 'styles';
-import Card from 'components/card';
-import ProductImage from 'components/productImage';
+import Card from 'components/Card';
 import WideItemTextContent from './TextContent';
+import ProductImage, { productImageSizes } from 'components/productImage';
 
 const ProductListItemWide = ({
-  onPress,
   product,
   style,
 }) => {
@@ -15,7 +14,11 @@ const ProductListItemWide = ({
     <View style={[styles.container, style]} >
       <Card rounded style={styles.container}>
         <View style={styles.imageContainer}>
-          <ProductImage.Small uri={product.image} index={product.id} />
+          <ProductImage
+            uri={product.image}
+            index={product.id}
+            scale={productImageSizes.SMALL}
+          />
         </View>
 
         <View style={styles.detailsContainer}>

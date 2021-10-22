@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { Fonts, Sizes } from 'styles';
+import { Colors, Fonts, Sizes } from 'styles';
 import Animated, { EasingNode } from 'react-native-reanimated';
 
 const AnimatedMaterialCommunityIcons = Animated.createAnimatedComponent(
@@ -58,7 +58,7 @@ export const BottomTabNavigationText = ({ label, focused }) => {
 
 const styles = StyleSheet.create({
   focused: {
-    color: '#e91e63',
+    color: Colors.ACTION,
   },
   text: {
     position: 'relative',

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Colors, Fonts } from 'styles';
-import Chip from 'components/chip';
+import Chip from 'components/Chip';
 
 const ProductDiscountChip = ({ discount }) => {
   return (

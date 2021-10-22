@@ -17,6 +17,8 @@ export default {
   PRIMARY: '#3737DB', // BLUE
   DARK_PRIMARY: '#2E315C',
 
+  ACTION: '#e91e63',
+
   // GRAYSCALE
   GRAY_LIGHT: '#e6e6e6',
   GRAY_MEDIUM: '#cacaca',

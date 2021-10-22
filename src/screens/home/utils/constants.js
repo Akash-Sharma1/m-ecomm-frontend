@@ -1,3 +1,3 @@
 export const topCategoryTabItem = [
-  'Most Viewed', 'Popular', 'Categories',
+  'Most Viewed', 'Popular', 'Categories', 'Marble',
 ];

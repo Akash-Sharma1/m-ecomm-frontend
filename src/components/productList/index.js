@@ -3,18 +3,24 @@ import { FlatList } from 'native-base';
 
 import ProductListItemSmall from './layout/small';
 import ProductListItemWide from './layout/wide';
+import ProductListItemMedium from './layout/medium';
 import { StyleSheet } from 'react-native';
 import { Sizes } from 'styles';
 
-const Item = ({ variant, product, horizontal, ...remainingProps }) => {
+const Item = ({ variant, product, index, ...remainingProps }) => {
   if (variant === 'small') {
     return (
       <ProductListItemSmall
         product={product}
-        style={[
-          styles.smallItem,
-          horizontal && styles.horizontal,
-        ]}
+        style={[styles.bottomMargin, (index % 2 == 0) && styles.rightMargin]}
+        {...remainingProps}
+      />
+    );
+  } else if (variant === 'medium') {
+    return (
+      <ProductListItemMedium
+        product={product}
+        style={styles.mediumItem}
         {...remainingProps}
       />
     );
@@ -22,7 +28,7 @@ const Item = ({ variant, product, horizontal, ...remainingProps }) => {
     return (
       <ProductListItemWide
         product={product}
-        style={styles.wideItem}
+        style={styles.bottomMargin}
         {...remainingProps}
       />
     );
@@ -35,7 +41,6 @@ const Item = ({ variant, product, horizontal, ...remainingProps }) => {
 const ProductList = ({
   products,
   variant,
-  horizontal,
   onPress,
   unqiueIndex,
   LisHeaderComponent,
@@ -44,17 +49,17 @@ const ProductList = ({
   const props = {
     variant,
     onPress,
-    horizontal,
   };
 
-  const numColumns = !horizontal && (variant === 'small') ? 2 : null;
+  const numColumns = (variant === 'small') ? 2 : null;
+  const horizontal = variant === 'medium';
 
   return (
     <FlatList
       data={Object.keys(products)}
       horizontal={horizontal}
-      renderItem={({ item: productId }) => (
-        <Item product={products[productId]} {...props} />
+      renderItem={({ item: productId, index }) => (
+        <Item product={products[productId]} index={index} {...props} />
       )}
       keyExtractor={(_, index) => index.toString()}
       numColumns={numColumns}
@@ -68,13 +73,16 @@ const ProductList = ({
 };
 
 const styles = StyleSheet.create({
-  smallItem: {
+  bottomMargin: {
     marginBottom: Sizes.MARGIN_2,
   },
-  wideItem: {
-    marginBottom: Sizes.MARGIN_2,
+  rightMargin: {
+    marginRight: Sizes.MARGIN_2,
   },
-  horizontal: {
+  mediumItem: {
+    flex: 2,
+    width: Sizes.size(220),
+    marginBottom: Sizes.MARGIN_2,
     marginRight: Sizes.MARGIN_2,
   },
 });

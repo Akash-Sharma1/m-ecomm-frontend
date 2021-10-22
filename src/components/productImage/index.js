@@ -1,18 +1,34 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
-import ProductSmallImage from './Small';
-import ProductMediumImage from './Medium';
+import BackgroundFloater from 'components/BackgroundFloater';
 
-const ProductImage = ({ style, uri }) => {
+const ProductImage = ({ uri, style, index, scale }) => {
   return (
-    <View>
-      <Text></Text>
+    <View style={[styles.container, style]}>
+      <BackgroundFloater
+        containerStyle={styles.floater}
+        color={index}
+        scale={scale}
+      />
+      <Image source={{ uri }} style={styles.image} />
     </View>
   );
 };
 
-ProductImage.Small = ProductSmallImage;
-ProductImage.Medium = ProductMediumImage;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative',
+  },
+  floater: {
+    position: 'absolute',
+  },
+  image: {
+    // flex: 1,
+  },
+});
+
+export { productImageSizes } from './utils';
 
 export default ProductImage;

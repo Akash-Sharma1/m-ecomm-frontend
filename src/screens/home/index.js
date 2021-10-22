@@ -21,12 +21,13 @@ const Home = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         <Title />
-        <CategoryChips />
+        <View style={styles.categoryChips}>
+          <CategoryChips />
+        </View>
         <View>
           <ProductList
-            variant="small"
+            variant="medium"
             products={products} unqiueIndex={3}
-            horizontal
           />
         </View>
         <View>
@@ -41,6 +42,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
+    marginBottom: Sizes.size(110),
     flex: 1,
   },
   header: {
@@ -48,6 +50,10 @@ const styles = StyleSheet.create({
   },
   scrollableContainer: {
     flex: 1,
+  },
+  categoryChips: {
+    marginTop: Sizes.size(10),
+    marginBottom: Sizes.size(20),
   },
 });
 

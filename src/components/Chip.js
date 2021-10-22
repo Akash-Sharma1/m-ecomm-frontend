@@ -1,36 +1,33 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 import { Colors, Fonts, Sizes } from 'styles';
 
 const Chip = ({
   label,
-  onClick,
-  active = false,
+  onPress,
+  selected,
   containerStyle,
   style,
 }) => {
-  const [isSelected, setSelected] = useState(active);
-
   const handleClick = useCallback(() => {
-    setSelected((prev) => !prev);
-    onClick && onClick(!isSelected);
-  }, [onClick, isSelected]);
+    onPress && onPress(label);
+  }, [onPress, label]);
 
   return (
     <TouchableOpacity
       style={[
         styles.container,
-        isSelected ? styles.isActive : {},
+        selected ? styles.isActive : {},
         containerStyle,
       ]}
-      onClick={handleClick}
-      activeOpacity={!onClick}
+      onPress={handleClick}
+      activeOpacity={!onPress}
     >
       <Text
         style={[
           styles.text,
-          isSelected ? styles.isActiveText : {},
+          selected ? styles.isActiveText : {},
           style,
         ]}
       >
