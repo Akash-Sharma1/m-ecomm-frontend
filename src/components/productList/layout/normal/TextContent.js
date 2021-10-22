@@ -5,7 +5,7 @@ import ProductTitle from 'components/productList/components/Title';
 import ProductPrice from 'components/productList/components/Price';
 import ProductRatings from 'components/productList/components/Ratings';
 
-const SmallItemTextContent = ({ product }) => {
+const NormalItemTextContent = ({ product }) => {
   return (
     <View style={styles.container}>
       <ProductTitle title={product.title} style={styles.title} />
@@ -20,7 +20,7 @@ const SmallItemTextContent = ({ product }) => {
   );
 };
 
-export default SmallItemTextContent;
+export default NormalItemTextContent;
 
 const styles = StyleSheet.create({
   container: {

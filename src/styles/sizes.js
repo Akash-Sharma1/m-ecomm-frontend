@@ -32,7 +32,7 @@ export default {
   H6: scaleFont(12),
 
   // app dimensions
-  width,
-  height,
+  SCREEN_WIDTH: width,
+  SCREEN_HEIGHT: height,
   size: (size) => scaleFont(size),
 };

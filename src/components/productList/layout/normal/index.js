@@ -7,7 +7,7 @@ import ProductListItemHeader from 'components/productList/components/Header';
 import ProductImage, { productImageSizes } from 'components/productImage';
 import SmallItemTextContent from './TextContent';
 
-const ProductListItemSmall = ({
+const ProductListItemNormal = ({
   product,
   style,
 }) => {
@@ -32,24 +32,22 @@ const ProductListItemSmall = ({
   );
 };
 
-const SMALL_ITEM_HEIGHT = Sizes.size(270);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    height: Sizes.size(SMALL_ITEM_HEIGHT),
   },
   imageContainer: {
     flex: 1.5,
   },
   detailsContainer: {
     flex: 1,
-    paddingVertical: Sizes.PADDING,
+    paddingTop: Sizes.PADDING_2,
   },
   header: {
     flex: 0.5,
   },
 });
 
-export default ProductListItemSmall;
+export default ProductListItemNormal;

@@ -22,11 +22,14 @@ const Home = ({ navigation }) => {
             <View style={styles.categoryChips}>
               <CategoryChips />
             </View>
-            <ProductList variant="medium" products={products} />
+            <ProductList variant="large" horizontal products={products} />
           </>
         )}
         ListFooterComponent={(
-          <ProductList variant="small" products={products} />
+          <>
+            <ProductList variant="small" products={products} />
+            <ProductList variant="medium" horizontal products={products} />
+          </>
         )}
       />
     </SafeAreaView>

@@ -6,7 +6,7 @@ import ProductPrice from 'components/productList/components/Price';
 import ProductRatings from 'components/productList/components/Ratings';
 import { Colors, Fonts, Sizes } from 'styles';
 
-const SmallItemTextContent = ({ product }) => {
+const WideItemTextContent = ({ product }) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -32,14 +32,19 @@ const SmallItemTextContent = ({ product }) => {
   );
 };
 
-export default SmallItemTextContent;
+
+export default WideItemTextContent;
 
 const styles = StyleSheet.create({
   container: {
+    // flex: 1,
+    height: Sizes.size(50),
     justifyContent: 'center',
+    alignContent: 'center',
     marginLeft: Sizes.PADDING,
   },
   row: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: Sizes.size(1),
