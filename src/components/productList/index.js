@@ -42,8 +42,7 @@ const ProductList = ({
   products,
   variant,
   onPress,
-  unqiueIndex,
-  LisHeaderComponent,
+  ListHeaderComponent,
   ListFooterComponent,
 }) => {
   const props = {
@@ -62,7 +61,7 @@ const ProductList = ({
         <Item product={products[productId]} index={index} {...props} />
       )}
       numColumns={numColumns}
-      LisHeaderComponent={LisHeaderComponent}
+      ListHeaderComponent={ListHeaderComponent}
       ListFooterComponent={ListFooterComponent}
     />
   );

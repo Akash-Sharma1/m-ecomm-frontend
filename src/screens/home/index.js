@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { ProductList, TopBar } from 'components';
 import { Sizes } from 'styles';
@@ -15,26 +15,20 @@ const Home = ({ navigation }) => {
       <View style={styles.header}>
         <TopBar navigation={navigation} />
       </View>
-
-      <ScrollView
-        style={styles.scrollableContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        <Title />
-        <View style={styles.categoryChips}>
-          <CategoryChips />
-        </View>
-        <View>
-          <ProductList
-            variant="medium"
-            products={products} unqiueIndex={3}
-          />
-        </View>
-        <View>
-          <ProductList variant="wide" products={products} unqiueIndex={1} />
-        </View>
-        <ProductList variant="small" products={products} unqiueIndex={2} />
-      </ScrollView>
+      <ProductList variant="wide" products={products}
+        ListHeaderComponent={(
+          <>
+            <Title />
+            <View style={styles.categoryChips}>
+              <CategoryChips />
+            </View>
+            <ProductList variant="medium" products={products} />
+          </>
+        )}
+        ListFooterComponent={(
+          <ProductList variant="small" products={products} />
+        )}
+      />
     </SafeAreaView>
   );
 };
@@ -47,9 +41,6 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingBottom: Sizes.PADDING,
-  },
-  scrollableContainer: {
-    flex: 1,
   },
   categoryChips: {
     marginTop: Sizes.size(10),

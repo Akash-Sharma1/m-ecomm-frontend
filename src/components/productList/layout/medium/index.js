@@ -20,7 +20,7 @@ const ProductListItemMedium = ({
       <View style={styles.imageContainer}>
         <ProductImage
           uri={product.image}
-          ndex={product.id}
+          index={product.id}
           scale={productImageSizes.MEDIUM_2}
         />
       </View>

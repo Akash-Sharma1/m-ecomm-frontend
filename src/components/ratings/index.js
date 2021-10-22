@@ -1,6 +1,7 @@
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import List from './List';
+import Star from './Star';
 
 /**
  * @param {variant} string [default, compact]
@@ -30,11 +31,21 @@ const Ratings = ({
   ];
 
   return (
-    <List
-      starDetailsArray={starDetailsArray}
-      style={style}
-    />
+    <View style={styles.container}>
+      {starDetailsArray.map((item, index) => (
+        <Star style={style} type={item} key={index} />
+      ))}
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Ratings;
