@@ -8,3 +8,4 @@ export { default as Card } from './Card';
 export { default as Ratings } from './ratings';
 export { default as BackgroundFloater } from './BackgroundFloater';
 export { default as ProductImage } from './productImage';
+export { default as List } from './List';

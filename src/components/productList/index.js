@@ -1,11 +1,11 @@
 import React from 'react';
-import { FlatList } from 'native-base';
 
 import ProductListItemSmall from './layout/small';
 import ProductListItemWide from './layout/wide';
 import ProductListItemMedium from './layout/medium';
 import { StyleSheet } from 'react-native';
 import { Sizes } from 'styles';
+import List from 'components/List';
 
 const Item = ({ variant, product, index, ...remainingProps }) => {
   if (variant === 'small') {
@@ -55,19 +55,15 @@ const ProductList = ({
   const horizontal = variant === 'medium';
 
   return (
-    <FlatList
+    <List
       data={Object.keys(products)}
       horizontal={horizontal}
       renderItem={({ item: productId, index }) => (
         <Item product={products[productId]} index={index} {...props} />
       )}
-      keyExtractor={(_, index) => index.toString()}
       numColumns={numColumns}
-      listKey={`productList-${unqiueIndex}`}
       LisHeaderComponent={LisHeaderComponent}
       ListFooterComponent={ListFooterComponent}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
     />
   );
 };

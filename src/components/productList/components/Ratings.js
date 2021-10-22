@@ -3,14 +3,13 @@ import { StyleSheet, View } from 'react-native';
 
 import Ratings from 'components/ratings';
 
-const ProductRatings = ({ rating, style, variant, productId }) => {
+const ProductRatings = ({ rating, style, variant }) => {
   return (
     <View style={[styles.ratingContainer, style]}>
       <Ratings
         rating={rating}
         showSubText
         variant={variant}
-        listKeyIndex={productId}
       />
     </View>
   );

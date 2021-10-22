@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Colors, Fonts, Sizes } from 'styles';
 import { topCategoryTabItem } from '../utils/constants';
 import { Chip } from 'components';
+import List from 'components/List';
 
 const CategoryChips = () => {
   const [selectedItem, setSelectedItem] = useState(topCategoryTabItem[0]);
 
   return (
-    <FlatList
-      showsHorizontalScrollIndicator={false}
+    <List
       horizontal
       data={topCategoryTabItem}
       renderItem={({ item }) => (
@@ -22,7 +22,6 @@ const CategoryChips = () => {
           selected={selectedItem === item}
         />
       )}
-      keyExtractor={(item) => item}
     />
   );
 };

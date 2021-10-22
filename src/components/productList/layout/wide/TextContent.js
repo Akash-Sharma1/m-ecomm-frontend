@@ -12,11 +12,7 @@ const SmallItemTextContent = ({ product }) => {
       <View style={styles.row}>
         <ProductTitle title={product.title} />
         <View>
-          <ProductRatings
-            variant="compact"
-            rating={product.rating}
-            productId={product.id}
-          />
+          <ProductRatings variant="compact" rating={product.rating} />
         </View>
       </View>
 

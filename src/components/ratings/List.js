@@ -1,21 +1,20 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import Star from './Star';
+import List from 'components/List';
 
 const StarList = ({
-  style, starDetailsArray, listKeyIndex,
+  style, starDetailsArray,
 }) => {
   return (
-    <FlatList
+    <List
       contentContainerStyle={styles.container}
       horizontal
       data={starDetailsArray}
       renderItem={({ item: starinfo }) => (
         <Star style={style} type={starinfo} />
       )}
-      keyExtractor={(_, index) => index.toString()}
-      listKeyIndex={`ratings-${listKeyIndex}`}
     />
   );
 };
