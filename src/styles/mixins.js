@@ -1,4 +1,5 @@
 import { Dimensions, PixelRatio } from 'react-native';
+import Colors from './colors';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 const guidelineBaseWidth = 375;
@@ -41,10 +42,24 @@ const boxShadow = (
   };
 };
 
+const simpleShadow = (
+  scale = 1, width = null, height = null, shadowRadius = 3.5,
+) => ({
+  shadowColor: Colors.GRAY_DARK,
+  shadowOffset: {
+    width: width !== null ? width : 0,
+    height: height !== null ? height : 10,
+  },
+  shadowOpacity: 0.25 * scale,
+  shadowRadius: shadowRadius * scale,
+  elevation: 5 * scale,
+});
+
 export default {
-  scaleSize: scaleSize,
-  scaleFont: scaleFont,
-  margin: margin,
-  padding: padding,
-  boxShadow: boxShadow,
+  scaleSize,
+  scaleFont,
+  margin,
+  padding,
+  boxShadow,
+  simpleShadow,
 };

@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Cart, Home, OrderHistory, ProductDetails } from 'screens';
+import { AddCustomOrder, Cart, Chat, Home, OrderHistory } from 'screens';
 import { Routes } from 'constants';
-import { Colors, Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 import { BottomTabNavigationIcon, BottomTabNavigationText } from './TabAssets';
 
 const Tab = createBottomTabNavigator();
@@ -15,7 +15,7 @@ const BottomTabNavigation = () => {
       screenOptions={{
         showLabel: false,
         headerShown: false,
-        tabBarStyle: [styles.tabBarStyle, styles.shadow],
+        tabBarStyle: [styles.tabBarStyle, Mixins.simpleShadow()],
       }}
     >
       <Tab.Screen
@@ -33,8 +33,8 @@ const BottomTabNavigation = () => {
       />
 
       <Tab.Screen
-        name={Routes.PRODUCT}
-        component={ProductDetails}
+        name={Routes.CHAT}
+        component={Chat}
         options={{
           tabBarLabel: (props) => (
             <BottomTabNavigationText label="Chat" {...props}/>
@@ -47,8 +47,8 @@ const BottomTabNavigation = () => {
       />
 
       <Tab.Screen
-        name={Routes.ORDER_SUMMARY}
-        component={ProductDetails}
+        name={Routes.ADD_CUSTOM_ORDER}
+        component={AddCustomOrder}
         options={{
           tabBarLabel: (props) => (
             <BottomTabNavigationText label="Enquire" {...props}/>
@@ -101,16 +101,6 @@ const styles = StyleSheet.create({
     paddingBottom: Sizes.PADDING,
     padding: Sizes.PADDING,
     height: Sizes.size(80),
-  },
-  shadow: {
-    shadowColor: Colors.GRAY_DARK,
-    shadowOffset: {
-      width: 0,
-      height: Sizes.size(10),
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.5,
-    elevation: 5,
   },
 });
 

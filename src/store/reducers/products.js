@@ -5,10 +5,11 @@ const TOGGLE_BOOKMARK_INIT = `${prefix}/TOGGLE_BOOKMARK_INIT`;
 const TOGGLE_BOOKMARK_DONE = `${prefix}/TOGGLE_BOOKMARK_DONE`;
 const TOGGLE_BOOKMARK_ERROR = `${prefix}/TOGGLE_BOOKMARK_ERROR`;
 
+const SET_CURRENT_PRODUCT_ID = `${prefix}/SET_CURRENT_PRODUCT_ID`;
+
 // DISPATCHERS
 export const toggleBookmark = ({ productId, setBookmark }) => {
   return (dispatch) => {
-    console.log('here');
     try {
       dispatch({ type: TOGGLE_BOOKMARK_INIT });
       // API CALL EXPECTED
@@ -19,6 +20,12 @@ export const toggleBookmark = ({ productId, setBookmark }) => {
     } catch (error) {
       dispatch({ type: TOGGLE_BOOKMARK_ERROR, error });
     }
+  };
+};
+
+export const setCurrentProductId = (productId) => {
+  return (dispatch) => {
+    dispatch({ type: SET_CURRENT_PRODUCT_ID, payload: productId });
   };
 };
 
@@ -37,6 +44,7 @@ export const toggleBookmark = ({ productId, setBookmark }) => {
 const initialState = {
   isLoading: false,
   loadError: null,
+  currentProductId: null,
   products: {
     0: {
       id: 0,
@@ -109,6 +117,11 @@ export default (state = initialState, action) => {
       ...state,
       isLoading: false,
       loadError: action.error,
+    };
+  case SET_CURRENT_PRODUCT_ID:
+    return {
+      ...state,
+      currentProductId: action.payload,
     };
   default:
     return state;

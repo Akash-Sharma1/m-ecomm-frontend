@@ -1,11 +1,12 @@
 import React from 'react';
 
-import ProductListItemNormal from './layout/normal';
-import ProductListItemWide from './layout/wide';
 import { StyleSheet } from 'react-native';
 import { Sizes } from 'styles';
-import List from 'components/List';
 import { ItemSizes } from './utils/constants';
+import { productImageSizes } from 'components/productImage';
+import ProductListItemNormal from './layout/normal';
+import ProductListItemWide from './layout/wide';
+import List from 'components/List';
 
 const Item = ({
   variant,
@@ -35,6 +36,7 @@ const Item = ({
       <ProductListItemNormal
         product={product}
         style={itemStyles}
+        scale={productImageSizes[`${variant}`.toLocaleUpperCase()]}
         {...remainingProps}
       />
     );

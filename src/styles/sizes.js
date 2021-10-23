@@ -9,6 +9,7 @@ export default {
   BASE: scaleFont(8),
   DEFAULT_FONT_SIZE: scaleFont(14),
 
+  RADIUS_0: scaleFont(4),
   RADIUS: scaleFont(10),
   RADIUS_2: scaleFont(20),
   RADIUS_CIRCLE: scaleFont(100),

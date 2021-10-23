@@ -1,26 +1,27 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Box } from 'native-base';
+import { Pressable, StyleSheet } from 'react-native';
 
-import { Colors, Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 
 const Card = ({
   noShadow,
-  shadow = 1,
   rounded,
   children,
+  onPress,
   style,
 }) => {
-  const shadowVar = noShadow ? null : shadow;
-
   return (
-    <Box shadow={shadowVar} style={[
-      styles.card,
-      style,
-      rounded && styles.rounded,
-    ]}>
+    <Pressable
+      onPress={() => onPress && onPress()}
+      style={[
+        styles.card,
+        rounded && styles.rounded,
+        !noShadow && Mixins.simpleShadow(0.3),
+        style,
+      ]}
+    >
       {children}
-    </Box>
+    </Pressable>
   );
 };
 
