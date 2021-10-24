@@ -7,11 +7,9 @@ import { Routes } from 'constants';
 import { Layout } from 'styles';
 import BottomTabNavigation from 'navigations/bottomTabs';
 
-
 const Stack = createStackNavigator();
 
-
-const StackNavigator = ({ navigation = null, style = {} }) => {
+const StackNavigator = ({ style }) => {
   return (
     <Animated.View style={[Layout.flexCol, style]}>
       <Stack.Navigator

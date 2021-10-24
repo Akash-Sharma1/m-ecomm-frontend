@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     padding: 0,
     ...Fonts.H5,
     ...Fonts.BOLD,
-    color: Colors.ACTION,
+    color: Colors.PRIMARY,
   },
 });

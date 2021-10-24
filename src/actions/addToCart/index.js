@@ -20,7 +20,7 @@ export default AddToCart;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.ACTION,
+    backgroundColor: Colors.PRIMARY,
     borderRadius: Sizes.RADIUS_0,
     flexDirection: 'row',
     justifyContent: 'center',

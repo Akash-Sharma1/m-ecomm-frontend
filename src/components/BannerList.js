@@ -9,12 +9,12 @@ const BannerList = ({ style }) => {
   return (
     <List
       style={[styles.container, style]}
-      data={[...Array(3)]}
+      data={[...Array(4)]}
       renderItem={({ item, index }) => (
         <Banner style={styles.banner} index={index}/>
       )}
       horizontal
-      // autoPlay
+      autoPlay
       snapOnItems
     />
   );
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     height: ComponentAttributes.BANNER_HEIGHT,
   },
   banner: {
-    width: Sizes.SCREEN_WIDTH * 0.9,
+    width: Sizes.SCREEN_WIDTH - 2 * Sizes.EDGE_HORIZONTAL_MARGIN,
   },
 });

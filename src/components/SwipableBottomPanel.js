@@ -10,6 +10,7 @@ import { Colors, Sizes } from 'styles';
 const DEFAULT_SIZE = 300;
 const CLOSING_THRESHOLD = 200;
 const CLOSING_HEIGHT = 200;
+const FULL_SCREEN_SNAPPING_THRESHOLD_FROM_TOP = 300;
 
 const SwipableBottomPanel = ({
   children,
@@ -17,10 +18,18 @@ const SwipableBottomPanel = ({
   initialHeight = DEFAULT_SIZE,
   closingThreshold = CLOSING_THRESHOLD,
   closedHeight = CLOSING_HEIGHT,
+  fullScreenSnapThresholdFromTop = FULL_SCREEN_SNAPPING_THRESHOLD_FROM_TOP,
+  rebounce=true,
 }) => {
-  const panelHeight = useSharedValue(Sizes.SCREEN_HEIGHT - initialHeight);
   const closedHeightFromTop = Sizes.SCREEN_HEIGHT - closedHeight;
-  const closingThresholdFromTop = Sizes.SCREEN_HEIGHT - closingThreshold;
+
+  const panelHeight = useSharedValue(Sizes.SCREEN_HEIGHT - initialHeight > (
+    Sizes.SCREEN_HEIGHT - closingThreshold
+  ) ? (Sizes.SCREEN_HEIGHT - initialHeight) : closedHeightFromTop);
+
+  const closingThresholdFromTop = closedHeightFromTop > (
+    Sizes.SCREEN_HEIGHT - closingThreshold
+  ) ? (Sizes.SCREEN_HEIGHT - closingThreshold) : closedHeightFromTop;
 
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
@@ -28,20 +37,40 @@ const SwipableBottomPanel = ({
     },
     onActive: (event, ctx) => {
       const heightFromTop = ctx.translationY + event.translationY;
-      // Once Reached the topmost part dont allow any more translation
-      if (heightFromTop >= marginFromTop) {
-        panelHeight.value = heightFromTop;
+
+      if (rebounce) {
+        // if rebouce is true then allow any value, as it will bounce back
+        if (heightFromTop >= marginFromTop) {
+          // Once Reached the topmost part dont allow any more translation
+          panelHeight.value = heightFromTop;
+        }
+      } else {
+        // if rebounce is false them not allow overlimit value
+        if (heightFromTop >= marginFromTop &&
+            heightFromTop < closingThresholdFromTop) {
+          panelHeight.value = heightFromTop;
+        }
       }
     },
-    onEnd: (_, ctx) => {
+    onEnd: () => {
       const heightFromTop = panelHeight.value;
 
       if (heightFromTop >= closingThresholdFromTop) {
         // This is below the closing limit, bounce back
-        panelHeight.value = withSpring(closedHeightFromTop);
+        panelHeight.value = rebounce ?
+          withSpring(closedHeightFromTop) :
+          closedHeightFromTop;
+      } else if (heightFromTop < fullScreenSnapThresholdFromTop) {
+        // This is for snapping to full screen view after hitting threshold
+        panelHeight.value = rebounce ?
+          withSpring(marginFromTop) :
+          marginFromTop;
       }
     },
-  }, [closingThresholdFromTop, closedHeightFromTop]);
+  }, [
+    closingThresholdFromTop, closedHeightFromTop,
+    rebounce, marginFromTop, fullScreenSnapThresholdFromTop,
+  ]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {

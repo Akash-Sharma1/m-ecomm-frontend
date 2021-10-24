@@ -37,7 +37,7 @@ export default ChangeQuantity;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderColor: Colors.ACTION,
+    borderColor: Colors.PRIMARY,
     borderWidth: Sizes.size(1),
     borderRadius: Sizes.RADIUS_0,
     flexDirection: 'row',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   actionText: {
     ...Fonts.H4,
     ...Fonts.BOLD,
-    color: Colors.ACTION,
+    color: Colors.PRIMARY,
   },
   action: {
     flex: 1,

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
 
-const IntervalTime = 4000;
+const IntervalTime = 5000;
 
 const List = ({
   data,

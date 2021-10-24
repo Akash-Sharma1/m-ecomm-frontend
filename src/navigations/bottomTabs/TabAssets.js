@@ -58,7 +58,7 @@ export const BottomTabNavigationText = ({ label, focused }) => {
 
 const styles = StyleSheet.create({
   focused: {
-    color: Colors.ACTION,
+    color: Colors.PRIMARY,
   },
   text: {
     position: 'relative',

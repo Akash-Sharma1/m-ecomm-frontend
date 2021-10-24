@@ -9,7 +9,7 @@ const FOOTER_HEIGHT = Sizes.size(70);
 // COMMON
 const SCREEN_CONTAINER = {
   marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
-  marginBottom: Sizes.size(110),
+  marginBottom: Sizes.size(70),
   flex: 1,
 };
 

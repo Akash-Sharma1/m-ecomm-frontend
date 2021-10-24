@@ -28,7 +28,7 @@ const ProductDetails = () => {
             <ProductImage uri={product.image} />
           </View>
         </ScrollView>
-        <SwipableBottomPanel>
+        <SwipableBottomPanel closedHeight="300">
           <View style={styles.body}>
             <Description product={product} />
           </View>
@@ -42,6 +42,7 @@ const ProductDetails = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Colors.DEFAULT_BACKGROUND_COLOR,
   },
   topBar: {
     marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.WHITE,
-    flex: 1,
+    // flex: 1,
     padding: Sizes.EDGE_HORIZONTAL_MARGIN,
   },
   scrollContainer: {
