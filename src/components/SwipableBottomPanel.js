@@ -13,6 +13,7 @@ const CLOSING_HEIGHT = 200;
 
 const SwipableBottomPanel = ({
   children,
+  marginFromTop = 0,
   initialHeight = DEFAULT_SIZE,
   closingThreshold = CLOSING_THRESHOLD,
   closedHeight = CLOSING_HEIGHT,
@@ -27,14 +28,16 @@ const SwipableBottomPanel = ({
     },
     onActive: (event, ctx) => {
       const heightFromTop = ctx.translationY + event.translationY;
-      if (heightFromTop >= 0) {
+      // Once Reached the topmost part dont allow any more translation
+      if (heightFromTop >= marginFromTop) {
         panelHeight.value = heightFromTop;
       }
     },
-    onEnd: () => {
+    onEnd: (_, ctx) => {
       const heightFromTop = panelHeight.value;
 
       if (heightFromTop >= closingThresholdFromTop) {
+        // This is below the closing limit, bounce back
         panelHeight.value = withSpring(closedHeightFromTop);
       }
     },
@@ -51,16 +54,16 @@ const SwipableBottomPanel = ({
   });
 
   return (
-    <Animated.View style={[styles.container, animatedStyle]}>
-      <PanGestureHandler onGestureEvent={gestureHandler}>
+    <PanGestureHandler onGestureEvent={gestureHandler}>
+      <Animated.View style={[styles.container, animatedStyle]}>
         <Animated.View style={styles.touchBarContainer}>
           <View style={styles.touchBar} />
         </Animated.View>
-      </PanGestureHandler>
-      <View style={styles.scrollView}>
-        {children}
-      </View>
-    </Animated.View>
+        <View style={styles.scrollView}>
+          {children}
+        </View>
+      </Animated.View>
+    </PanGestureHandler>
   );
 };
 
