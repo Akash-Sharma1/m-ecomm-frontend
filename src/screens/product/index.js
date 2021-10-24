@@ -1,9 +1,11 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { TopBar } from 'components';
-import { ComponentAttributes } from 'styles';
+import { ProductImage, SwipableBottomPanel, TopBar } from 'components';
+import { Colors, ComponentAttributes, Sizes } from 'styles';
+import Description from './components/Description';
+import Footer from './components/Footer';
 
 const ProductDetails = () => {
   const currentProductId = useSelector(
@@ -18,15 +20,42 @@ const ProductDetails = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <TopBar title="Product"/>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <TopBar title="Product" style={styles.topBar}/>
+        <ScrollView style={styles.scrollContainer} >
+          <View style={styles.image}>
+            <ProductImage uri={product.image} />
+          </View>
+        </ScrollView>
+        <SwipableBottomPanel>
+          <View style={styles.body}>
+            <Description product={product} />
+          </View>
+        </SwipableBottomPanel>
+        {/* <Footer product={product} /> */}
+      </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    ...ComponentAttributes.SCREEN_CONTAINER,
+    flex: 1,
+  },
+  topBar: {
+    marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
+  },
+  image: {
+    flex: 2,
+  },
+  body: {
+    backgroundColor: Colors.WHITE,
+    flex: 1,
+    padding: Sizes.EDGE_HORIZONTAL_MARGIN,
+  },
+  scrollContainer: {
+    flex: 1,
   },
 });
 

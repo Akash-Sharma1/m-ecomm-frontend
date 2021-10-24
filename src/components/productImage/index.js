@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   image: {
-    // flex: 1,
+    flex: 1,
   },
 });
 

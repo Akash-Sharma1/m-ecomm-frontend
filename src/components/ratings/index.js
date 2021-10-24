@@ -7,7 +7,7 @@ import Star from './Star';
  * @param {variant} string [default, compact]
  */
 const Ratings = ({
-  rating = 0, showSubText, style, variant='default',
+  rating = 0, showSubText, style, variant='default', customText, containerStyle,
 }) => {
   let completeStars = 0;
   let emptyStars = 0;
@@ -27,11 +27,11 @@ const Ratings = ({
     ...(completeStars ? [...Array(completeStars)].map(() => 'complete'): []),
     ...(halfStar ? [...Array(halfStar)].map(() => 'half') : []),
     ...(emptyStars ? [...Array(emptyStars)].map(() => 'empty') : []),
-    showSubText && rating,
+    ...(showSubText ? [customText || rating] : []),
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       {starDetailsArray.map((item, index) => (
         <Star style={style} type={item} key={index} />
       ))}
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
   },
 });

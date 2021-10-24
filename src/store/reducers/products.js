@@ -53,6 +53,7 @@ const initialState = {
       rating: 5.0,
       discount: 0,
       isBookmarked: false,
+      timesReviewed: 123,
       // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
     },
@@ -62,6 +63,7 @@ const initialState = {
       price: 240.00,
       rating: 1.5,
       discount: 0,
+      timesReviewed: 12,
       isBookmarked: true,
       // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
@@ -70,6 +72,7 @@ const initialState = {
       id: 2,
       title: 'Shri Ram',
       price: 240.00,
+      timesReviewed: 13,
       rating: 5.0,
       discount: 0.3,
       isBookmarked: false,
@@ -83,6 +86,7 @@ const initialState = {
       rating: 1.5,
       discount: 0.12,
       isBookmarked: true,
+      timesReviewed: 3,
       // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
     },

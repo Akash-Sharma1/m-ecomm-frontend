@@ -11,3 +11,6 @@ export { default as ProductImage } from './productImage';
 export { default as Banner } from './Banner';
 export { default as BannerList } from './BannerList';
 export { default as List } from './List';
+export { default as TextExpander } from './TextExpander';
+export { default as SwipableBottomPanel } from './SwipableBottomPanel';
+

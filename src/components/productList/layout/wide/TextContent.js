@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import ProductTitle from 'components/productList/components/Title';
 import ProductPrice from 'components/productList/components/Price';
-import ProductRatings from 'components/productList/components/Ratings';
 import { Colors, Fonts, Sizes } from 'styles';
+import Ratings from 'components/ratings';
 
 const WideItemTextContent = ({ product }) => {
   return (
@@ -12,7 +12,11 @@ const WideItemTextContent = ({ product }) => {
       <View style={styles.row}>
         <ProductTitle title={product.title} />
         <View>
-          <ProductRatings variant="compact" rating={product.rating} />
+          <Ratings
+            rating={product.rating}
+            showSubText
+            variant="compact"
+          />
         </View>
       </View>
 

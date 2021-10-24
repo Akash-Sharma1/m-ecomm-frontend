@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import ProductTitle from 'components/productList/components/Title';
 import ProductPrice from 'components/productList/components/Price';
-import ProductRatings from 'components/productList/components/Ratings';
+import Ratings from 'components/ratings';
 
 const NormalItemTextContent = ({ product }) => {
   return (
@@ -14,7 +14,10 @@ const NormalItemTextContent = ({ product }) => {
         style={styles.price}
       />
       <View style={styles.rating}>
-        <ProductRatings rating={product.rating} />
+        <Ratings
+          rating={product.rating}
+          showSubText
+        />
       </View>
     </View>
   );

@@ -15,11 +15,11 @@ const RightAction = ({ navigation, avatar }) => {
   }
 };
 
-const TopBar = ({ avatar, title }) => {
+const TopBar = ({ avatar, title, style }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <RightAction navigation={navigation} avatar={avatar} />
       {title && <Text style={styles.title}>{title}</Text>}
       <Search navigation={navigation} />
