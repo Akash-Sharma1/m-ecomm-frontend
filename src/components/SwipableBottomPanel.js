@@ -1,19 +1,22 @@
-import React, { useCallback } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, from 'react';
+import { StyleSheet, View } from 'react-native';
 import { PanGestureHandler, ScrollView } from 'react-native-gesture-handler';
 import Animated, {
-  useAnimatedGestureHandler, useAnimatedStyle, useSharedValue,
+  useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring,
 } from 'react-native-reanimated';
 
 import { Colors, Sizes } from 'styles';
 
 const DEFAULT_SIZE = 300;
+const CLOSING_THRESHOLD = 200;
 
 const SwipableBottomPanel = ({
   children,
-  initialHeight,
+  initialHeight = DEFAULT_SIZE,
+  closingThreshold = CLOSING_THRESHOLD,
+  closedSize = 50,
 }) => {
-  const panelHeight = useSharedValue(initialHeight || DEFAULT_SIZE);
+  const panelHeight = useSharedValue(initialHeight);
 
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
@@ -22,7 +25,14 @@ const SwipableBottomPanel = ({
     onActive: (event, ctx) => {
       panelHeight.value = ctx.translationY - event.translationY;
     },
-  });
+    onEnd: () => {
+      const height = panelHeight.value;
+
+      if (height < closingThreshold) {
+        panelHeight.value = withSpring(closedSize);
+      }
+    },
+  }, [closingThreshold, closedSize]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
