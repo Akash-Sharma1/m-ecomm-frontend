@@ -3,7 +3,7 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Routes } from 'constants';
@@ -23,23 +23,29 @@ const DrawerContent = (props) => {
   const isLoggedIn = false; // TODO: AUTOMATE
 
   return (
-    <DrawerContentScrollView {...props} scrollEnabled={false}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.item}>
         <TopBar avatar/>
       </View>
 
-      {Links.map(({ label, route, icon }, index) => (
-        <DrawerItem
-          key={index}
-          label={({ color }) => (
-            <View style={styles.itemContainer}>
-              <MaterialCommunityIcons style={styles.icon} name={icon} />
-              <Text style={[{ color }, styles.text]}>{label}</Text>
-            </View>
-          )}
-          onPress={() => props.navigation.navigate(route)}
-        />
-      ))}
+      <DrawerContentScrollView
+        style={styles.scrollContainer}
+        {...props}
+        crollEnabled={false}
+      >
+        {Links.map(({ label, route, icon }, index) => (
+          <DrawerItem
+            key={index}
+            label={({ color }) => (
+              <View style={styles.itemContainer}>
+                <MaterialCommunityIcons style={styles.icon} name={icon} />
+                <Text style={[{ color }, styles.text]}>{label}</Text>
+              </View>
+            )}
+            onPress={() => props.navigation.navigate(route)}
+          />
+        ))}
+      </DrawerContentScrollView>
 
       {isLoggedIn ? (
         <DrawerItem
@@ -80,15 +86,20 @@ const DrawerContent = (props) => {
           />
         </>
       )}
-    </DrawerContentScrollView>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollContainer: {
+    flex: 1,
+  },
   item: {
     padding: Sizes.PADDING,
   },
   itemContainer: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
