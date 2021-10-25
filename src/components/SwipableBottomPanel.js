@@ -8,7 +8,7 @@ import Animated, {
 import { Colors, Sizes } from 'styles';
 
 const DEFAULT_SIZE = 300;
-const CLOSING_THRESHOLD = 200;
+const CLOSING_THRESHOLD = 300;
 const CLOSING_HEIGHT = 200;
 const FULL_SCREEN_SNAPPING_THRESHOLD_FROM_TOP = 300;
 
@@ -30,6 +30,7 @@ const SwipableBottomPanel = ({
   const closingThresholdFromTop = closedHeightFromTop > (
     Sizes.SCREEN_HEIGHT - closingThreshold
   ) ? (Sizes.SCREEN_HEIGHT - closingThreshold) : closedHeightFromTop;
+  console.log(closingThresholdFromTop, Sizes.SCREEN_HEIGHT - closingThreshold);
 
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
@@ -37,6 +38,7 @@ const SwipableBottomPanel = ({
     },
     onActive: (event, ctx) => {
       const heightFromTop = ctx.translationY + event.translationY;
+      console.log(heightFromTop, closingThresholdFromTop);
 
       if (rebounce) {
         // if rebouce is true then allow any value, as it will bounce back

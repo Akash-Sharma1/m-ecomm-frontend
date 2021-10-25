@@ -4,11 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { Fonts } from 'styles';
 
-const Search = ({ navigation }) => {
+const Search = () => {
   return (
-    <TouchableOpacity
-      onPress={navigation.openDrawer}
-    >
+    <TouchableOpacity>
       <Ionicons name="search" style={styles.search} />
     </TouchableOpacity>
   );

@@ -22,7 +22,7 @@ const ProductDetails = () => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
-        <TopBar title="Product" style={styles.topBar}/>
+        <TopBar goBack title="Product" cart style={styles.topBar}/>
         <ScrollView style={styles.scrollContainer} >
           <View style={styles.image}>
             <ProductImage uri={product.image} />

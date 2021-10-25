@@ -10,7 +10,7 @@ const ProductListItemHeader = ({ product }) => {
       {product.discount ? (
         <DiscountChip discount={product.discount} />
       ) : <View />}
-      <Bookmark productId={product.id} />
+
     </View>
   );
 };

@@ -5,3 +5,4 @@ export { default as OrderHistory } from './orderHistory';
 export { default as OrderSummary } from './orderSummary';
 export { default as Chat } from './chat';
 export { default as AddCustomOrder } from './addCustomOrder';
+export { default as Accounts } from './accounts';

@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { toggleBookmark } from 'store/reducers/products';
-import { Colors, Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 
 const Bookmark = ({ productId, containerStyle, style }) => {
   const dispatch = useDispatch();
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     paddingBottom: Sizes.size(3.5),
   },
   activeContainer: {
-    backgroundColor: Colors.PINK,
+    backgroundColor: Colors.PRIMARY,
+    ...Mixins.simpleShadow(),
   },
   heart: {
     fontSize: Sizes.H5,

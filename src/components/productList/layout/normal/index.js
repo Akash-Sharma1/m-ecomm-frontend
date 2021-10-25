@@ -7,7 +7,6 @@ import { setCurrentProductId } from 'store/reducers/products';
 import { useNavigation } from '@react-navigation/core';
 import { Routes } from 'constants';
 import Card from 'components/Card';
-import ProductListItemHeader from 'components/productList/components/Header';
 import ProductImage from 'components/productImage';
 import SmallItemTextContent from './TextContent';
 
@@ -26,10 +25,6 @@ const ProductListItemNormal = ({
 
   return (
     <Card rounded style={[styles.container, style]} onPress={onPress}>
-      <View style={styles.header}>
-        <ProductListItemHeader product={product} />
-      </View>
-
       <View style={styles.imageContainer}>
         <ProductImage
           uri={product.image}
@@ -50,16 +45,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    paddingHorizontal: Sizes.PADDING,
   },
   imageContainer: {
-    flex: 1.5,
+    flex: 2.5,
   },
   detailsContainer: {
     flex: 1,
     paddingTop: Sizes.PADDING_2,
-  },
-  header: {
-    flex: 0.5,
   },
 });
 

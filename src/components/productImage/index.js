@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
 import BackgroundFloater from 'components/BackgroundFloater';
+import { Sizes } from 'styles';
 
 const ProductImage = ({ uri, style, index, scale }) => {
   return (
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    borderRadius: Sizes.RADIUS,
   },
 });
 

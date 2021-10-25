@@ -6,23 +6,32 @@ import { Colors, Fonts, Sizes } from 'styles';
 import GoBack from './GoBack';
 import OpenDrawer from './OpenDrawer';
 import Search from './Search';
+import SearchBar from './SearchBar';
+import DrawerMenu from './DrawerMenu';
+import Cart from './Cart';
 
-const RightAction = ({ navigation, avatar }) => {
-  if (avatar) {
-    return <OpenDrawer navigation={navigation} />;
-  } else {
-    return <GoBack navigation={navigation} />;
-  }
-};
 
-const TopBar = ({ avatar, title, style }) => {
+const TopBar = ({
+  avatar,
+  title,
+  search,
+  searchBar,
+  drawerMenu,
+  goBack,
+  cart,
+  style,
+}) => {
   const navigation = useNavigation();
 
   return (
     <View style={[styles.container, style]}>
-      <RightAction navigation={navigation} avatar={avatar} />
+      {avatar && <OpenDrawer navigation={navigation} />}
+      {goBack && <GoBack navigation={navigation} />}
       {title && <Text style={styles.title}>{title}</Text>}
-      <Search navigation={navigation} />
+      {search && <Search />}
+      {drawerMenu && <DrawerMenu />}
+      {searchBar && <SearchBar />}
+      {cart && <Cart />}
     </View>
   );
 };

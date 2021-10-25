@@ -11,7 +11,7 @@ const Title = () => {
   return (
     <View style={styles.title}>
       <Text style={styles.titleText}>Our Products</Text>
-      <View>
+      {/* <View>
         <DropDownPopover
           title="Sort by"
           selectedItem={sortBy}
@@ -20,7 +20,7 @@ const Title = () => {
           onSelect={setSortBy}
           width="90"
         />
-      </View>
+      </View> */}
     </View>
   );
 };
