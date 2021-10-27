@@ -1,10 +1,19 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import BackgroundFloater from 'components/BackgroundFloater';
 import { Sizes } from 'styles';
+import BackgroundFloater from 'components/BackgroundFloater';
+import List from '../List';
 
-const ProductImage = ({ uri, style, index, scale }) => {
+const ProductImage = ({
+  uri,
+  style,
+  index,
+  scale,
+  carausal,
+  fullSize,
+  rounded,
+}) => {
   return (
     <View style={[styles.container, style]}>
       <BackgroundFloater
@@ -12,7 +21,23 @@ const ProductImage = ({ uri, style, index, scale }) => {
         color={index}
         scale={scale}
       />
-      <Image source={{ uri }} style={styles.image} />
+
+      {carausal ? (
+        <List
+          data={uri}
+          renderitem={(item) => {
+            <Image
+              source={{ item }}
+              style={[styles.image, rounded && styles.rounded]}
+            />;
+          }}
+        />
+      ) : (
+        <Image
+          source={{ uri }}
+          style={[styles.image, rounded && styles.rounded]}
+        />
+      )}
     </View>
   );
 };
@@ -27,6 +52,8 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+  },
+  rounded: {
     borderRadius: Sizes.RADIUS,
   },
 });

@@ -55,6 +55,8 @@ const initialState = {
       isBookmarked: false,
       timesReviewed: 123,
       // eslint-disable-next-line max-len
+      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
+      // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
     },
     1: {
@@ -65,6 +67,8 @@ const initialState = {
       discount: 0,
       timesReviewed: 12,
       isBookmarked: true,
+      // eslint-disable-next-line max-len
+      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
       // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
     },
@@ -77,6 +81,8 @@ const initialState = {
       discount: 0.3,
       isBookmarked: false,
       // eslint-disable-next-line max-len
+      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
+      // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
     },
     3: {
@@ -87,6 +93,8 @@ const initialState = {
       discount: 0.12,
       isBookmarked: true,
       timesReviewed: 3,
+      // eslint-disable-next-line max-len
+      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
       // eslint-disable-next-line max-len
       image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
     },

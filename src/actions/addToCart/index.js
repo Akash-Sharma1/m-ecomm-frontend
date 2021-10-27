@@ -9,8 +9,7 @@ const AddToCart = ({ productId }) => {
 
   return (
     <TouchableOpacity style={styles.container}>
-      <Text style={styles.text}>Add</Text>
-      <Text style={[styles.text, styles.padded]}>{product?.price}</Text>
+      <Text style={styles.text}>Cart</Text>
     </TouchableOpacity>
   );
 };
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.PRIMARY,
-    borderRadius: Sizes.RADIUS_0,
+    borderRadius: Sizes.RADIUS,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -31,8 +30,5 @@ const styles = StyleSheet.create({
     ...Fonts.H4,
     ...Fonts.BOLD,
     color: Colors.WHITE,
-  },
-  padded: {
-    paddingHorizontal: Sizes.PADDING,
   },
 });

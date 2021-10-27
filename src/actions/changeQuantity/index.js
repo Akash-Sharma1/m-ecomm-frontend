@@ -21,9 +21,7 @@ const ChangeQuantity = ({ productId, vertical }) => {
         <Text style={styles.actionText} >-</Text>
       </TouchableOpacity>
 
-      <View style={styles.action}>
-        <Text style={styles.text}>1</Text>
-      </View>
+      <Text style={styles.text}>1</Text>
 
       <TouchableOpacity style={styles.action} onPress={increment}>
         <Text style={styles.actionText} >+</Text>
@@ -36,12 +34,13 @@ export default ChangeQuantity;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     borderColor: Colors.PRIMARY,
     borderWidth: Sizes.size(1),
-    borderRadius: Sizes.RADIUS_0,
+    borderRadius: Sizes.RADIUS_2,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   text: {
     ...Fonts.H4,
@@ -53,9 +52,10 @@ const styles = StyleSheet.create({
     color: Colors.PRIMARY,
   },
   action: {
-    flex: 1,
-    padding: Sizes.PADDING,
+    paddingHorizontal: Sizes.PADDING,
+    paddingVertical: Sizes.size(5),
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
   },
 });

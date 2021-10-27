@@ -8,6 +8,7 @@ const List = ({
   renderitem,
   key,
   autoPlay,
+  autoPlayIntervalTime = IntervalTime,
   snapOnItems,
   ...remainingProps
 }) => {
@@ -20,15 +21,15 @@ const List = ({
   const startAutoPlay = useCallback(() => {
     timerRef .current = setInterval(() => {
       nextStep();
-    }, IntervalTime);
-  }, [nextStep]);
+    }, autoPlayIntervalTime);
+  }, [nextStep, autoPlayIntervalTime]);
 
   const stopAutoPlay = useCallback(() => {
     if (timerRef) {
       clearInterval(timerRef);
       timerRef.current = null;
     }
-  }, [timerRef]);
+  }, []);
 
   const nextStep = useCallback(() => {
     curentSlideRef.current = (curentSlideRef.current + 1) % data.length;

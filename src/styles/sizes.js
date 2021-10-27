@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 import Mixins from './mixins';
 
 const { scaleFont } = Mixins;
@@ -35,5 +35,10 @@ export default {
   // app dimensions
   SCREEN_WIDTH: width,
   SCREEN_HEIGHT: height,
+
+  // Others
+  // TODO: A better method to get this
+  NOTCH_SIZE: StatusBar.currentHeight,
+  STATUS_BAR_SIZE: (Platform.OS == 'android' ? StatusBar.currentHeight : 0),
   size: (size) => scaleFont(size),
 };

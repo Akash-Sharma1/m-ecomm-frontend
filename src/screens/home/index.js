@@ -12,18 +12,17 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container} >
+      <TopBar searchBar drawerMenu/>
       <View style={styles.innerContainer}>
-        <TopBar searchBar drawerMenu/>
 
         <ProductList variant="small" products={products}
           ListHeaderComponent={(
             <>
-              <BannerList style={styles.banner}/>
-              <View style={styles.categoryChips}>
+              <Title />
+              <BannerList style={styles.banner} />
+              {/* <View style={styles.categoryChips}>
                 <CategoryChips />
-              </View>
-              {/* <Title /> */}
-              {/* <ProductList variant="medium" horizontal products={products}/> */}
+              </View> */}
             </>
           )}
         />
@@ -43,10 +42,10 @@ const styles = StyleSheet.create({
   },
   categoryChips: {
     marginTop: Sizes.size(10),
-    // marginBottom: Sizes.size(),
+    marginVertical: Sizes.MARGIN_2,
   },
   banner: {
-    marginVertical: Sizes.MARGIN,
+    marginBottom: 1.5 * Sizes.MARGIN,
   },
 });
 

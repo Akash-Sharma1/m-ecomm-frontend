@@ -7,6 +7,8 @@ const ProductTitle = ({ title, style, textStyle }) => {
   return (
     <View style={[styles.container, style]}>
       <Text
+        numberOfLines={1}
+        ellipsizeMode="tail"
         style={styles.title}
       >
         Shri Ram Darbar
@@ -16,6 +18,8 @@ const ProductTitle = ({ title, style, textStyle }) => {
   );
 };
 
+const TITLE_HEIGHT = Sizes.H3;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -24,11 +28,10 @@ const styles = StyleSheet.create({
     ...Fonts.H4,
     ...Fonts.BOLD,
     color: Colors.DEFAULT_FONT_COLOR,
-    flex: 1,
+    height: TITLE_HEIGHT,
   },
   description: {
     ...Fonts.H6,
-    // ...Fonts.BOLD,
     color: Colors.GRAY_DARK,
     paddingTop: Sizes.size(5),
     flex: 1,

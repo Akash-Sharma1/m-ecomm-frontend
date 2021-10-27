@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { Fonts } from 'styles';
+import { Colors, Fonts, Sizes } from 'styles';
 
 const Search = () => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={styles.container}>
       <Ionicons name="search" style={styles.search} />
     </TouchableOpacity>
   );
@@ -14,8 +14,15 @@ const Search = () => {
 
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.WHITE,
+    borderRadius: Sizes.RADIUS,
+    padding: Sizes.PADDING,
+  },
   search: {
-    ...Fonts.H1,
+    ...Fonts.H4,
   },
 });
 

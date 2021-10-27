@@ -15,7 +15,10 @@ const Star = ({ type, style }) => {
     );
   } else if (type === 'empty') {
     return (
-      <FontAwesome name="star" style={[styles.star, styles.emptyStar, style]} />
+      <FontAwesome
+        name="star-o"
+        style={[styles.star, styles.emptyStar, style]}
+      />
     );
   } else if (type !== null) {
     return (

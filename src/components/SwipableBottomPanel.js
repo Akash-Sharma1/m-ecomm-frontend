@@ -1,86 +1,66 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring,
 } from 'react-native-reanimated';
 
-import { Colors, Sizes } from 'styles';
+import { Colors, ComponentAttributes, Mixins, Sizes } from 'styles';
 
-const DEFAULT_SIZE = 300;
-const CLOSING_THRESHOLD = 300;
-const CLOSING_HEIGHT = 200;
-const FULL_SCREEN_SNAPPING_THRESHOLD_FROM_TOP = 300;
+// eslint-disable-next-line max-len
+const FULL_SCREEN_HEIGHT = Sizes.SCREEN_HEIGHT - ComponentAttributes.TOP_BAR_HEIGHT - Sizes.NOTCH_SIZE;
+const INTIAL_HEIGHT = Sizes.size(180);
+const CLOSED_HEIGHT = Sizes.size(180);
 
 const SwipableBottomPanel = ({
   children,
-  marginFromTop = 0,
-  initialHeight = DEFAULT_SIZE,
-  closingThreshold = CLOSING_THRESHOLD,
-  closedHeight = CLOSING_HEIGHT,
-  fullScreenSnapThresholdFromTop = FULL_SCREEN_SNAPPING_THRESHOLD_FROM_TOP,
-  rebounce=true,
+  initialHeight = INTIAL_HEIGHT,
+  maxHeight = FULL_SCREEN_HEIGHT,
+  closedHeight = CLOSED_HEIGHT,
+  rebounce = true,
 }) => {
-  const closedHeightFromTop = Sizes.SCREEN_HEIGHT - closedHeight;
-
-  const panelHeight = useSharedValue(Sizes.SCREEN_HEIGHT - initialHeight > (
-    Sizes.SCREEN_HEIGHT - closingThreshold
-  ) ? (Sizes.SCREEN_HEIGHT - initialHeight) : closedHeightFromTop);
-
-  const closingThresholdFromTop = closedHeightFromTop > (
-    Sizes.SCREEN_HEIGHT - closingThreshold
-  ) ? (Sizes.SCREEN_HEIGHT - closingThreshold) : closedHeightFromTop;
-  console.log(closingThresholdFromTop, Sizes.SCREEN_HEIGHT - closingThreshold);
+  const panelHeight = useSharedValue(initialHeight);
 
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
       ctx.translationY = panelHeight.value;
     },
+
     onActive: (event, ctx) => {
-      const heightFromTop = ctx.translationY + event.translationY;
-      console.log(heightFromTop, closingThresholdFromTop);
+      const height = ctx.translationY - event.translationY;
 
       if (rebounce) {
         // if rebouce is true then allow any value, as it will bounce back
-        if (heightFromTop >= marginFromTop) {
-          // Once Reached the topmost part dont allow any more translation
-          panelHeight.value = heightFromTop;
+        if (height <= maxHeight && height >= 0) {
+          panelHeight.value = height;
         }
       } else {
         // if rebounce is false them not allow overlimit value
-        if (heightFromTop >= marginFromTop &&
-            heightFromTop < closingThresholdFromTop) {
-          panelHeight.value = heightFromTop;
+        if (height <= maxHeight && height >= closedHeight) {
+          panelHeight.value = height;
         }
       }
     },
-    onEnd: () => {
-      const heightFromTop = panelHeight.value;
 
-      if (heightFromTop >= closingThresholdFromTop) {
+    onEnd: (_, ctx) => {
+      const currentHeight = panelHeight.value;
+      const startedFromHeight = ctx.translationY;
+
+      if (currentHeight < startedFromHeight) {
         // This is below the closing limit, bounce back
-        panelHeight.value = rebounce ?
-          withSpring(closedHeightFromTop) :
-          closedHeightFromTop;
-      } else if (heightFromTop < fullScreenSnapThresholdFromTop) {
-        // This is for snapping to full screen view after hitting threshold
-        panelHeight.value = rebounce ?
-          withSpring(marginFromTop) :
-          marginFromTop;
+        panelHeight.value = rebounce ? withSpring(closedHeight) : closedHeight;
+      } else if (currentHeight > startedFromHeight) {
+        // This is for snapping to full screen view after scrolling up
+        panelHeight.value = rebounce ? withSpring(maxHeight) : maxHeight;
       }
     },
   }, [
-    closingThresholdFromTop, closedHeightFromTop,
-    rebounce, marginFromTop, fullScreenSnapThresholdFromTop,
+    maxHeight, closedHeight,
   ]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          translateY: panelHeight.value,
-        },
-      ],
+      height: panelHeight.value,
     };
   });
 
@@ -102,10 +82,11 @@ export default SwipableBottomPanel;
 
 const styles = StyleSheet.create({
   container: {
-    borderTopLeftRadius: Sizes.RADIUS_2,
-    borderTopRightRadius: Sizes.RADIUS_2,
+    borderTopLeftRadius: Sizes.size(32),
+    borderTopRightRadius: Sizes.size(32),
     backgroundColor: Colors.WHITE,
     height: Sizes.SCREEN_HEIGHT,
+    ...Mixins.simpleShadow(),
   },
   touchBar: {
     backgroundColor: Colors.GRAY_LIGHT,
@@ -121,6 +102,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    padding: Sizes.PADDING,
+    paddingVertical: Sizes.PADDING,
+    paddingHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
   },
 });

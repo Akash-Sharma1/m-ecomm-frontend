@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, Text } from 'react-native';
 
-import { Colors, Fonts, Sizes } from 'styles';
+import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
 import GoBack from './GoBack';
 import OpenDrawer from './OpenDrawer';
 import Search from './Search';
@@ -24,7 +24,7 @@ const TopBar = ({
   const navigation = useNavigation();
 
   return (
-    <View style={[styles.container, style]}>
+    <SafeAreaView style={[styles.container, style]}>
       {avatar && <OpenDrawer navigation={navigation} />}
       {goBack && <GoBack navigation={navigation} />}
       {title && <Text style={styles.title}>{title}</Text>}
@@ -32,21 +32,26 @@ const TopBar = ({
       {drawerMenu && <DrawerMenu />}
       {searchBar && <SearchBar />}
       {cart && <Cart />}
-    </View>
+    </SafeAreaView>
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.TRANSPARENT,
+    backgroundColor: Colors.DEFAULT_BACKGROUND_COLOR,
     justifyContent: 'space-between',
-    paddingBottom: Sizes.PADDING,
+    marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    paddingVertical: Sizes.PADDING,
+    // eslint-disable-next-line max-len
+    paddingTop: Platform.OS === 'android' ? (Sizes.STATUS_BAR_SIZE + Sizes.size(15)) : 0,
+    height: ComponentAttributes.TOP_BAR_HEIGHT,
+    zIndex: ComponentAttributes.TOP_BAR_Z_INDEX,
   },
   title: {
-    ...Fonts.H2,
+    ...Fonts.H3,
     ...Fonts.BOLD,
   },
 });

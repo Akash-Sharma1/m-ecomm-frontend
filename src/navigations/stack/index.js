@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Animated from 'react-native-reanimated';
 
-import { Accounts, OrderHistory, OrderSummary, ProductDetails } from 'screens';
+import { Accounts, Cart, OrderHistory, OrderSummary, ProductDetails } from 'screens';
 import { Routes } from 'constants';
 import { Layout } from 'styles';
 import BottomTabNavigation from 'navigations/bottomTabs';
@@ -31,6 +31,7 @@ const StackNavigator = ({ style }) => {
         <Stack.Screen name={Routes.ORDER_TRACKING} component={ProductDetails} />
         <Stack.Screen name={Routes.ACCOUNTS} component={Accounts} />
         <Stack.Screen name={Routes.AUTH} component={ProductDetails} />
+        <Stack.Screen name={Routes.CART} component={Cart} />
       </Stack.Navigator>
     </Animated.View>
   );

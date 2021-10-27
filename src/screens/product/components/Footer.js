@@ -1,18 +1,29 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { AddToCart, ChangeQuantity } from 'actions';
-import { Colors, ComponentAttributes, Sizes } from 'styles';
+import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
+import { Price } from 'components';
 
 const Footer = ({ product }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.quantity}>
-        <ChangeQuantity productId={product.id} />
+      <Price
+        amount={product.price}
+        containerStyle={styles.price}
+        style={styles.priceText}
+      />
+
+      <View style={styles.actions}>
+        {/* <View style={styles.quantity}>
+          <ChangeQuantity productId={product.id} />
+        </View> */}
+
+        <View style={styles.add}>
+          <AddToCart productId={product.id} />
+        </View>
       </View>
-      <View style={styles.add}>
-        <AddToCart productId={product.id} />
-      </View>
+
     </View>
   );
 };
@@ -24,15 +35,29 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: ComponentAttributes.FOOTER_HEIGHT,
-    padding: Sizes.PADDING_2,
+    paddingVertical: Sizes.PADDING_2,
     backgroundColor: Colors.WHITE,
+    alignItems: 'center',
   },
   quantity: {
-    paddingHorizontal: Sizes.PADDING_2,
-    flex: 1,
+    marginLeft: Sizes.MARGIN,
+    flex: 0.8,
   },
   add: {
-    paddingHorizontal: Sizes.PADDING_2,
+    marginLeft: Sizes.MARGIN,
+    flex: 1,
+  },
+  price: {
+    alignItems: 'center',
+    marginRight: Sizes.size(30),
+  },
+  priceText: {
+    ...Fonts.H3,
+    ...Fonts.BOLD,
+  },
+  actions: {
     flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

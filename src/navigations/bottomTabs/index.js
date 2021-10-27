@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AddCustomOrder, Cart, Chat, Home, OrderHistory } from 'screens';
@@ -91,7 +91,7 @@ const BottomTabNavigation = () => {
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    bottom: Sizes.size(25),
+    bottom: Platform.OS === 'ios' ? Sizes.size(25) : Sizes.size(15),
     position: 'absolute',
     left: Sizes.size(20),
     right: Sizes.size(20),
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
     paddingBottom: Sizes.PADDING,
     padding: Sizes.PADDING,
-    height: Sizes.size(80),
+    height: Sizes.size(70),
   },
 });
 
