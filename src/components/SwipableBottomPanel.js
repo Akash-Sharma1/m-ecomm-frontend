@@ -8,7 +8,7 @@ import Animated, {
 import { Colors, ComponentAttributes, Mixins, Sizes } from 'styles';
 
 // eslint-disable-next-line max-len
-const FULL_SCREEN_HEIGHT = Sizes.SCREEN_HEIGHT - ComponentAttributes.TOP_BAR_HEIGHT - Sizes.NOTCH_SIZE;
+const FULL_SCREEN_HEIGHT = Sizes.SCREEN_HEIGHT - ComponentAttributes.TOP_BAR_HEIGHT - (Platform.OS === 'ios' ? Sizes.STATUS_BAR_SIZE : 0);
 const INTIAL_HEIGHT = Sizes.size(180);
 const CLOSED_HEIGHT = Sizes.size(180);
 
@@ -82,8 +82,8 @@ export default SwipableBottomPanel;
 
 const styles = StyleSheet.create({
   container: {
-    borderTopLeftRadius: Sizes.size(32),
-    borderTopRightRadius: Sizes.size(32),
+    borderTopLeftRadius: Sizes.RADIUS_32,
+    borderTopRightRadius: Sizes.RADIUS_32,
     backgroundColor: Colors.WHITE,
     height: Sizes.SCREEN_HEIGHT,
     ...Mixins.simpleShadow(),

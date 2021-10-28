@@ -4,7 +4,7 @@ import { Platform, SafeAreaView, StyleSheet, Text } from 'react-native';
 
 import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
 import GoBack from './GoBack';
-import OpenDrawer from './OpenDrawer';
+import WelcomeUserAvatar from './WelcomeUserAvatar';
 import Search from './Search';
 import SearchBar from './SearchBar';
 import DrawerMenu from './DrawerMenu';
@@ -25,7 +25,7 @@ const TopBar = ({
 
   return (
     <SafeAreaView style={[styles.container, style]}>
-      {avatar && <OpenDrawer navigation={navigation} />}
+      {avatar && <WelcomeUserAvatar navigation={navigation} />}
       {goBack && <GoBack navigation={navigation} />}
       {title && <Text style={styles.title}>{title}</Text>}
       {search && <Search />}

@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Fonts, Sizes } from 'styles';
 import Avatar from 'components/Avatar';
 
-const OpenDrawer = ({ navigation }) => {
+const WelcomeUserAvatar = ({ navigation }) => {
   const fullName = 'Akash Sharma'; // TODO: Change Later
 
   return (
@@ -41,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OpenDrawer;
+export default WelcomeUserAvatar;

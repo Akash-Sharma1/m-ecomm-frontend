@@ -12,6 +12,7 @@ export default {
   RADIUS_0: scaleFont(4),
   RADIUS: scaleFont(10),
   RADIUS_2: scaleFont(20),
+  RADIUS_32: scaleFont(32),
   RADIUS_CIRCLE: scaleFont(100),
 
   PADDING: scaleFont(10),
@@ -38,7 +39,8 @@ export default {
 
   // Others
   // TODO: A better method to get this
-  NOTCH_SIZE: StatusBar.currentHeight,
-  STATUS_BAR_SIZE: (Platform.OS == 'android' ? StatusBar.currentHeight : 0),
+  STATUS_BAR_SIZE: StatusBar.currentHeight || 46,
+  // TODO
+  // for ios currently fixing notch size
   size: (size) => scaleFont(size),
 };

@@ -18,9 +18,7 @@ function dimensions(top, right = top, bottom = top, left = right, property) {
 
 // EXPORTS
 
-// const scaleSize = (size) => (WINDOW_WIDTH/guidelineBaseWidth) * size;
-const scaleSize = (size) => size;
-// console.log(WINDOW_WIDTH, guidelineBaseWidth, (WINDOW_WIDTH/guidelineBaseWidth));
+const scaleSize = (size) => (WINDOW_WIDTH/guidelineBaseWidth) * size;
 
 const scaleFont = (size) => size * PixelRatio.getFontScale();
 

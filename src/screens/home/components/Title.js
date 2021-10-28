@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { DropDownPopover } from 'components';
-import { sortByOptions } from 'utils/constants';
-import { Fonts, Sizes } from 'styles';
+// import { DropDownPopover } from 'components';
+// import { sortByOptions } from 'utils/constants';
+// import { Fonts, Sizes } from 'styles';
+import { Fonts } from 'styles';
 
 const Title = () => {
-  const [sortBy, setSortBy] = useState(null);
+  // const [sortBy, setSortBy] = useState(null);
 
   return (
     <View style={styles.title}>
@@ -29,7 +30,6 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: Sizes.PADDING,
     alignItems: 'center',
   },
   titleText: {

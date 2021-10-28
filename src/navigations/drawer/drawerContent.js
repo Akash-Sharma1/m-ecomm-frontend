@@ -8,7 +8,7 @@ import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Routes } from 'constants';
 import { TopBar } from 'components';
-import { Fonts, Sizes } from 'styles';
+import { Colors, Fonts, Sizes } from 'styles';
 
 const Links = [
   { label: 'Home', route: Routes.HOME, icon: 'home' },
@@ -25,7 +25,7 @@ const DrawerContent = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.item}>
-        <TopBar avatar/>
+        <TopBar avatar style={styles.avatar}/>
       </View>
 
       <DrawerContentScrollView
@@ -90,6 +90,10 @@ const DrawerContent = (props) => {
   );
 };
 const styles = StyleSheet.create({
+  avatar: {
+    backgroundColor: Colors.WHITE,
+    marginHorizontal: Sizes.size(5),
+  },
   container: {
     flex: 1,
   },
