@@ -5,9 +5,7 @@ const IntervalTime = 5000;
 
 const List = ({
   data = [],
-  renderitem = () => {
-    return null;
-  },
+  renderItem = () => null,
   key,
   autoPlay,
   autoPlayIntervalTime = IntervalTime,
@@ -60,7 +58,7 @@ const List = ({
     <FlatList
       ref={listRef}
       data={data}
-      renderItem={renderitem}
+      renderItem={renderItem}
       keyExtractor={(_, index) => index.toString()}
       listKey={`${key}-${randomString}`}
       showsHorizontalScrollIndicator={false}

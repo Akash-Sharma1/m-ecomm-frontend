@@ -3,22 +3,29 @@ import { StyleSheet, View } from 'react-native';
 
 import { Colors, Sizes } from 'styles';
 
-const BackgroundFloater = ({ style, containerStyle, color=0, scale=1 }) => {
+const BackgroundFloater = ({
+  containerStyle,
+  style,
+  index=0,
+  scale=1,
+  children,
+}) => {
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[
         styles.floater,
         scaleSize(scale),
-        availableBackgroundlors[color%availableBackgroundlors.length],
+        availableBackgroundlors[index%availableBackgroundlors.length],
+        availableTransform[index % availableTransform.length],
         style,
       ]}>
-        <View style={styles.insideBorderedCircle} />
+        {children}
       </View>
     </View>
   );
 };
 
-const FLOATER_SIZE = 90;
+const FLOATER_SIZE = 150;
 
 const styles = StyleSheet.create({
   container: {
@@ -27,21 +34,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '100%',
+    position: 'absolute',
   },
   floater: {
-    borderRadius: Sizes.RADIUS_CIRCLE,
+    borderRadius: Sizes.RADIUS_32,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  insideBorderedCircle: {
-    backgroundColor: Colors.TRANSPARENT,
-    borderRadius: Sizes.RADIUS_CIRCLE,
-    borderColor: Colors.WHITE,
-    width: '90%',
-    height: '90%',
-    borderWidth: Sizes.size(2),
-  },
 });
+
+const availableTransform = [
+  {
+    transform: [{
+      rotate: '-15deg',
+    }],
+  },
+  {
+    transform: [{
+      rotate: '15deg',
+    }],
+  },
+];
 
 const scaleSize = (scale) => ({
   width: Sizes.size(FLOATER_SIZE * scale),
@@ -49,10 +62,10 @@ const scaleSize = (scale) => ({
 });
 
 const availableBackgroundlors = [
-  { backgroundColor: Colors.PINK_MUTED },
-  { backgroundColor: Colors.BLUE_MUTED },
+  { backgroundColor: Colors.SECONDARY_MUTED },
+  { backgroundColor: Colors.PRIMARY_MUTED },
+  { backgroundColor: Colors.TERTIARY_MUTED },
   { backgroundColor: Colors.GREEN_MUTED },
-  { backgroundColor: Colors.YELLOW_MUTED },
 ];
 
 export default BackgroundFloater;

@@ -14,4 +14,4 @@ export { default as List } from './List';
 export { default as TextExpander } from './TextExpander';
 export { default as SwipableBottomPanel } from './SwipableBottomPanel';
 export { default as Price } from './Price';
-export { default as Tile } from './Tile';
+export { default as ProductTile } from './ProductTile';

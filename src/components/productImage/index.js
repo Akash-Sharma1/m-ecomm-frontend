@@ -25,8 +25,7 @@ const ProductImage = ({
     <View style={[styles.container, style]}>
       {!fullSize && (
         <BackgroundFloater
-          containerStyle={styles.floater}
-          color={index}
+          index={index}
           scale={scale}
         />
       )}
@@ -54,9 +53,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-  },
-  floater: {
-    position: 'absolute',
   },
   image: {
     flex: 1,
