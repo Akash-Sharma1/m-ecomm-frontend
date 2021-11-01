@@ -17,7 +17,7 @@ const Banner = ({ style, index }) => {
 export default Banner;
 
 const applyBgColor = [
-  { backgroundColor: Colors.SECONDARY_MUTED },
+  { backgroundColor: Colors.PRIMARY_MUTED },
   { backgroundColor: Colors.BLUE_MUTED },
   { backgroundColor: Colors.PINK_MUTED },
   { backgroundColor: Colors.GREEN_MUTED },

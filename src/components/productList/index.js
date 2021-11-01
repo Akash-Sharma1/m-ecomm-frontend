@@ -53,6 +53,7 @@ const ProductList = ({
   ListHeaderComponent,
   ListFooterComponent,
   horizontal,
+  style,
 }) => {
   const numColumns = (variant === 'small') ? 2 : null;
 
@@ -65,6 +66,7 @@ const ProductList = ({
 
   return (
     <List
+      style={style}
       data={Object.keys(products)}
       horizontal={horizontal}
       renderItem={({ item: productId, index }) => (

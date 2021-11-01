@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontSize: Sizes.H5,
   },
   selected: {
-    backgroundColor: Colors.SECONDARY_MUTED,
+    backgroundColor: Colors.PRIMARY_MUTED,
   },
 });
 

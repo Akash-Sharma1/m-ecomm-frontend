@@ -40,7 +40,7 @@ module.exports = {
     'react/prop-types': 'off',
     'no-console': 'warn',
     'react/jsx-filename-extension': 'off',
-    'max-len': [2, { code: 80 }],
+    'max-len': [2, { code: 100 }],
     'react/style-prop-object': 'off',
     'no-trailing-spaces': 'error',
     'eol-last': 2,

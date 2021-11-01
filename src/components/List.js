@@ -4,8 +4,10 @@ import { FlatList } from 'react-native';
 const IntervalTime = 5000;
 
 const List = ({
-  data,
-  renderitem,
+  data = [],
+  renderitem = () => {
+    return null;
+  },
   key,
   autoPlay,
   autoPlayIntervalTime = IntervalTime,

@@ -7,7 +7,7 @@ import { Sizes } from 'styles';
 const CONTAINER_SIZE = Sizes.SCREEN_WIDTH;
 const ITEM_SIZE = Sizes.SCREEN_WIDTH * 0.8;
 const SEPERATOR_WIDTH = 20;
-const AUTO_SCROLL_INTERVAL_TIME = 5000;
+const AUTO_SCROLL_INTERVAL_TIME = 6000;
 
 const getEdgeMargins = (containerSize, itemSize, seperatorSize) => (
   seperatorSize + (containerSize - itemSize - 2 * seperatorSize) / 2
@@ -21,7 +21,6 @@ const Carausal = ({
   itemSize = ITEM_SIZE,
   seperatorSize = SEPERATOR_WIDTH,
   autoPlayIntervalTime = AUTO_SCROLL_INTERVAL_TIME,
-  currentIndexCallback,
   children,
   loop,
   ...remainingProps
@@ -32,11 +31,12 @@ const Carausal = ({
   const isManuallyMovedRef = useRef(false);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [circularList, setCircularList] = useState(data);
   const totalItemSize = itemSize + seperatorSize;
 
   const randomString = (Math.random() + 1).toString(36).substring(2);
 
-  // AUTO SCROLL CARAUSAL
+  // AUTO SCROLL CARAUSAL STARTS
 
   const startAutoPlay = useCallback(() => {
     timerRef .current = setInterval(() => {
@@ -45,7 +45,7 @@ const Carausal = ({
   }, [nextStep, autoPlayIntervalTime]);
 
   const stopAutoPlay = useCallback(() => {
-    clearInterval(timerRef);
+    clearInterval(timerRef.current);
     timerRef.current = null;
   }, []);
 
@@ -58,7 +58,7 @@ const Carausal = ({
     return () => stopAutoPlay();
   }, [autoScroll, startAutoPlay, stopAutoPlay]);
 
-  const nextStep = useCallback((overridenIndex = null) => {
+  const nextStep = useCallback(() => {
     // This is because when user moved the slide mannualy then
     // it should not skip to next slide in the next time out
     // it should skip the next time out in case of mannual move
@@ -68,10 +68,7 @@ const Carausal = ({
     }
 
     // overriden index is given as to move the slide anywhere
-    curentSlideRef.current = overridenIndex != null ?
-      overridenIndex :
-      (curentSlideRef.current + 1) % data.length;
-
+    curentSlideRef.current = (curentSlideRef.current + data.length + 1) % data.length;
     setCurrentIndex(curentSlideRef.current);
 
     listRef && listRef.current && listRef.current.scrollToIndex({
@@ -80,7 +77,7 @@ const Carausal = ({
     });
   }, [data]);
 
-  // AUTO SCROLL CARAUSAL
+  // AUTO SCROLL CARAUSAL ENDS
 
 
   // TRIGGERED WHEN ANY CARAUSAL GOES TO NEXT INTERVAL
@@ -89,16 +86,15 @@ const Carausal = ({
       const index = viewableItems[0].index;
 
       if (curentSlideRef.current !== index) {
-        // This means manually moved the slides
         isManuallyMovedRef.current = false;
-        // Change next step to current index so that carausal starts from here
-        nextStep(index);
+        // Change current step to current index so that carausal starts from here
+        curentSlideRef.current = index;
+        setCurrentIndex(curentSlideRef.current);
+        // This means manually moved the slides
         isManuallyMovedRef.current = true;
       }
-
-      currentIndexCallback && currentIndexCallback(index);
     }
-  }, [currentIndexCallback, nextStep]);
+  }, []);
 
 
   return (
@@ -107,7 +103,7 @@ const Carausal = ({
       style={[styles.container, style]}
       horizontal
 
-      data={data}
+      data={loop ? circularList : data}
       renderItem={({ item, index }) => React.cloneElement(children,
         {
           style: [

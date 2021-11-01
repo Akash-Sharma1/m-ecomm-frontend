@@ -4,19 +4,17 @@ import { StyleSheet } from 'react-native';
 import { ComponentAttributes, Sizes } from 'styles';
 import List from 'components/List';
 import Banner from 'components/Banner';
+import Carausal from './Carausal';
 
 const BannerList = ({ style }) => {
   return (
-    <List
+    <Carausal
       style={[styles.container, style]}
       data={[...Array(4)]}
-      renderItem={({ item, index }) => (
-        <Banner style={styles.banner} index={index}/>
-      )}
-      horizontal
-      autoPlay
-      snapOnItems
-    />
+      autoScroll
+    >
+      <Banner style={styles.banner} />
+    </Carausal>
   );
 };
 

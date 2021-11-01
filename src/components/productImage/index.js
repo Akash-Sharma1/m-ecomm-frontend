@@ -1,43 +1,51 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { Sizes } from 'styles';
 import BackgroundFloater from 'components/BackgroundFloater';
 import List from '../List';
+import Carausal from '../Carausal';
+
+const Card = ({ item, style }) => <Image
+  source={{ uri: item }}
+  style={[style, styles.rounded]}
+/>;
 
 const ProductImage = ({
   uri,
+  uris,
   style,
   index,
   scale,
-  carausal,
+  enableDots,
   fullSize,
   rounded,
 }) => {
   return (
     <View style={[styles.container, style]}>
-      <BackgroundFloater
-        containerStyle={styles.floater}
-        color={index}
-        scale={scale}
-      />
-
-      {carausal ? (
-        <List
-          data={uri}
-          renderitem={(item) => {
-            <Image
-              source={{ item }}
-              style={[styles.image, rounded && styles.rounded]}
-            />;
-          }}
+      {!fullSize && (
+        <BackgroundFloater
+          containerStyle={styles.floater}
+          color={index}
+          scale={scale}
         />
+      )}
+
+      {uris ? (
+        <Carausal data={uris} autoScroll>
+          <Card />
+        </Carausal>
       ) : (
         <Image
           source={{ uri }}
           style={[styles.image, rounded && styles.rounded]}
         />
       )}
+
+
+      {/* {enableDots && (
+        <Dots />
+      )} */}
     </View>
   );
 };
@@ -52,9 +60,12 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    // width: Sizes.SCREEN_WIDTH - 2 * Sizes.EDGE_HORIZONTAL_MARGIN,
+    // marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
+    // resizeMode: 'contain',
   },
   rounded: {
-    borderRadius: Sizes.RADIUS,
+    borderRadius: Sizes.RADIUS_32,
   },
 });
 

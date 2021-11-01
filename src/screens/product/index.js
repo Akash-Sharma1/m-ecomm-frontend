@@ -26,10 +26,11 @@ const ProductDetails = () => {
 
         <View style={styles.image}>
           <ProductImage
-            uri={product.image}
+            // eslint-disable-next-line max-len
+            uris={[product.image, product.image, product.image, product.image, product.image, product.image, product.image, product.image, product.image, product.image]}
             rounded
-            // carausal
             fullSize
+            enableDots
           />
         </View>
 
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 6,
-    paddingHorizontal: Sizes.size(20),
+    // paddingHorizontal: Sizes.size(20),
   },
   body: {
     backgroundColor: Colors.WHITE,

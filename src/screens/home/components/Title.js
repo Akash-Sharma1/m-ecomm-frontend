@@ -6,11 +6,11 @@ import { StyleSheet, Text, View } from 'react-native';
 // import { Fonts, Sizes } from 'styles';
 import { Fonts } from 'styles';
 
-const Title = () => {
+const Title = ({ style }) => {
   // const [sortBy, setSortBy] = useState(null);
 
   return (
-    <View style={styles.title}>
+    <View style={[styles.title, style]}>
       <Text style={styles.titleText}>Our Products</Text>
       {/* <View>
         <DropDownPopover
