@@ -2,12 +2,10 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import {
-  ProductTile, SwipableBottomPanel,
-} from 'components';
+import { ProductTile } from 'components';
 import { Colors, Sizes } from 'styles';
 import Description from './components/Description';
-import { GoBack } from 'actions';
+import HeaderActions from './components/HeaderActions';
 
 const ProductDetails = () => {
   const currentProductId = useSelector(
@@ -23,14 +21,12 @@ const ProductDetails = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.imageActions}>
-        <GoBack/>
-      </View>
-
       <ProductTile.ImageCarausal
         style={styles.image}
         product={product}
-      />
+      >
+        <HeaderActions />
+      </ProductTile.ImageCarausal>
 
       <View style={styles.body}>
         <Description product={product} />
@@ -48,12 +44,6 @@ const styles = StyleSheet.create({
     marginTop: Sizes.MARGIN,
     backgroundColor: Colors.DEFAULT_BACKGROUND_COLOR,
     position: 'relative',
-  },
-  imageActions: {
-    position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
   image: {
     flex: 1.2,

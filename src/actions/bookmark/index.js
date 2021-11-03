@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { toggleBookmark } from 'store/reducers/products';
-import { Colors, Mixins, Sizes } from 'styles';
+import { Colors, Sizes } from 'styles';
 
-const Bookmark = ({ productId, containerStyle, style }) => {
+const Bookmark = ({ productId, containerStyle, style, activeStyle }) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products.products[productId]);
   const { isBookmarked } = product || {};
@@ -23,15 +23,14 @@ const Bookmark = ({ productId, containerStyle, style }) => {
     <TouchableOpacity
       style={[
         styles.container,
-        isBookmarked && styles.activeContainer,
         containerStyle,
       ]}
       onPress={handlePress}
     >
       {isBookmarked ? (
-        <AntDesign name="heart" style={[styles.activeHeart, style]} />
+        <Ionicons name="heart" style={[styles.activeHeart, style, activeStyle]} />
       ) : (
-        <AntDesign name="heart" style={[styles.heart, style]} />
+        <Ionicons name="heart-outline" style={[styles.heart, style]} />
       )}
     </TouchableOpacity>
   );
@@ -47,17 +46,13 @@ const styles = StyleSheet.create({
     paddingTop: Sizes.size(4.5),
     paddingBottom: Sizes.size(3.5),
   },
-  activeContainer: {
-    backgroundColor: Colors.PRIMARY,
-    ...Mixins.simpleShadow(),
-  },
   heart: {
-    fontSize: Sizes.H5,
-    color: Colors.GRAY_MEDIUM,
+    fontSize: Sizes.H1,
+    color: Colors.BLACK,
   },
   activeHeart: {
-    fontSize: Sizes.H5,
-    color: Colors.WHITE,
+    fontSize: Sizes.H1,
+    color: Colors.BLACK,
   },
 });
 

@@ -17,15 +17,23 @@ const getEdgeMargins = (containerSize, itemSize, seperatorSize) => (
 const Carausal = ({
   data,
   style,
-  autoScroll,
+  // Sizes
   containerSize = CONTAINER_SIZE,
   seperatorSize = SEPERATOR_WIDTH,
+
+  // Auto scroll
+  autoScroll,
   adjacentItemsVisible=false,
   autoPlayIntervalTime = AUTO_SCROLL_INTERVAL_TIME,
+
   children,
-  loop,
+
+  // Dots
   dots=false,
-  dotsPosition='bottom',
+  dotsPosition='top',
+  dotsStyle,
+  dotsActiveStyle,
+  dotsContainerStyle,
   ...remainingProps
 }) => {
   const timerRef = useRef(null);
@@ -153,7 +161,14 @@ const Carausal = ({
       />
 
       {dots && (
-        <Dots position={dotsPosition} totalDots={data.length} currentIndex={currentIndex} />
+        <Dots
+          position={dotsPosition}
+          totalDots={data.length}
+          currentIndex={currentIndex}
+          style={dotsStyle}
+          activeStyle={dotsActiveStyle}
+          containerStyle={dotsContainerStyle}
+        />
       )}
     </View>
   );

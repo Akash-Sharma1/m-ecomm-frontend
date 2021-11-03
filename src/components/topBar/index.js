@@ -3,7 +3,6 @@ import React from 'react';
 import { Platform, SafeAreaView, StyleSheet, Text } from 'react-native';
 
 import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
-import GoBack from './GoBack';
 import WelcomeUserAvatar from './WelcomeUserAvatar';
 import Search from './Search';
 import SearchBar from './SearchBar';
@@ -17,7 +16,6 @@ const TopBar = ({
   search,
   searchBar,
   drawerMenu,
-  goBack,
   cart,
   style,
 }) => {
@@ -26,7 +24,6 @@ const TopBar = ({
   return (
     <SafeAreaView style={[styles.container, style]}>
       {avatar && <WelcomeUserAvatar navigation={navigation} />}
-      {goBack && <GoBack navigation={navigation} />}
       {title && <Text style={styles.title}>{title}</Text>}
       {search && <Search />}
       {drawerMenu && <DrawerMenu />}

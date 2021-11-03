@@ -13,7 +13,13 @@ const ImageCard = ({ item, index, style, ...remainingProps }) => {
   );
 };
 
-const ImageCarausal = ({ product, index=0, style, ...remainingProps }) => {
+const ImageCarausal = ({
+  product,
+  index=0,
+  style,
+  children,
+  ...remainingProps
+}) => {
   const productImages = [product.image, product.image, product.image, product.image];
 
   return (
@@ -34,7 +40,8 @@ const ImageCarausal = ({ product, index=0, style, ...remainingProps }) => {
       <Carausal
         data={productImages}
         dots
-        dotsPosition="bottom"
+        dotsPosition='top'
+        dotsContainerStyle={styles.dots}
         style={styles.carausal}
         contentContainerStyle={styles.carausalContainer}
         autoScroll
@@ -43,17 +50,20 @@ const ImageCarausal = ({ product, index=0, style, ...remainingProps }) => {
       >
         <ImageCard />
       </Carausal>
+      {children}
     </View>
   );
 };
 
 export default ImageCarausal;
 
+const PRODUCT_TILE_SIZE = Sizes.size(450);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: Sizes.RADIUS_32,
-    // height: PRODUCT_TILE_SIZE,
+    height: PRODUCT_TILE_SIZE,
     paddingVertical: Sizes.PADDING,
   },
   floaterContainerStyle: {
@@ -63,14 +73,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth: 2,
-    padding: Sizes.size(20),
+    padding: Sizes.size(10),
+    paddingTop: Sizes.size(60),
   },
   image: {
-    // height: PRODUCT_TILE_IMAGE_SIZE,
     flex: 1,
     resizeMode: 'contain',
     width: '100%',
     // borderWidth: 2,
+  },
+  dots: {
+    marginTop: 2.2 * Sizes.PADDING,
   },
 });
 

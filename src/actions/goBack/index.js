@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { Colors, Sizes } from 'styles';
+import { Colors, Fonts, Sizes } from 'styles';
+import { useNavigation } from '@react-navigation/core';
 
-const GoBack = ({ navigation }) => {
+const GoBack = ({ containerStyle, style }) => {
+  const navigation = useNavigation();
+
+  const handlePress = useCallback(() => {
+    navigation.canGoBack() && navigation.goBack();
+  }, [navigation]);
+
   return (
     <TouchableOpacity
-      onPress={() => navigation.canGoBack() && navigation.goBack()}
-      style={styles.container}
+      onPress={handlePress}
+      style={[styles.container, containerStyle]}
     >
-      <Ionicons name="arrow-back" style={styles.back} />
+      <Ionicons name="ios-chevron-back" style={[styles.back, style]} />
     </TouchableOpacity>
   );
 };
@@ -25,7 +32,7 @@ const styles = StyleSheet.create({
     padding: Sizes.PADDING,
   },
   back: {
-    fontSize: Sizes.H4,
+    ...Fonts.H1,
   },
 });
 
