@@ -55,6 +55,10 @@ const simpleShadow = (
   elevation: 5 * scale,
 });
 
+const populateStylePropery = (keyName, values, index) => ({
+  [keyName]: values[index],
+});
+
 export default {
   scaleSize,
   scaleFont,
@@ -62,4 +66,5 @@ export default {
   padding,
   boxShadow,
   simpleShadow,
+  populateStylePropery,
 };

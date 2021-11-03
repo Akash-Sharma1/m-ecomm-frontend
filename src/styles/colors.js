@@ -1,4 +1,4 @@
-export default {
+const Colors = {
   WHITE: '#FFFFFF',
   BLACK: '#262626',
 
@@ -46,3 +46,18 @@ export default {
   // FONT COLOR
   DEFAULT_FONT_COLOR: '#333637',
 };
+
+Colors.SOLID_PALLATE = [
+  Colors.PRIMARY, Colors.SECONDARY, Colors.PURPLE, Colors.GREEN,
+];
+
+Colors.MUTED_PALLATE = [
+  Colors.PRIMARY_MUTED, Colors.SECONDARY_MUTED, Colors.PURPLE_MUTED, Colors.GREEN_MUTED,
+];
+
+Colors.MUTED_2_PALLATE = [
+  Colors.PRIMARY_MUTED_2, Colors.SECONDARY_MUTED_2, Colors.PURPLE_MUTED_2, Colors.GREEN_MUTED_2,
+];
+
+
+export default Colors;

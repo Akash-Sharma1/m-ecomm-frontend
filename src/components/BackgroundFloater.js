@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Colors, Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 
 const BackgroundFloater = ({
   containerStyle,
@@ -15,7 +15,7 @@ const BackgroundFloater = ({
       <View style={[
         styles.floater,
         scaleSize(scale),
-        availableBackgroundlors[tileColor % availableBackgroundlors.length],
+        Mixins.populateStylePropery('backgroundColor', Colors.MUTED_PALLATE, tileColor),
         availableTransform[tileColor % availableTransform.length],
         style,
       ]}>
@@ -60,12 +60,5 @@ const scaleSize = (scale) => ({
   width: Sizes.size(FLOATER_SIZE * scale),
   height: Sizes.size(FLOATER_SIZE * scale),
 });
-
-const availableBackgroundlors = [
-  { backgroundColor: Colors.SECONDARY_MUTED },
-  { backgroundColor: Colors.PRIMARY_MUTED },
-  { backgroundColor: Colors.PURPLE_MUTED },
-  { backgroundColor: Colors.GREEN_MUTED },
-];
 
 export default BackgroundFloater;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 
-import { Colors, Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 import { OpenProduct } from 'actions';
 import BackgroundFloater from '../BackgroundFloater';
 import ProductDetails from './components/ProductDetails';
@@ -13,7 +13,7 @@ const LargeDetail = ({ product, tileColor=0, style, ...remainingProps }) => {
       productId={product.id}
       style={[
         styles.container,
-        availableBackgroundColors[tileColor % availableBackgroundColors.length],
+        Mixins.populateStylePropery('backgroundColor', Colors.MUTED_2_PALLATE, tileColor),
         style,
       ]}
       {...remainingProps}
@@ -55,10 +55,3 @@ const styles = StyleSheet.create({
     marginTop: Sizes.MARGIN,
   },
 });
-
-const availableBackgroundColors = [
-  { backgroundColor: Colors.SECONDARY_MUTED_2 },
-  { backgroundColor: Colors.PRIMARY_MUTED_2 },
-  { backgroundColor: Colors.PURPLE_MUTED_2 },
-  { backgroundColor: Colors.GREEN_MUTED_2 },
-];

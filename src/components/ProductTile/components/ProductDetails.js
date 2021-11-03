@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Colors, Fonts, Sizes } from 'styles';
+import { Colors, Fonts, Mixins, Sizes } from 'styles';
 import { OpenChat } from 'actions';
 import Price from '../../Price';
 
@@ -15,13 +15,14 @@ const ProductDetails = ({ product, style, tileColor }) => {
           {product.title}
         </Text>
 
-        <Price amount={product.price} style={[
-          availablePriceColors[tileColor % availablePriceColors.length],
-        ]} />
+        <Price
+          amount={product.price}
+          style={Mixins.populateStylePropery('color', Colors.SOLID_PALLATE, tileColor)}
+        />
       </View>
 
       <OpenChat
-        style={[availablePriceColors[tileColor % availablePriceColors.length]]}
+        style={Mixins.populateStylePropery('color', Colors.SOLID_PALLATE, tileColor)}
         containerStyle={styles.chat}
       />
     </View>
@@ -51,10 +52,3 @@ const styles = StyleSheet.create({
     paddingVertical: Sizes.size(2),
   },
 });
-
-const availablePriceColors = [
-  { color: Colors.SECONDARY },
-  { color: Colors.PRIMARY },
-  { color: Colors.PURPLE },
-  { color: Colors.GREEN },
-];

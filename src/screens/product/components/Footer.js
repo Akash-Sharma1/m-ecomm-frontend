@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { AddToCart, ChangeQuantity } from 'actions';
+import { AddToCart } from 'actions';
 import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
 import { Price } from 'components';
 
@@ -35,13 +35,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: ComponentAttributes.FOOTER_HEIGHT,
-    paddingVertical: Sizes.PADDING_2,
+    paddingTop: Sizes.PADDING_2,
     backgroundColor: Colors.WHITE,
     alignItems: 'center',
-  },
-  quantity: {
-    marginLeft: Sizes.MARGIN,
-    flex: 0.8,
   },
   add: {
     marginLeft: Sizes.MARGIN,

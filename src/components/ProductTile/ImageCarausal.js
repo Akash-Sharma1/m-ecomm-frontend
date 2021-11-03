@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { Colors, Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 import BackgroundFloater from '../BackgroundFloater';
 import Carausal from '../Carausal';
 
@@ -27,7 +27,7 @@ const ImageCarausal = ({
       productId={product.id}
       style={[
         styles.container,
-        availableBackgroundColors[tileColor % availableBackgroundColors.length],
+        Mixins.populateStylePropery('backgroundColor', Colors.MUTED_2_PALLATE, tileColor),
         style,
       ]}
       {...remainingProps}
@@ -86,10 +86,3 @@ const styles = StyleSheet.create({
     marginTop: 2.2 * Sizes.PADDING,
   },
 });
-
-const availableBackgroundColors = [
-  { backgroundColor: Colors.SECONDARY_MUTED_2 },
-  { backgroundColor: Colors.PRIMARY_MUTED_2 },
-  { backgroundColor: Colors.PURPLE_MUTED_2 },
-  { backgroundColor: Colors.GREEN_MUTED_2 },
-];
