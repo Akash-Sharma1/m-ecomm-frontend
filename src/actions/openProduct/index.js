@@ -6,14 +6,14 @@ import { useNavigation } from '@react-navigation/core';
 import { setCurrentProductId } from 'store/reducers/products';
 import { Routes } from 'constants';
 
-const OpenProduct = ({ productId, children, ...remainingProps }) => {
+const OpenProduct = ({ productId, children, routeParams, ...remainingProps }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const onPress = useCallback(() => {
     dispatch(setCurrentProductId(productId));
-    navigation.navigate(Routes.PRODUCT);
-  }, [navigation, productId, dispatch]);
+    navigation.navigate(Routes.PRODUCT, routeParams);
+  }, [navigation, productId, dispatch, routeParams]);
 
   return (
     <Pressable {...remainingProps} onPress={onPress} >

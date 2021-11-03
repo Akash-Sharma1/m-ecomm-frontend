@@ -7,13 +7,14 @@ import { Colors, Sizes } from 'styles';
 import Description from './components/Description';
 import HeaderActions from './components/HeaderActions';
 
-const ProductDetails = () => {
+const ProductDetails = ({ route }) => {
   const currentProductId = useSelector(
     (state) => state.products.currentProductId);
 
   const products = useSelector((state) => state.products.products);
   const product = products[currentProductId];
 
+  const { tileColor } = route?.params || {};
 
   if (currentProductId == null) {
     return null;
@@ -24,6 +25,7 @@ const ProductDetails = () => {
       <ProductTile.ImageCarausal
         style={styles.image}
         product={product}
+        tileColor={tileColor}
       >
         <HeaderActions />
       </ProductTile.ImageCarausal>
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: Colors.WHITE,
     flex: 1,
-    padding: Sizes.PADDING,
+    marginTop: 1.5 * Sizes.MARGIN,
   },
 });
 

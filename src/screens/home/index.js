@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
-import { BannerList, List, ProductList, ProductTile, TopBar } from 'components';
-import { Colors, ComponentAttributes, Sizes } from 'styles';
-import Title from './components/Title';
-import CategoryChips from './components/CategoryChips';
+import { List, ProductTile, TopBar } from 'components';
+import { Colors, Sizes } from 'styles';
 
 const Home = () => {
   const { products } = useSelector((state) => state.products);
@@ -21,7 +19,7 @@ const Home = () => {
           <ProductTile.LargeDetails
             product={products[item]}
             style={styles.tile}
-            index={index}
+            tileColor={index}
           />
         )}
       />
@@ -42,14 +40,6 @@ const styles = StyleSheet.create({
   },
   tile: {
     marginBottom: Sizes.size(30),
-  },
-  categoryChips: {
-    marginTop: Sizes.size(10),
-    marginVertical: Sizes.MARGIN_2,
-  },
-  banner: {
-    marginTop: 2 * Sizes.PADDING,
-    marginBottom: 1.5 * Sizes.MARGIN,
   },
 });
 

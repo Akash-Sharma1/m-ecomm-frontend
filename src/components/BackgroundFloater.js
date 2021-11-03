@@ -6,7 +6,7 @@ import { Colors, Sizes } from 'styles';
 const BackgroundFloater = ({
   containerStyle,
   style,
-  index=0,
+  tileColor=0,
   scale=1,
   children,
 }) => {
@@ -15,8 +15,8 @@ const BackgroundFloater = ({
       <View style={[
         styles.floater,
         scaleSize(scale),
-        availableBackgroundlors[index%availableBackgroundlors.length],
-        availableTransform[index % availableTransform.length],
+        availableBackgroundlors[tileColor % availableBackgroundlors.length],
+        availableTransform[tileColor % availableTransform.length],
         style,
       ]}>
         {children}

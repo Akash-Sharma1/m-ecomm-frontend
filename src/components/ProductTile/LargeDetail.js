@@ -1,43 +1,31 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
-import { Colors, Fonts, Sizes } from 'styles';
-import { OpenChat, OpenProduct } from 'actions';
+import { Colors, Sizes } from 'styles';
+import { OpenProduct } from 'actions';
 import BackgroundFloater from '../BackgroundFloater';
-import Price from '../Price';
+import ProductDetails from './components/ProductDetails';
 
-const LargeDetail = ({ product, index=0, style, ...remainingProps }) => {
+const LargeDetail = ({ product, tileColor=0, style, ...remainingProps }) => {
   return (
     <OpenProduct
+      routeParams={{ tileColor }}
       productId={product.id}
       style={[
         styles.container,
-        availableBackgroundColors[index%availableBackgroundColors.length],
+        availableBackgroundColors[tileColor % availableBackgroundColors.length],
         style,
       ]}
       {...remainingProps}
     >
-      <BackgroundFloater index={index} containerStyle={styles.floaterContainerStyle} />
+      <BackgroundFloater tileColor={tileColor} containerStyle={styles.floaterContainerStyle} />
       <Image style={styles.images} source={{ uri: product.image }} />
 
-      <View style={styles.innerContainer}>
-        <View style={styles.textContent}>
-          <Text>Marble / Size: 7.5 foot</Text>
-
-          <Text style={styles.heading} numberOfLines={1} ellipsizeMode="tail">
-            {product.title}
-          </Text>
-
-          <Price amount={product.price} style={[
-            availablePriceColors[index % availablePriceColors.length],
-          ]} />
-        </View>
-
-        <OpenChat
-          style={[availablePriceColors[index % availablePriceColors.length]]}
-          containerStyle={styles.chatContainer}
-        />
-      </View>
+      <ProductDetails
+        style={styles.textContainer}
+        product={product}
+        tileColor={tileColor}
+      />
     </OpenProduct>
   );
 };
@@ -45,7 +33,7 @@ const LargeDetail = ({ product, index=0, style, ...remainingProps }) => {
 export default LargeDetail;
 
 const PRODUCT_TILE_SIZE = Sizes.size(300);
-const PRODUCT_TILE_IMAGE_SIZE = Sizes.size(200);
+const PRODUCT_TILE_IMAGE_SIZE = Sizes.size(190);
 
 const styles = StyleSheet.create({
   container: {
@@ -62,23 +50,9 @@ const styles = StyleSheet.create({
     height: PRODUCT_TILE_IMAGE_SIZE,
     resizeMode: 'contain',
   },
-  innerContainer: {
-    paddingHorizontal: Sizes.size(30),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textContent: {
-    flex: 1,
-  },
-  chatContainer: {
-    marginLeft: Sizes.MARGIN,
-  },
-  heading: {
-    ...Fonts.H3,
-    ...Fonts.BOLD,
-    paddingTop: Sizes.size(5),
-    paddingBottom: Sizes.size(5),
+  textContainer: {
+    paddingHorizontal: 2.5 * Sizes.PADDING,
+    marginTop: Sizes.MARGIN,
   },
 });
 
@@ -87,11 +61,4 @@ const availableBackgroundColors = [
   { backgroundColor: Colors.PRIMARY_MUTED_2 },
   { backgroundColor: Colors.PURPLE_MUTED_2 },
   { backgroundColor: Colors.GREEN_MUTED_2 },
-];
-
-const availablePriceColors = [
-  { color: Colors.SECONDARY },
-  { color: Colors.PRIMARY },
-  { color: Colors.PURPLE },
-  { color: Colors.GREEN },
 ];

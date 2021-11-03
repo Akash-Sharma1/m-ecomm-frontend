@@ -15,7 +15,7 @@ const ImageCard = ({ item, index, style, ...remainingProps }) => {
 
 const ImageCarausal = ({
   product,
-  index=0,
+  tileColor=0,
   style,
   children,
   ...remainingProps
@@ -27,13 +27,13 @@ const ImageCarausal = ({
       productId={product.id}
       style={[
         styles.container,
-        availableBackgroundColors[index%availableBackgroundColors.length],
+        availableBackgroundColors[tileColor % availableBackgroundColors.length],
         style,
       ]}
       {...remainingProps}
     >
       <BackgroundFloater
-        index={index}
+        tileColor={tileColor}
         containerStyle={styles.floaterContainerStyle}
         scale={1.4}
       />
