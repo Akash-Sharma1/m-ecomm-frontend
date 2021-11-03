@@ -62,7 +62,7 @@ const SwipableBottomPanel = ({
     return {
       height: panelHeight.value,
     };
-  });
+  }, []);
 
   return (
     <PanGestureHandler onGestureEvent={gestureHandler}>

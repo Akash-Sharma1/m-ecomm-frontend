@@ -2,10 +2,12 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { ProductImage, SwipableBottomPanel, TopBar } from 'components';
+import {
+  ProductTile, SwipableBottomPanel,
+} from 'components';
 import { Colors, Sizes } from 'styles';
 import Description from './components/Description';
-import FloatingBubbles from './components/FloatingBubbles';
+import { GoBack } from 'actions';
 
 const ProductDetails = () => {
   const currentProductId = useSelector(
@@ -20,51 +22,45 @@ const ProductDetails = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        <TopBar goBack searchBar cart style={styles.topBar}/>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.imageActions}>
+        <GoBack/>
+      </View>
 
-        <View style={styles.image}>
-          <ProductImage
-            // eslint-disable-next-line max-len
-            uris={[product.image, product.image, product.image, product.image, product.image, product.image, product.image, product.image, product.image, product.image]}
-            rounded
-            fullSize
-            enableDots
-          />
-        </View>
+      <ProductTile.ImageCarausal
+        style={styles.image}
+        product={product}
+      />
 
-        <View style={styles.bubbles}>
-          <FloatingBubbles product={product} />
-        </View>
-      </SafeAreaView>
-
-      <SwipableBottomPanel >
-        <View style={styles.body}>
-          <Description product={product} />
-        </View>
-      </SwipableBottomPanel>
-    </View>
+      <View style={styles.body}>
+        <Description product={product} />
+      </View>
+    </SafeAreaView>
   );
 };
 
-const BUBBLES_LIST_HEIGHT = Sizes.size(100);
+// const BUBBLES_LIST_HEIGHT = Sizes.size(100);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
+    marginTop: Sizes.MARGIN,
     backgroundColor: Colors.DEFAULT_BACKGROUND_COLOR,
+    position: 'relative',
+  },
+  imageActions: {
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   image: {
-    flex: 6,
-    // paddingHorizontal: Sizes.size(20),
+    flex: 1.2,
   },
   body: {
     backgroundColor: Colors.WHITE,
     flex: 1,
-  },
-  bubbles: {
-    height: BUBBLES_LIST_HEIGHT,
     padding: Sizes.PADDING,
   },
 });

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { AddCustomOrder, Cart, Chat, Home, OrderHistory } from 'screens';
 import { Routes } from 'constants';
-import { Colors, ComponentAttributes, Mixins, Sizes } from 'styles';
+import { Colors, Sizes } from 'styles';
 import { BottomTabNavigationIcon, BottomTabNavigationText } from './TabAssets';
 
 const Tab = createBottomTabNavigator();
@@ -15,7 +15,7 @@ const BottomTabNavigation = () => {
       screenOptions={{
         showLabel: false,
         headerShown: false,
-        tabBarStyle: [styles.tabBarStyle, Mixins.simpleShadow()],
+        tabBarStyle: [styles.tabBarStyle],
       }}
     >
       <Tab.Screen
@@ -91,16 +91,11 @@ const BottomTabNavigation = () => {
 
 const styles = StyleSheet.create({
   tabBarStyle: {
-    bottom: ComponentAttributes.BOTTOM_TABS_ABSOLUTE_BOTTOM,
-    position: 'absolute',
-    left: Sizes.size(20),
-    right: Sizes.size(20),
     borderRadius: Sizes.RADIUS,
     elevation: 0,
     backgroundColor: Colors.WHITE,
     paddingBottom: Sizes.PADDING,
     padding: Sizes.PADDING,
-    height: ComponentAttributes.BOTTOM_TABS_HEIGHT,
   },
 });
 

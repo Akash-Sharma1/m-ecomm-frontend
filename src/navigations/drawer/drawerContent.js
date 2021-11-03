@@ -113,7 +113,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     ...Fonts.H1,
-    // ...Fonts.BOLD,
     paddingRight: Sizes.PADDING,
   },
 });

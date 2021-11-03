@@ -64,7 +64,7 @@ const scaleSize = (scale) => ({
 const availableBackgroundlors = [
   { backgroundColor: Colors.SECONDARY_MUTED },
   { backgroundColor: Colors.PRIMARY_MUTED },
-  { backgroundColor: Colors.TERTIARY_MUTED },
+  { backgroundColor: Colors.PURPLE_MUTED },
   { backgroundColor: Colors.GREEN_MUTED },
 ];
 

@@ -6,13 +6,11 @@ import { Layout } from 'styles';
 import StackNavigator from 'navigations/stack';
 import DrawerContent from './drawerContent';
 
-
 const Drawer = createDrawerNavigator();
-
 
 const DrawerNavigation = () => {
   return (
-    <View style={Layout.flexRow} >
+    <View style={Layout.flexCol} >
       <Drawer.Navigator
         screenOptions={{
           headerShown: false,

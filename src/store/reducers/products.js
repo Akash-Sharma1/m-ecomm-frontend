@@ -57,7 +57,8 @@ const initialState = {
       // eslint-disable-next-line max-len
       description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
       // eslint-disable-next-line max-len
-      image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
+      // image: 'file:///Users/akash/Downloads/balaji-transparent.png',
+      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
     },
     1: {
       id: 1,
@@ -70,7 +71,7 @@ const initialState = {
       // eslint-disable-next-line max-len
       description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
       // eslint-disable-next-line max-len
-      image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
+      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
     },
     2: {
       id: 2,
@@ -83,7 +84,7 @@ const initialState = {
       // eslint-disable-next-line max-len
       description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
       // eslint-disable-next-line max-len
-      image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
+      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
     },
     3: {
       id: 3,
@@ -96,7 +97,7 @@ const initialState = {
       // eslint-disable-next-line max-len
       description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
       // eslint-disable-next-line max-len
-      image: 'https://i.pinimg.com/originals/32/d5/27/32d5271c16689d66aaf1843170f20d20.jpg',
+      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
     },
   },
 };

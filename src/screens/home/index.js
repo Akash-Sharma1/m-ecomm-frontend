@@ -18,7 +18,7 @@ const Home = () => {
         style={styles.marginedContainer}
         data={productIds}
         renderItem={({ item, index }) => (
-          <ProductTile
+          <ProductTile.LargeDetails
             product={products[item]}
             style={styles.tile}
             index={index}
@@ -36,8 +36,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DEFAULT_BACKGROUND_COLOR,
     borderBottomLeftRadius: Sizes.RADIUS,
     borderBottomRightRadius: Sizes.RADIUS,
-    marginBottom: ComponentAttributes.BOTTOM_TABS_HEIGHT +
-    ComponentAttributes.BOTTOM_TABS_ABSOLUTE_BOTTOM,
   },
   marginedContainer: {
     marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,

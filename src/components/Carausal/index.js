@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 
 import { Sizes } from 'styles';
+import List from '../List';
+import Dots from './Dots';
 
 const CONTAINER_SIZE = Sizes.SCREEN_WIDTH;
-const ITEM_SIZE = Sizes.SCREEN_WIDTH * 0.8;
-const SEPERATOR_WIDTH = 20;
+// const ITEM_SIZE = Sizes.SCREEN_WIDTH * 0.8;
+const SEPERATOR_WIDTH = Sizes.size(20);
 const AUTO_SCROLL_INTERVAL_TIME = 6000;
 
 const getEdgeMargins = (containerSize, itemSize, seperatorSize) => (
@@ -18,11 +19,13 @@ const Carausal = ({
   style,
   autoScroll,
   containerSize = CONTAINER_SIZE,
-  itemSize = ITEM_SIZE,
   seperatorSize = SEPERATOR_WIDTH,
+  adjacentItemsVisible=false,
   autoPlayIntervalTime = AUTO_SCROLL_INTERVAL_TIME,
   children,
   loop,
+  dots=false,
+  dotsPosition='bottom',
   ...remainingProps
 }) => {
   const timerRef = useRef(null);
@@ -30,11 +33,11 @@ const Carausal = ({
   const listRef = useRef(null);
   const isManuallyMovedRef = useRef(false);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [circularList, setCircularList] = useState(data);
-  const totalItemSize = itemSize + seperatorSize;
+  const itemSize = containerSize - 2 * seperatorSize -
+    (adjacentItemsVisible ? (containerSize - 2 * seperatorSize) * 0.2 : 0);
 
-  const randomString = (Math.random() + 1).toString(36).substring(2);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalItemSize = itemSize + seperatorSize;
 
   // AUTO SCROLL CARAUSAL STARTS
 
@@ -98,57 +101,61 @@ const Carausal = ({
 
 
   return (
-    <FlatList
-      ref={listRef}
-      style={[styles.container, style]}
-      horizontal
+    <View style={[styles.container, style]}>
+      <List
+        ref={listRef}
+        style={styles.container}
+        horizontal
 
-      data={loop ? circularList : data}
-      renderItem={({ item, index }) => React.cloneElement(children,
-        {
-          style: [
-            childComponentStyles.commonChildComponent(itemSize),
-            // eslint-disable-next-line max-len
-            index === 0 && childComponentStyles.firstChildComponent(containerSize, itemSize, seperatorSize),
-            // eslint-disable-next-line max-len
-            index === data.length - 1 && childComponentStyles.lastChildComponent(containerSize, itemSize, seperatorSize),
-          ],
-          item,
-          index: currentIndex % data.length,
-          active: index === currentIndex,
-        },
+        data={data}
+        renderItem={({ item, index }) => React.cloneElement(children,
+          {
+            style: [
+              childComponentStyles.commonChildComponent(itemSize),
+              // eslint-disable-next-line max-len
+              index === 0 && childComponentStyles.firstChildComponent(containerSize, itemSize, seperatorSize),
+              // eslint-disable-next-line max-len
+              index === data.length - 1 && childComponentStyles.lastChildComponent(containerSize, itemSize, seperatorSize),
+            ],
+            item,
+            index: index,
+            active: index === currentIndex,
+          },
+        )}
+
+        // TRIGGERS
+        viewabilityConfig={{
+          viewAreaCoveragePercentThreshold: 50,
+        }}
+        onViewableItemsChanged={onViewableItemsChanged}
+
+        // PAGING
+        pagingEnabled
+        snapToInterval={totalItemSize}
+        ItemSeparatorComponent={() => (
+          <View style={{ width: seperatorSize }}/>
+        )}
+
+        // OPTIMIZATIONS
+        getItemLayout={(data, index) => ({
+          length: totalItemSize,
+          offset: totalItemSize * index,
+          index,
+        })}
+        windowSize={1}
+        initialNumToRender={1}
+        maxToRenderPerBatch={1}
+        decelerationRate="fast"
+
+        showsHorizontalScrollIndicator={false}
+
+        {...remainingProps}
+      />
+
+      {dots && (
+        <Dots position={dotsPosition} totalDots={data.length} currentIndex={currentIndex} />
       )}
-
-      // TRIGGERS
-      viewabilityConfig={{
-        viewAreaCoveragePercentThreshold: 50,
-      }}
-      onViewableItemsChanged={onViewableItemsChanged}
-
-      // PAGING
-      pagingEnabled
-      snapToInterval={totalItemSize}
-      ItemSeparatorComponent={() => (
-        <View style={{ width: seperatorSize }}/>
-      )}
-
-      // OPTIMIZATIONS
-      getItemLayout={(data, index) => ({
-        length: totalItemSize,
-        offset: totalItemSize * index,
-        index,
-      })}
-      windowSize={1}
-      initialNumToRender={1}
-      maxToRenderPerBatch={1}
-      decelerationRate="fast"
-
-      keyExtractor={(_, index) => index.toString()}
-      listKey={randomString}
-      showsHorizontalScrollIndicator={false}
-
-      {...remainingProps}
-    />
+    </View>
   );
 };
 
@@ -157,6 +164,7 @@ export default Carausal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
   },
 });
 

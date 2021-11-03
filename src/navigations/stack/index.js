@@ -4,8 +4,9 @@ import Animated from 'react-native-reanimated';
 
 import { Accounts, Cart, OrderHistory, OrderSummary, ProductDetails } from 'screens';
 import { Routes } from 'constants';
-import { Layout } from 'styles';
+import { Colors, Layout } from 'styles';
 import BottomTabNavigation from 'navigations/bottomTabs';
+import { StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const StackNavigator = ({ style }) => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
+          cardStyle: styles.container,
         }}
         initialRouteName={Routes.HOME}
       >
@@ -29,6 +31,7 @@ const StackNavigator = ({ style }) => {
         <Stack.Screen name={Routes.ORDER_SUMMARY} component={OrderSummary} />
         <Stack.Screen name={Routes.PAYMENTS} component={ProductDetails} />
         <Stack.Screen name={Routes.ORDER_TRACKING} component={ProductDetails} />
+        <Stack.Screen name={Routes.ORDER_HISTORY} component={OrderHistory} />
         <Stack.Screen name={Routes.ACCOUNTS} component={Accounts} />
         <Stack.Screen name={Routes.AUTH} component={ProductDetails} />
         <Stack.Screen name={Routes.CART} component={Cart} />
@@ -37,5 +40,10 @@ const StackNavigator = ({ style }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.DEFAULT_BACKGROUND_COLOR,
+  },
+});
 
 export default StackNavigator;

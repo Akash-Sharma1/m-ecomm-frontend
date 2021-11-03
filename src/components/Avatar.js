@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   container: {
     width: Sizes.size(50),
     height: Sizes.size(50),
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.SECONDARY_LIGHT,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
