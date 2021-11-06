@@ -20,4 +20,5 @@ export default {
   ORDER_TRACKING: 'order_tracking',
   ACCOUNTS: 'accounts',
   AUTH: 'auth',
+  CONVERSATION: 'conversations',
 };

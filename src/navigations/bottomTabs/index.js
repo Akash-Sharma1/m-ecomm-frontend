@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { AddCustomOrder, Cart, Chat, Home, OrderHistory } from 'screens';
+import {
+  AddCustomOrder, Cart, Conversations, Home, OrderHistory,
+} from 'screens';
 import { Routes } from 'constants';
 import { Colors, Sizes } from 'styles';
 import { BottomTabNavigationIcon, BottomTabNavigationText } from './TabAssets';
@@ -33,8 +35,8 @@ const BottomTabNavigation = () => {
       />
 
       <Tab.Screen
-        name={Routes.CHAT}
-        component={Chat}
+        name={Routes.CONVERSATION}
+        component={Conversations}
         options={{
           tabBarLabel: (props) => (
             <BottomTabNavigationText label="Chat" {...props}/>
@@ -92,6 +94,7 @@ const BottomTabNavigation = () => {
 const styles = StyleSheet.create({
   tabBarStyle: {
     borderRadius: Sizes.RADIUS,
+    borderTopWidth: 0,
     elevation: 0,
     backgroundColor: Colors.WHITE,
     paddingBottom: Sizes.PADDING,

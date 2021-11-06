@@ -15,7 +15,7 @@ import DropDownPopoverTitle from './title';
  *  "bottom left" | "bottom right" | "right top" | "right bottom" |
  *  "left top" | "left bottom"
  */
-const DropDownPopover = ({
+const DropDownMenu = ({
   placeholder='down',
   closeOnSelect=true,
   title,
@@ -66,4 +66,4 @@ const DropDownPopover = ({
   );
 };
 
-export default DropDownPopover;
+export default DropDownMenu;

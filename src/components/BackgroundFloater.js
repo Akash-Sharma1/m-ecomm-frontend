@@ -15,7 +15,7 @@ const BackgroundFloater = ({
       <View style={[
         styles.floater,
         scaleSize(scale),
-        Mixins.populateStylePropery('backgroundColor', Colors.MUTED_PALLATE, tileColor),
+        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_PALLATE, tileColor),
         availableTransform[tileColor % availableTransform.length],
         style,
       ]}>

@@ -7,7 +7,7 @@ import { Colors } from 'styles';
  * @param {string} variant
  *  ["outline" | "rounded" | "filled" | "underlined" | "unstyled"]
  */
-const DropDown = ({
+const DropDownPanel = ({
   placeholder,
   items,
   selectedItem,
@@ -49,4 +49,5 @@ const DropDown = ({
   );
 };
 
-export default DropDown;
+export default DropDownPanel;
+

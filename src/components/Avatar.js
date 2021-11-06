@@ -4,9 +4,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Fonts, Sizes } from 'styles';
 
 // TODO: USERNAME AUTO
-const Avatar = ({ username }) => {
+const Avatar = ({ username, style }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.text}>AK</Text>
     </View>
   );

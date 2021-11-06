@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import { Colors, Mixins, Sizes } from 'styles';
-import BackgroundFloater from '../BackgroundFloater';
-import Carausal from '../Carausal';
+import BackgroundFloater from '../../BackgroundFloater';
+import Carausal from '../../Carausal';
+import { Colors, Sizes } from 'styles';
 
 const ImageCard = ({ item, index, style, ...remainingProps }) => {
   return (
@@ -13,25 +13,15 @@ const ImageCard = ({ item, index, style, ...remainingProps }) => {
   );
 };
 
-const ImageCarausal = ({
+const ProductTileCarausal = ({
+  tileColor,
   product,
-  tileColor=0,
-  style,
-  children,
-  ...remainingProps
+  containerStyle,
 }) => {
   const productImages = [product.image, product.image, product.image, product.image];
 
   return (
-    <View
-      productId={product.id}
-      style={[
-        styles.container,
-        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_2_PALLATE, tileColor),
-        style,
-      ]}
-      {...remainingProps}
-    >
+    <View style={[styles.container, containerStyle]}>
       <BackgroundFloater
         tileColor={tileColor}
         containerStyle={styles.floaterContainerStyle}
@@ -50,23 +40,15 @@ const ImageCarausal = ({
       >
         <ImageCard />
       </Carausal>
-      {children}
     </View>
   );
 };
 
-export default ImageCarausal;
-
-const PRODUCT_TILE_SIZE = Sizes.size(450);
+export default ProductTileCarausal;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderRadius: Sizes.RADIUS_32,
-    height: PRODUCT_TILE_SIZE,
-    paddingVertical: Sizes.PADDING,
-  },
-  floaterContainerStyle: {
   },
   imageContainer: {
     flex: 1,

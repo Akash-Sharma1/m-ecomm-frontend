@@ -13,7 +13,7 @@ const LargeDetail = ({ product, tileColor=0, style, ...remainingProps }) => {
       productId={product.id}
       style={[
         styles.container,
-        Mixins.populateStylePropery('backgroundColor', Colors.MUTED_2_PALLATE, tileColor),
+        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_2_PALLATE, tileColor),
         style,
       ]}
       {...remainingProps}

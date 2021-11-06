@@ -12,7 +12,7 @@ import { Colors, Fonts, Sizes } from 'styles';
 
 const Links = [
   { label: 'Home', route: Routes.HOME, icon: 'home' },
-  { label: 'Chat', route: Routes.CHAT, icon: 'chat' },
+  { label: 'Chat', route: Routes.CONVERSATION, icon: 'chat' },
   { label: 'Categories', route: Routes.CATEGORIES, icon: 'view-day' },
   { label: 'Cart', route: Routes.CART, icon: 'cart' },
   { label: 'Order History', route: Routes.ORDER_HISTORY, icon: 'receipt' },

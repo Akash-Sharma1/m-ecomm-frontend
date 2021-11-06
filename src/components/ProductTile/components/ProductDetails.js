@@ -17,12 +17,12 @@ const ProductDetails = ({ product, style, tileColor }) => {
 
         <Price
           amount={product.price}
-          style={Mixins.populateStylePropery('color', Colors.SOLID_PALLATE, tileColor)}
+          style={Mixins.populateStyleProperty('color', Colors.SOLID_PALLATE, tileColor)}
         />
       </View>
 
       <OpenChat
-        style={Mixins.populateStylePropery('color', Colors.SOLID_PALLATE, tileColor)}
+        style={Mixins.populateStyleProperty('color', Colors.SOLID_PALLATE, tileColor)}
         containerStyle={styles.chat}
       />
     </View>

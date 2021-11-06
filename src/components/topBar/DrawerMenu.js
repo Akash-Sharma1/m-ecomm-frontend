@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     padding: Sizes.PADDING,
   },
   icon: {
-    ...Fonts.H4,
+    ...Fonts.H2,
   },
 });

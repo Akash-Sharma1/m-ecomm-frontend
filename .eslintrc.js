@@ -62,5 +62,6 @@ module.exports = {
     'import/no-unresolved': 'error',
     'no-restricted-imports': 'error',
     'valid-jsdoc': 'off',
+    'no-duplicate-case': 'error',
   },
 };
