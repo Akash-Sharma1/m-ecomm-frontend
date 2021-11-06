@@ -1,4 +1,4 @@
-import { generateNewTextMessageObj } from 'utils/chat';
+import { generateNewConversationObj, generateNewTextMessageObj } from 'utils/chat';
 import { batch } from 'react-redux';
 import chatApi from 'apis/chat';
 
@@ -88,11 +88,23 @@ export const sendMessage = ({ to, text, conversationId }) => {
   };
 };
 
-export const selectOrCreateConversation = ({ resurceId, resourceType }) => {
-  return (dispatch) => {
+export const selectOrCreateConversation = ({ resourceId, resourceType, receiverName }) => {
+  return (dispatch, getState) => {
+    const conversations = getState().chats.conversations;
+    const isNewConversation = conversations.find((conversation) => (
+      conversation.resourceId === resourceId &&
+      conversation.resourceType === resourceType &&
+      conversation.receiverName === receiverName
+    ));
+
     dispatch({ type: SELECT_OR_CREATE_CONVERSATION, payload: {
-      resourceId: resurceId,
-      resourceType: resourceType,
+      isNewConversation,
+      newConversation: generateNewConversationObj({
+        resourceId, resourceType, receiverName,
+      }),
+      currentConversationResouces: {
+        resourceId, resourceType, receiverName,
+      },
     } });
   };
 };
@@ -139,7 +151,7 @@ export const selectOrCreateConversation = ({ resurceId, resourceType }) => {
 const initialState = {
   isLoading: false,
   loadError: null,
-  currentConversationId: null,
+  currentConversation: null,
   conversations: [],
 };
 
@@ -150,15 +162,11 @@ export default (state = initialState, action) => {
   case SELECT_OR_CREATE_CONVERSATION:
     return {
       ...state,
-      conversations: state.conversations[action.payload.productId] ? state.conversations : {
+      conversations: action.payload.isNewConversation ? [
         ...state.conversations,
-        [action.payload.productId]: {
-          general: false,
-          name: action.payload.productName,
-          messages: [],
-        },
-      },
-      currentConversationId: action.payload.productId,
+        action.payload.newConversation,
+      ] : state.conversations,
+      currentConversation: action.payload.currentConversationResouces,
     };
   case FETCH_CONVERSATIONS_INIT:
     return {

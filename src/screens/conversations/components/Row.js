@@ -2,13 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Avatar, ChatTicks } from 'components';
+import { OpenChat } from 'actions';
 import { Colors, Fonts, Mixins, Sizes } from 'styles';
 
 const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
   const lastMessage = conversation.messages[0];
 
   return (
-    <View style={[styles.container, style]}>
+    <OpenChat
+      containerStyle={[styles.container, style]}
+      resourceId={conversation.resourceId}
+      resourceType={conversation.resourceType}
+      receiverName={conversation.receiverName}
+    >
       <Avatar style={[styles.avatar,
         Mixins.populateStyleProperty('backgroundColor', Colors.LIGHT_PALLATE, accentColorIndex)]} />
 
@@ -31,7 +37,7 @@ const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
           </Text>
         </View>
       </View>
-    </View>
+    </OpenChat>
   );
 };
 

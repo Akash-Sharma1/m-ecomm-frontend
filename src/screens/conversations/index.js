@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Colors, Fonts, Sizes } from 'styles';
-import { List, SearchInput } from 'components';
-import { fetchConversations } from 'store/reducers/chat';
-import HeaderActions from './components/HeaderActions';
+import { Colors, Sizes } from 'styles';
+import { Header, List, SearchInput } from 'components';
+import { fetchConversations } from 'store/reducers/chats';
 import ConverationRow from './components/Row';
 
 const Conversations = () => {
   const dispatch = useDispatch();
-  const conversations = useSelector((state) => state.chat.conversations);
+  const conversations = useSelector((state) => state.chats.conversations);
 
   useEffect(() => {
     dispatch(fetchConversations());
@@ -19,7 +18,7 @@ const Conversations = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.marginContainer}>
-        <HeaderActions />
+        <Header label="Messages" />
         <SearchInput
           containerStyle={styles.search}
         />

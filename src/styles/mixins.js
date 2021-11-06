@@ -56,7 +56,7 @@ const simpleShadow = (
 });
 
 const populateStyleProperty = (keyName, values, index) => ({
-  [keyName]: values[index],
+  [keyName]: values[index % values.length],
 });
 
 export default {

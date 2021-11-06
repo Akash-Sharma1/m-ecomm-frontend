@@ -32,6 +32,22 @@ export const generateNewTextMessageObj = ({
   };
 };
 
+export const generateNewConversationObj = ({
+  receiverName,
+  resourceId,
+  resourceType,
+  avatarUrl,
+  messages=[],
+}) => {
+  return {
+    receiverName,
+    resourceId,
+    resourceType,
+    avatarUrl,
+    messages,
+  };
+};
+
 export const conversationIdGenerator = ( message ) => {
   return;
 };

@@ -1,22 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Fonts } from 'styles';
+import { Fonts, Sizes } from 'styles';
 import { GoBack } from 'actions';
 
-const HeaderActions = () => {
+const Header = ({ enableGoBack, label }) => {
   return (
     <View style={styles.container}>
       <View style={styles.gobackContainer}>
-        <GoBack containerStyle={styles.gobackIcon} />
-        <Text style={styles.title}>Messages</Text>
+        {enableGoBack && <GoBack containerStyle={styles.gobackIcon} />}
+        <Text style={styles.title}>{label}</Text>
       </View>
-      
     </View>
   );
 };
 
-export default HeaderActions;
+export default Header;
+
+const HEADER_HEIGHT = Sizes.size(50);
 
 const styles = StyleSheet.create({
   container: {
@@ -24,6 +25,8 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: Sizes.MARGIN,
+    height: HEADER_HEIGHT,
   },
   gobackContainer: {
     flexDirection: 'row',
@@ -31,7 +34,6 @@ const styles = StyleSheet.create({
   },
   gobackIcon: {
     paddingLeft: 0,
-    // paddingVertical: 1.5 * Sizes.PADDING,
   },
   title: {
     ...Fonts.H1,

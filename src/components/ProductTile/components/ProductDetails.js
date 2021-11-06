@@ -24,6 +24,10 @@ const ProductDetails = ({ product, style, tileColor }) => {
       <OpenChat
         style={Mixins.populateStyleProperty('color', Colors.SOLID_PALLATE, tileColor)}
         containerStyle={styles.chat}
+        enableIcon
+        resourceId={product.id}
+        resourceType="product"
+        receiverName="seller"
       />
     </View>
   );
