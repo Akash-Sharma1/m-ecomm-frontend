@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Bookmark } from 'actions';
 import DiscountChip from './DiscountChip';
 
 const ProductListItemHeader = ({ product }) => {

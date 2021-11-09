@@ -3,6 +3,7 @@ import { Menu } from 'native-base';
 
 import DropDownPopoverItem from './item';
 import DropDownPopoverTitle from './title';
+import { SELECTION_TYPES, TITLE_TYPES } from './utils';
 
 
 /**
@@ -16,25 +17,60 @@ import DropDownPopoverTitle from './title';
  *  "left top" | "left bottom"
  */
 const DropDownMenu = ({
-  placeholder='down',
-  closeOnSelect=true,
-  title,
-  items,
-  selectedItem,
-  selectionToggleEnabled=true,
-  placement,
-  onSelect,
+  placement='bottom',
   width='100',
+  closeOnSelect=true,
+
+  placeholder=null,
+  titleType=TITLE_TYPES.MENU,
+  title=null,
+
+  items=[],
+  itemsSelectable=false,
+  doubleClickSelectToggle=true,
+  selectionType=SELECTION_TYPES.RADIO,
+  onSelect,
 }) => {
   const [isOpen, setOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleSelection = useCallback((value) => {
-    if (selectionToggleEnabled && selectedItem === value) {
-      onSelect(null);
+  const handleSelection = useCallback((clickedItem) => {
+    const { label, onPress } = clickedItem;
+    const isSelected = selectedItems.includes(label);
+
+    if (itemsSelectable === false) {
+      onSelect && onSelect(label);
+      onPress && onPress();
     } else {
-      onSelect(value);
+      if (doubleClickSelectToggle && isSelected) {
+        const itemsExceptCurrentlyClickedItem = selectedItems.filter((selectedItem) => (
+          selectedItem !== label
+        ));
+
+        setSelectedItems(itemsExceptCurrentlyClickedItem);
+        onSelect && onSelect(itemsExceptCurrentlyClickedItem);
+        onPress && onPress({ isSelected: false });
+      } else if (selectionType === SELECTION_TYPES.RADIO) {
+        const selectedItem = label;
+
+        setSelectedItems([selectedItem]);
+        onSelect && onSelect(selectedItem);
+        onPress && onPress({ isSelected: true });
+      } else if (selectionType === SELECTION_TYPES.CHECKBOX) {
+        const selectedItemsWithCurrentlyClickedItem = [...selectedItems, label];
+
+        setSelectedItems(selectedItemsWithCurrentlyClickedItem);
+        onSelect && onSelect(selectedItemsWithCurrentlyClickedItem);
+        onPress && onPress({ isSelected: true });
+      }
     }
-  }, [onSelect, selectionToggleEnabled, selectedItem]);
+  }, [
+    itemsSelectable,
+    onSelect,
+    selectedItems,
+    doubleClickSelectToggle,
+    selectionType,
+  ]);
 
   return (
     <Menu
@@ -49,17 +85,18 @@ const DropDownMenu = ({
           triggerProps={triggerProps}
           isOpen={isOpen}
           placeholder={placeholder}
+          titleType={titleType}
           title={title}
-          selectedItem={selectedItem}
+          selectedItem={selectedItems.length && selectedItems[0]}
         />
       )}
     >
-      {items && items.map((item, index) => (
+      {items.map((item, index) => (
         <DropDownPopoverItem
           key={index}
-          handlePress={handleSelection}
-          label={item}
-          selected={selectedItem === item}
+          handlePress={() => handleSelection(item)}
+          label={item.label}
+          selected={selectedItems.includes(item.label)}
         />
       ))}
     </Menu>

@@ -32,7 +32,7 @@ const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
         </View>
 
         <View style={styles.secondRow}>
-          <Text style={styles.subtext} numberOfLines={2} ellipsizeMode="tail">
+          <Text style={styles.subtext} numberOfLines={1} ellipsizeMode="tail">
             {lastMessage.text}
           </Text>
         </View>

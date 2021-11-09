@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
+import { Colors, Fonts, Sizes } from 'styles';
 import { Ratings, TextExpander } from 'components';
-import Footer from './Footer';
 
 const Description = ({ product }) => {
   return (
@@ -32,9 +31,6 @@ const Description = ({ product }) => {
         <Text style={styles.text}>7 foot</Text>
       </View>
 
-      <View style={styles.footer}>
-        <Footer product={product} />
-      </View>
     </View>
   );
 };
@@ -61,10 +57,6 @@ const styles = StyleSheet.create({
   title: {
     ...Fonts.H3,
     ...Fonts.BOLD,
-  },
-  footer: {
-    height: ComponentAttributes.FOOTER_HEIGHT,
-    // flex: 1,
   },
   subtitle: {
     ...Fonts.H4,

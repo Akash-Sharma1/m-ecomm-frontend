@@ -1,13 +1,24 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { Colors, Sizes } from 'styles';
+import { Header } from 'components';
 
 const Chat = () => {
   return (
-    <SafeAreaView styles={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.marginContainer}>
-        <Text>Hello</Text>
+        <Header
+          enableGoBack
+          enableMenu
+          menuProps={{
+            items: [
+              { label: 'Order now', onPress: () => {} },
+              { label: 'Add to cart', onPress: () => {} },
+              { label: 'Close conversation', onPress: () => {} },
+            ],
+          }}
+        />
       </View>
     </SafeAreaView>
   );

@@ -38,21 +38,17 @@ const Bookmark = ({ productId, containerStyle, style, activeStyle }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: Sizes.RADIUS_2,
-    paddingLeft: Sizes.size(4.5),
-    paddingRight: Sizes.size(3.5),
-    paddingTop: Sizes.size(4.5),
-    paddingBottom: Sizes.size(3.5),
+    justifyContent: 'center',
+    backgroundColor: Colors.WHITE,
+    borderRadius: Sizes.RADIUS,
+    padding: Sizes.PADDING,
   },
   heart: {
     fontSize: Sizes.H1,
-    color: Colors.BLACK,
   },
   activeHeart: {
     fontSize: Sizes.H1,
-    color: Colors.BLACK,
   },
 });
 
