@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { Header, ProductTile } from 'components';
+import { Header, ProductTile, SwipableBottomPanel } from 'components';
 import { Colors, ComponentAttributes, Layout, Sizes } from 'styles';
 import Description from './components/Description';
 import Footer from './components/Footer';
@@ -22,7 +22,7 @@ const ProductDetails = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={Layout.flexCol} showsVerticalScrollIndicator={false} >
+      <View style={Layout.flexCol} showsVerticalScrollIndicator={false} >
         <ProductTile.ImageCarausal
           style={styles.image}
           product={product}
@@ -38,10 +38,15 @@ const ProductDetails = ({ route }) => {
           />
         </ProductTile.ImageCarausal>
 
-        <View style={styles.body}>
+        <SwipableBottomPanel
+          hideTouchBar
+          rebounce={false}
+          topMargin={2 * PRODUCT_PAGE_HEADER_HEIGHT}
+          style={styles.body}
+        >
           <Description product={product} />
-        </View>
-      </ScrollView>
+        </SwipableBottomPanel>
+      </View>
 
       <View style={styles.footer}>
         <Footer product={product} />
@@ -72,12 +77,11 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.WHITE,
-    flex: 1,
     marginTop: 1.5 * Sizes.MARGIN,
+    paddingVertical: 2 * Sizes.PADDING,
   },
   footer: {
     height: ComponentAttributes.FOOTER_HEIGHT,
-    // flex: 1,
   },
 });
 

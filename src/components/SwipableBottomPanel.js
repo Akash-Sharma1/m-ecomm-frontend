@@ -1,23 +1,27 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
-  useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring,
+  useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring, withTiming,
 } from 'react-native-reanimated';
 
-import { Colors, ComponentAttributes, Mixins, Sizes } from 'styles';
+import { Colors, Sizes } from 'styles';
 
-// eslint-disable-next-line max-len
-const FULL_SCREEN_HEIGHT = Sizes.SCREEN_HEIGHT - ComponentAttributes.TOP_BAR_HEIGHT - (Platform.OS === 'ios' ? Sizes.STATUS_BAR_SIZE : 0);
+const FULL_SCREEN_HEIGHT = Sizes.SCREEN_HEIGHT - Sizes.size(50) - Sizes.STATUS_BAR_SIZE;
 const INTIAL_HEIGHT = Sizes.size(180);
+const TOGGLE_THRESHOLD = Sizes.size(50);
 const CLOSED_HEIGHT = Sizes.size(180);
 
 const SwipableBottomPanel = ({
   children,
   initialHeight = INTIAL_HEIGHT,
   maxHeight = FULL_SCREEN_HEIGHT,
+  topMargin = 0,
   closedHeight = CLOSED_HEIGHT,
   rebounce = true,
+  toggleThreshold = TOGGLE_THRESHOLD,
+  hideTouchBar=false,
+  style,
 }) => {
   const panelHeight = useSharedValue(initialHeight);
 
@@ -31,12 +35,12 @@ const SwipableBottomPanel = ({
 
       if (rebounce) {
         // if rebouce is true then allow any value, as it will bounce back
-        if (height <= maxHeight && height >= 0) {
+        if (height <= (maxHeight - topMargin) && height >= 0) {
           panelHeight.value = height;
         }
       } else {
         // if rebounce is false them not allow overlimit value
-        if (height <= maxHeight && height >= closedHeight) {
+        if (height <= (maxHeight - topMargin) && height >= closedHeight) {
           panelHeight.value = height;
         }
       }
@@ -46,16 +50,18 @@ const SwipableBottomPanel = ({
       const currentHeight = panelHeight.value;
       const startedFromHeight = ctx.translationY;
 
-      if (currentHeight < startedFromHeight) {
-        // This is below the closing limit, bounce back
-        panelHeight.value = rebounce ? withSpring(closedHeight) : closedHeight;
-      } else if (currentHeight > startedFromHeight) {
+      if (currentHeight < startedFromHeight - toggleThreshold) {
+        // This is for snapping to closed view after scrolling down
+        panelHeight.value = rebounce ? withSpring(closedHeight) : withTiming(closedHeight);
+      } else if (currentHeight > startedFromHeight + toggleThreshold) {
         // This is for snapping to full screen view after scrolling up
-        panelHeight.value = rebounce ? withSpring(maxHeight) : maxHeight;
+        panelHeight.value = rebounce ?
+          withSpring(maxHeight - topMargin) :
+          withTiming(maxHeight - topMargin);
       }
     },
   }, [
-    maxHeight, closedHeight,
+    maxHeight, closedHeight, rebounce, toggleThreshold, topMargin,
   ]);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -66,10 +72,12 @@ const SwipableBottomPanel = ({
 
   return (
     <PanGestureHandler onGestureEvent={gestureHandler}>
-      <Animated.View style={[styles.container, animatedStyle]}>
-        <Animated.View style={styles.touchBarContainer}>
-          <View style={styles.touchBar} />
-        </Animated.View>
+      <Animated.View style={[styles.container, animatedStyle, style]}>
+        {!hideTouchBar && (
+          <View style={styles.touchBarContainer}>
+            <View style={styles.touchBar} />
+          </View>
+        )}
         <View style={styles.scrollView}>
           {children}
         </View>
@@ -86,7 +94,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: Sizes.RADIUS_32,
     backgroundColor: Colors.WHITE,
     height: Sizes.SCREEN_HEIGHT,
-    ...Mixins.simpleShadow(),
   },
   touchBar: {
     backgroundColor: Colors.GRAY_LIGHT,
@@ -102,7 +109,5 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    paddingVertical: Sizes.PADDING,
-    paddingHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
   },
 });

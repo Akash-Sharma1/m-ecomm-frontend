@@ -31,7 +31,7 @@ const Colors = {
 
   // GRAYSCALE
   GRAY_LIGHT: `${'#8a8a8a'}10`,
-  GRAY_MEDIUM: `${'#8a8a8a'}50`,
+  GRAY_MEDIUM: `${'#8a8a8a'}40`,
   GRAY_DARK: '#8a8a8a',
 
   // ACTION COLORS
