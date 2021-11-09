@@ -1,44 +1,50 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Input } from 'native-base';
+import { Input as NativeBaseInput } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Colors, Fonts, Sizes } from 'styles';
 
-const SearchInput = ({
-  handleSearch,
+const Input = ({
+  value='',
+  onChange,
+  onSubmit,
   containerStyle,
   style,
+  placeholder='Search',
+  rightIconName='search',
+  rightIcon=true,
 }) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(value);
 
-  const handleChange = useCallback((e) => {
-    setText(e.target.value);
-  }, []);
+  const handleChange = useCallback((val) => {
+    onChange && onChange(val);
+    setText(val);
+  }, [onChange]);
 
   const handleSubmit = useCallback(() => {
-    handleSearch && handleSearch(text);
-  }, [text, handleSearch]);
+    onSubmit && onSubmit(text);
+  }, [text, onSubmit]);
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <Input
+      <NativeBaseInput
         variant="rounded"
-        InputRightElement={
+        InputRightElement={rightIcon ? (
           <TouchableOpacity onPress={handleSubmit}>
-            <Ionicons name="search" style={styles.icon} />
+            <Ionicons name={rightIconName} style={styles.icon} />
           </TouchableOpacity>
-        }
+        ) : null}
         style={[styles.input, style]}
-        onChange={handleChange}
-        placeholder="Search"
+        onChangeText={handleChange}
+        placeholder={placeholder}
         value={text}
       />
     </View>
   );
 };
 
-export default SearchInput;
+export default Input;
 
 const styles = StyleSheet.create({
   container: {
@@ -50,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    ...Fonts.H5,
+    ...Fonts.H4,
     ...Fonts.BOLD,
   },
   icon: {

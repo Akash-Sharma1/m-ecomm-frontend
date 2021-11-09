@@ -1,17 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Sizes } from 'styles';
-import SearchInput from '../SearchInput';
+import Input from '../Input';
 
 const SearchBar = () => {
   const handleSearch = useCallback((value) => {
-    console.log(value);
   }, []);
 
   return (
-    <SearchInput
-      handleSearch={handleSearch}
+    <Input
+      onSubmit={handleSearch}
       containerStyle={styles.container}
       style={styles.input}
     />

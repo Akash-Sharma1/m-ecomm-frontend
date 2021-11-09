@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Colors, Sizes } from 'styles';
-import { Header, List, SearchInput } from 'components';
+import { Header, Input, List } from 'components';
 import { fetchConversations } from 'store/reducers/chats';
 import ConverationRow from './components/Row';
 
@@ -19,7 +19,7 @@ const Conversations = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.marginContainer}>
         <Header label="Messages" />
-        <SearchInput
+        <Input
           containerStyle={styles.search}
         />
         <View style={styles.conversations}>

@@ -1,10 +1,10 @@
 // import React, { useCallback } from 'react';
 import React from 'react';
 
-import ClickableIcon from '../../components/ClickableIcon';
+import ClickableIcon from '../../../components/ClickableIcon';
 // import { useNavigation } from '@react-navigation/core';
 
-const DialCall = ({ containerStyle, style }) => {
+const Attach = ({ containerStyle, style }) => {
   // const navigation = useNavigation();
 
   // const handlePress = useCallback(() => {
@@ -15,8 +15,9 @@ const DialCall = ({ containerStyle, style }) => {
     <ClickableIcon
       containerStyle={containerStyle}
       style={style}
+      iconName="ios-attach-sharp"
     />
   );
 };
 
-export default DialCall;
+export default Attach;

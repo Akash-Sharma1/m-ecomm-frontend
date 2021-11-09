@@ -20,6 +20,7 @@ const DropDownMenu = ({
   placement='bottom',
   width='100',
   closeOnSelect=true,
+  containerStyle,
 
   placeholder=null,
   titleType=TITLE_TYPES.MENU,
@@ -87,6 +88,7 @@ const DropDownMenu = ({
           placeholder={placeholder}
           titleType={titleType}
           title={title}
+          containerStyle={containerStyle}
           selectedItem={selectedItems.length && selectedItems[0]}
         />
       )}

@@ -30,8 +30,8 @@ const Colors = {
   GREEN_MUTED_2: `${'#7DB03B'}15`, // BLUE,
 
   // GRAYSCALE
-  GRAY_LIGHT: '#F8FAFB',
-  GRAY_MEDIUM: '#cacaca',
+  GRAY_LIGHT: `${'#8a8a8a'}10`,
+  GRAY_MEDIUM: `${'#8a8a8a'}50`,
   GRAY_DARK: '#8a8a8a',
 
   // ACTION COLORS

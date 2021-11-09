@@ -7,24 +7,40 @@ import DropDownMenu from '../dropDownMenu';
 
 const Header = ({
   label,
+
   enableGoBack,
   enableBookmark,
   enableMenu,
+
   menuProps, // used for menu
   productId, // used for bookmark
+
   leftItems,
   rightItems,
   middleitems,
+
   isAbsolute,
   containerStyle,
-  iconStyle,
+  componentStyles={},
 }) => {
   return (
     <View style={[styles.container, isAbsolute && styles.absoluteContainer, containerStyle]}>
       <View style={styles.itemsContainer}>
-        {enableGoBack && <GoBack containerStyle={iconStyle} />}
-        <Text style={styles.title}>{label}</Text>
+        {enableGoBack && <GoBack containerStyle={[
+          styles.goBackIconContainer,
+          componentStyles.icon,
+          componentStyles.goBackContainer,
+        ]} />}
         {leftItems}
+        {label && (
+          <Text
+            numberOfLines={1}
+            ellipsizeMode='tail'
+            style={[styles.title, componentStyles.label]}
+          >
+            {label}
+          </Text>
+        )}
       </View>
 
       <View style={styles.itemsContainer}>
@@ -34,10 +50,23 @@ const Header = ({
       <View style={styles.itemsContainer}>
         {rightItems}
         {enableBookmark && (
-          <Bookmark containerStyle={iconStyle} productId={productId} />
+          <Bookmark
+            containerStyle={[
+              componentStyles.icon,
+              componentStyles.bookmarkContainer,
+            ]}
+            productId={productId}
+          />
         )}
         {enableMenu && (
-          <DropDownMenu {...menuProps} />
+          <DropDownMenu
+            containerStyle={[
+              styles.menuIconContainer,
+              componentStyles.icon,
+              componentStyles.menuContainer,
+            ]}
+            {...menuProps}
+          />
         )}
       </View>
     </View>
@@ -47,6 +76,7 @@ const Header = ({
 export default Header;
 
 const HEADER_HEIGHT = Sizes.size(50);
+const HEADER_LABEL_WIDTH = Sizes.size(220);
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +94,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    ...Fonts.H1,
+    ...Fonts.H2,
     ...Fonts.BOLD,
+    paddingHorizontal: Sizes.PADDING,
+    maxWidth: HEADER_LABEL_WIDTH,
+  },
+  goBackIconContainer: {
+    paddingLeft: 0,
+  },
+  menuIconContainer: {
+    paddingRight: 0,
   },
 });

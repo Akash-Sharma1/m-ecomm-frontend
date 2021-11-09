@@ -13,6 +13,7 @@ const DropDownPopoverTitle = ({
   placeholder,
   title,
   selectedItem,
+  containerStyle,
 }) => {
   const label = title || selectedItem || placeholder;
 
@@ -43,7 +44,7 @@ const DropDownPopoverTitle = ({
   return (
     <Pressable
       {...triggerProps}
-      style={styles.container}
+      style={[styles.container, containerStyle]}
     >
       <TitleContent />
     </Pressable>

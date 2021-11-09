@@ -15,6 +15,7 @@ export { default as TextExpander } from './TextExpander';
 export { default as SwipableBottomPanel } from './SwipableBottomPanel';
 export { default as Price } from './Price';
 export { default as ProductTile } from './ProductTile';
-export { default as SearchInput } from './SearchInput';
+export { default as Input } from './Input';
 export { default as ChatTicks } from './ChatTicks';
 export { default as Header } from './header';
+export { default as ClickableIcon } from './ClickableIcon';

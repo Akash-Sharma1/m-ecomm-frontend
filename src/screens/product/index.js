@@ -34,7 +34,7 @@ const ProductDetails = ({ route }) => {
             enableBookmark
             isAbsolute
             containerStyle={styles.header}
-            iconStyle={styles.headerIcon}
+            componentStyles={{ icon: styles.headerIcon }}
           />
         </ProductTile.ImageCarausal>
 
@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
     height: PRODUCT_PAGE_HEADER_HEIGHT,
   },
   headerIcon: {
-    paddingHorizontal: 2 * Sizes.PADDING,
+    paddingLeft: 2 * Sizes.PADDING,
+    paddingRight: 2 * Sizes.PADDING,
   },
   body: {
     backgroundColor: Colors.WHITE,
