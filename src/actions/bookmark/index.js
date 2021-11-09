@@ -1,12 +1,10 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { toggleBookmark } from 'store/reducers/products';
-import { Colors, Sizes } from 'styles';
+import ClickableIcon from '../../components/ClickableIcon';
 
-const Bookmark = ({ productId, containerStyle, style, activeStyle }) => {
+const Bookmark = ({ productId, containerStyle, style = {}, activeStyle = {} }) => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.products.products[productId]);
   const { isBookmarked } = product || {};
@@ -19,37 +17,17 @@ const Bookmark = ({ productId, containerStyle, style, activeStyle }) => {
     ));
   }, [dispatch, productId, isBookmarked]);
 
+  const iconStyle = isBookmarked ? style : { ...style, ...activeStyle };
+
   return (
-    <TouchableOpacity
-      style={[
-        styles.container,
-        containerStyle,
-      ]}
+    <ClickableIcon
+      containerStyle={containerStyle}
+      style={iconStyle}
       onPress={handlePress}
-    >
-      {isBookmarked ? (
-        <Ionicons name="heart" style={[styles.activeHeart, style, activeStyle]} />
-      ) : (
-        <Ionicons name="heart-outline" style={[styles.heart, style]} />
-      )}
-    </TouchableOpacity>
+      iconName={isBookmarked ? 'heart' : 'heart-outline'}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.WHITE,
-    borderRadius: Sizes.RADIUS,
-    padding: Sizes.PADDING,
-  },
-  heart: {
-    fontSize: Sizes.H1,
-  },
-  activeHeart: {
-    fontSize: Sizes.H1,
-  },
-});
 
 export default Bookmark;

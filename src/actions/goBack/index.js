@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-
-import { Colors, Fonts, Sizes } from 'styles';
 import { useNavigation } from '@react-navigation/core';
+
+import ClickableIcon from '../../components/ClickableIcon';
 
 const GoBack = ({ containerStyle, style }) => {
   const navigation = useNavigation();
@@ -13,27 +11,13 @@ const GoBack = ({ containerStyle, style }) => {
   }, [navigation]);
 
   return (
-    <TouchableOpacity
+    <ClickableIcon
+      containerStyle={containerStyle}
+      style={style}
       onPress={handlePress}
-      style={[styles.container, containerStyle]}
-    >
-      <Ionicons name="ios-chevron-back" style={[styles.back, style]} />
-    </TouchableOpacity>
+      iconName="ios-chevron-back"
+    />
   );
 };
-
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.WHITE,
-    borderRadius: Sizes.RADIUS,
-    padding: Sizes.PADDING,
-  },
-  back: {
-    ...Fonts.H1,
-  },
-});
 
 export default GoBack;

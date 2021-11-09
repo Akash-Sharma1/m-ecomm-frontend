@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import { Colors, Fonts, Sizes } from 'styles';
 
 const AddToCart = ({ productId }) => {
-  const product = useSelector((state) => state.products.products[productId]);
+  // const product = useSelector((state) => state.products.products[productId]);
 
   return (
     <TouchableOpacity style={styles.container}>

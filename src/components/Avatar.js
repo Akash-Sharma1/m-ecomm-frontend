@@ -4,9 +4,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Colors, Fonts, Sizes } from 'styles';
 
 // TODO: USERNAME AUTO
-const Avatar = ({ username, style }) => {
+const Avatar = ({ username, style, rounded }) => {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, rounded && styles.rounded, style]}>
       <Text style={styles.text}>AK</Text>
     </View>
   );
@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: Sizes.RADIUS,
+  },
+  rounded: {
+    borderRadius: Sizes.RADIUS_32,
   },
   text: {
     ...Fonts.H3,

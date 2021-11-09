@@ -2,23 +2,14 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { Colors, Sizes } from 'styles';
-import { Header } from 'components';
+import ChatHeader from './components/ChatHeader';
+
 
 const Chat = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.marginContainer}>
-        <Header
-          enableGoBack
-          enableMenu
-          menuProps={{
-            items: [
-              { label: 'Order now', onPress: () => {} },
-              { label: 'Add to cart', onPress: () => {} },
-              { label: 'Close conversation', onPress: () => {} },
-            ],
-          }}
-        />
+        <ChatHeader />
       </View>
     </SafeAreaView>
   );

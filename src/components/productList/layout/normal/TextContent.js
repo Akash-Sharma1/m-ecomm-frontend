@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 
 import ProductTitle from 'components/productList/components/Title';
 import ProductPrice from 'components/productList/components/Price';
-import Ratings from 'components/ratings';
 import { Bookmark } from 'actions';
 import { Sizes } from 'styles';
 

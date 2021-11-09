@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Colors, Fonts, Sizes } from 'styles';
+import { Fonts, Sizes } from 'styles';
 import { Bookmark, GoBack } from 'actions';
 import DropDownMenu from '../dropDownMenu';
 
@@ -22,7 +22,7 @@ const Header = ({
   return (
     <View style={[styles.container, isAbsolute && styles.absoluteContainer, containerStyle]}>
       <View style={styles.itemsContainer}>
-        {enableGoBack && <GoBack containerStyle={[styles.icon, iconStyle]} />}
+        {enableGoBack && <GoBack containerStyle={iconStyle} />}
         <Text style={styles.title}>{label}</Text>
         {leftItems}
       </View>
@@ -32,13 +32,13 @@ const Header = ({
       </View>
 
       <View style={styles.itemsContainer}>
+        {rightItems}
         {enableBookmark && (
-          <Bookmark containerStyle={[styles.icon, iconStyle]} productId={productId} />
+          <Bookmark containerStyle={iconStyle} productId={productId} />
         )}
         {enableMenu && (
           <DropDownMenu {...menuProps} />
         )}
-        {rightItems}
       </View>
     </View>
   );
@@ -62,9 +62,6 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  icon: {
-    backgroundColor: Colors.TRANSPARENT,
   },
   title: {
     ...Fonts.H1,

@@ -15,7 +15,7 @@ const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
       resourceType={conversation.resourceType}
       receiverName={conversation.receiverName}
     >
-      <Avatar style={[styles.avatar,
+      <Avatar rounded style={[styles.avatar,
         Mixins.populateStyleProperty('backgroundColor', Colors.LIGHT_PALLATE, accentColorIndex)]} />
 
       <View style={styles.textContainer}>
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    borderRadius: Sizes.RADIUS_32,
     width: Sizes.size(60),
     height: Sizes.size(60),
   },
