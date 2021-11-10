@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { StyleSheet, View, Animated } from 'react-native';
-import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import React from 'react';
+import { StyleSheet, Animated } from 'react-native';
 
 import { Colors, Sizes } from 'styles';
 
 const Dot = ({ style, activeStyle, active }) => {
-  const animatedValue = useRef(new Animated.Value(0)).current;
+  const animatedValue = React.useRef(new Animated.Value(0)).current;
 
   const animatedDotStyle = {
       opacity: animatedValue.interpolate({
@@ -18,7 +17,7 @@ const Dot = ({ style, activeStyle, active }) => {
       }),
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (active) {
       Animated.timing(animatedValue, {
         toValue: 1,
@@ -47,53 +46,11 @@ const Dot = ({ style, activeStyle, active }) => {
   );
 };
 
-// Position can be top, bottom
-const Dots = ({
-  currentIndex = 0,
-  totalDots = 0,
-  style,
-  activeStyle,
-  containerStyle,
-  position='bottom',
-}) => {
-  return (
-    <View style={[
-      position === 'top' && styles.moveToTop,
-      position === 'bottom' && styles.moveToBottom,
-      styles.container,
-      containerStyle,
-    ]}>
-      {[...Array(totalDots)].map((_, index) => (
-        <Dot
-          key={index}
-          style={style}
-          activeStyle={activeStyle}
-          active={(currentIndex === (index % totalDots))}
-        />
-      ))}
-    </View>
-  );
-};
-
-export default Dots;
+export default Dot;
 
 const DOTS_SIZE = Sizes.size(8);
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    flexDirection: 'row',
-  },
-  moveToTop: {
-    top: 0,
-    width: '100%',
-  },
-  moveToBottom: {
-    bottom: 0,
-    width: '100%',
-  },
   dot: {
     borderColor: Colors.BLACK,
     borderWidth: Sizes.size(1),

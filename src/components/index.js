@@ -17,3 +17,5 @@ export { default as Input } from './Input';
 export { default as ChatTicks } from './ChatTicks';
 export { default as Header } from './header';
 export { default as ClickableIcon } from './ClickableIcon';
+export { default as Carausal } from './Carausal';
+export { default as Dots } from './dots';

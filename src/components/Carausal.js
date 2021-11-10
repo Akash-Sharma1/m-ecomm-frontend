@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Sizes } from 'styles';
-import List from '../List';
-import Dots from './Dots';
+import List from './List';
+import Dots from './dots';
 
 const CONTAINER_SIZE = Sizes.SCREEN_WIDTH;
 // const ITEM_SIZE = Sizes.SCREEN_WIDTH * 0.8;
