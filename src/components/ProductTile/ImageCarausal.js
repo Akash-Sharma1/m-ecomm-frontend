@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: Sizes.RADIUS_32,
     height: PRODUCT_TILE_SIZE,
     paddingVertical: Sizes.PADDING,
+    overflow: 'hidden',
   },
   floaterContainerStyle: {
   },

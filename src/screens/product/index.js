@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { Header, ProductTile, SwipableBottomPanel } from 'components';

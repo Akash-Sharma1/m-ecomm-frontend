@@ -1,13 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
 import { List, ProductTile, TopBar } from 'components';
 import { Colors, Sizes } from 'styles';
+import { fetchProducts } from 'store/reducers/products';
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const { products } = useSelector((state) => state.products);
   const productIds = Object.keys(products);
+
+  React.useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <SafeAreaView style={styles.container} >

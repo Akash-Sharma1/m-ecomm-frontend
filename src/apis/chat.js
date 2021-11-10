@@ -23,6 +23,7 @@ const fetchConversations = async () => {
       messages: [
         {
           status: 'pending',
+          // eslint-disable-next-line max-len
           text: 'Shriman Narayan, Narayan, Hari Hari Shriman Narayan, Narayan, Hari Hari Shriman Narayan, Narayan, Hari Hari',
         },
       ],

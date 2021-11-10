@@ -1,9 +1,16 @@
+import productsApi from 'apis/product';
+import { transformProductsResponse } from 'utils/products';
+
 // ACTIONS
 const prefix = 'products';
 
 const TOGGLE_BOOKMARK_INIT = `${prefix}/TOGGLE_BOOKMARK_INIT`;
 const TOGGLE_BOOKMARK_DONE = `${prefix}/TOGGLE_BOOKMARK_DONE`;
 const TOGGLE_BOOKMARK_ERROR = `${prefix}/TOGGLE_BOOKMARK_ERROR`;
+
+const FETCH_PRODUCTS_INIT = `${prefix}/FETCH_PRODUCTS_INIT`;
+const FETCH_PRODUCTS_DONE = `${prefix}/FETCH_PRODUCTS_DONE`;
+const FETCH_PRODUCTS_ERROR = `${prefix}/FETCH_PRODUCTS_ERROR`;
 
 const SET_CURRENT_PRODUCT_ID = `${prefix}/SET_CURRENT_PRODUCT_ID`;
 
@@ -23,6 +30,24 @@ export const toggleBookmark = ({ productId, setBookmark }) => {
   };
 };
 
+export const fetchProducts = () => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: FETCH_PRODUCTS_INIT });
+
+      const response = await productsApi.fetchAll();
+      const transformedProductsResponse = transformProductsResponse(response);
+
+      dispatch({
+        type: FETCH_PRODUCTS_DONE,
+        payload: transformedProductsResponse,
+      });
+    } catch (error) {
+      dispatch({ type: FETCH_PRODUCTS_ERROR, error });
+    }
+  };
+};
+
 export const setCurrentProductId = (productId) => {
   return (dispatch) => {
     dispatch({ type: SET_CURRENT_PRODUCT_ID, payload: productId });
@@ -31,7 +56,8 @@ export const setCurrentProductId = (productId) => {
 
 // INITIAL STATE
 /**
-  products: [{
+  products: {
+    <product_id>: {
     id: <int>,
     title: <string> (Shri Ram),
     price: <float>,
@@ -39,67 +65,14 @@ export const setCurrentProductId = (productId) => {
     discount: <float> [0, 1],
     isFavorite: <boolean>,
     image: '<uri>',
-  }]
+    }
+  }
  */
 const initialState = {
   isLoading: false,
   loadError: null,
   currentProductId: null,
-  products: {
-    0: {
-      id: 0,
-      title: 'Shri Ram',
-      price: 240.00,
-      rating: 5.0,
-      discount: 0,
-      isBookmarked: false,
-      timesReviewed: 123,
-      // eslint-disable-next-line max-len
-      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
-      // eslint-disable-next-line max-len
-      // image: 'file:///Users/akash/Downloads/balaji-transparent.png',
-      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
-    },
-    1: {
-      id: 1,
-      title: 'Shri Ram',
-      price: 240.00,
-      rating: 1.5,
-      discount: 0,
-      timesReviewed: 12,
-      isBookmarked: true,
-      // eslint-disable-next-line max-len
-      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
-      // eslint-disable-next-line max-len
-      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
-    },
-    2: {
-      id: 2,
-      title: 'Shri Ram',
-      price: 240.00,
-      timesReviewed: 13,
-      rating: 5.0,
-      discount: 0.3,
-      isBookmarked: false,
-      // eslint-disable-next-line max-len
-      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
-      // eslint-disable-next-line max-len
-      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
-    },
-    3: {
-      id: 3,
-      title: 'Shri Ram',
-      price: 240.00,
-      rating: 1.5,
-      discount: 0.12,
-      isBookmarked: true,
-      timesReviewed: 3,
-      // eslint-disable-next-line max-len
-      description: 'Duis ornare justo eros, at laoreet enim commodo ac. Integer ornare mollis lectus, mollis porta libero cursus quis. Sed nisi sem, efficitur nec eros quis, laoreet condimentum libero. In finibus ullamcorper sapien, at facilisis risus imperdiet vitae. Nulla facilisi. Nunc et dapibus erat. In hac habitasse platea dictumst.',
-      // eslint-disable-next-line max-len
-      image: 'file:///Users/akash/Downloads/balaji-transparent.png',
-    },
-  },
+  products: {},
 };
 
 
@@ -135,6 +108,25 @@ export default (state = initialState, action) => {
     return {
       ...state,
       currentProductId: action.payload,
+    };
+  case FETCH_PRODUCTS_INIT:
+    return {
+      ...state,
+      isLoading: true,
+      loadError: null,
+    };
+  case FETCH_PRODUCTS_DONE:
+    return {
+      ...state,
+      isLoading: false,
+      loadError: null,
+      products: action.payload,
+    };
+  case FETCH_PRODUCTS_ERROR:
+    return {
+      ...state,
+      isLoading: false,
+      loadError: action.error,
     };
   default:
     return state;
