@@ -26,7 +26,7 @@ const LargeDetail = ({ product, tileColor=0, style, ...remainingProps }) => {
       ]}
       {...remainingProps}
     >
-      <BackgroundFloater containerStyle={styles.floaterContainerStyle} />
+      <BackgroundFloater containerStyle={styles.floaterContainerStyle} tileColor={tileColor} />
       <Image style={styles.images} source={{ uri: product.image }} />
 
       <ProductDetails

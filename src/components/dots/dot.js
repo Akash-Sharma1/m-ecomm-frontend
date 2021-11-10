@@ -1,37 +1,41 @@
 import React from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Animated, {
+  Easing, Extrapolate, interpolate,
+  useAnimatedStyle, useSharedValue, withTiming,
+} from 'react-native-reanimated';
 
 import { Colors, Sizes } from 'styles';
 
-const Dot = ({ style, activeStyle, active }) => {
-  const animatedValue = React.useRef(new Animated.Value(0)).current;
+const TimeConfigurations = { duration: 200, easing: Easing.linear };
 
-  const animatedDotStyle = {
-      opacity: animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0.8, 0.9]
-      }),
-      width: animatedValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: [DOTS_SIZE, 2 * DOTS_SIZE]
-      }),
-  };
+const Dot = ({ style, activeStyle, active }) => {
+  const animatedValue = useSharedValue(0);
+
+  const animatedDotStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        animatedValue.value,
+        [0, 1],
+        [0.8, 0.9],
+        Extrapolate.CLAMP,
+      ),
+      width: interpolate(
+        animatedValue.value,
+        [0, 1],
+        [DOTS_SIZE, 2 * DOTS_SIZE],
+        Extrapolate.CLAMP,
+      ),
+    };
+  });
 
   React.useEffect(() => {
     if (active) {
-      Animated.timing(animatedValue, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
+      animatedValue.value = withTiming(1, TimeConfigurations);
     } else {
-      Animated.timing(animatedValue, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: false,
-      }).start();
+      animatedValue.value = withTiming(0, TimeConfigurations);
     }
-  }, [active]);
+  }, [active, animatedValue]);
 
   return (
     <Animated.View

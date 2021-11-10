@@ -12,7 +12,7 @@ const OpenProduct = ({ productId, children, routeParams, onPress, ...remainingPr
 
   const handlePress = useCallback(() => {
     dispatch(setCurrentProductId(productId));
-    onPress();
+    onPress && onPress();
     navigation.navigate(Routes.PRODUCT, routeParams);
   }, [navigation, productId, dispatch, routeParams, onPress]);
 

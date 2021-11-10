@@ -11,11 +11,13 @@ const Dots = ({
   activeStyle,
   containerStyle,
   position='bottom',
+  isAbsolute,
 }) => {
   return (
     <View style={[
-      position === 'top' && styles.moveToTop,
-      position === 'bottom' && styles.moveToBottom,
+      position === 'top' && isAbsolute && styles.moveToTop,
+      position === 'bottom' && isAbsolute && styles.moveToBottom,
+      isAbsolute && styles.absolute,
       styles.container,
       containerStyle,
     ]}>
@@ -38,8 +40,10 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
     flexDirection: 'row',
+  },
+  absolute: {
+    position: 'absolute',
   },
   moveToTop: {
     top: 0,

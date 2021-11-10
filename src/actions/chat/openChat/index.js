@@ -27,7 +27,7 @@ const OpenChat = ({
       recieverName,
       resourceType,
     }));
-    onPress();
+    onPress && onPress();
 
     navigation.navigate(Routes.CHAT);
   }, [navigation, recieverId, recieverName, resourceType, dispatch, onPress]);

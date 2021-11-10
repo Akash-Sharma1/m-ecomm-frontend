@@ -9,16 +9,18 @@ const BackgroundFloater = ({
   style,
   scale=1,
   children,
+  tileColor=null,
 }) => {
   const accentColorIndex = useSelector((state) => state.general.accentColorIndex);
+  const colorIndex = tileColor === null ? accentColorIndex : tileColor;
 
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[
         styles.floater,
         scaleSize(scale),
-        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_PALLATE, accentColorIndex),
-        availableTransform[accentColorIndex % availableTransform.length],
+        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_PALLATE, colorIndex),
+        availableTransform[colorIndex % availableTransform.length],
         style,
       ]}>
         {children}

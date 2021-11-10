@@ -168,6 +168,7 @@ const Carausal = ({
           style={dotsStyle}
           activeStyle={dotsActiveStyle}
           containerStyle={dotsContainerStyle}
+          isAbsolute
         />
       )}
     </View>
