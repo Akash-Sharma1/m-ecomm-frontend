@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Sizes } from 'styles';
+import { Colors, Mixins, Sizes } from 'styles';
 import { Attach, VoiceInput } from 'actions';
 import { ClickableIcon, Input } from 'components';
+import { useSelector } from 'react-redux';
 
 const ChatFooter = () => {
   const [text, setText] = useState('');
+  const accentColorIndex = useSelector((state) => state.general.accentColorIndex);
 
   return (
     <View style={styles.container}>
@@ -20,6 +22,7 @@ const ChatFooter = () => {
       {(text && text.length) ? (
         <ClickableIcon
           containerStyle={styles.submitIconContainer}
+          style={Mixins.populateStyleProperty('color', Colors.SOLID_PALLATE, accentColorIndex)}
           iconName="paper-plane"
         />
       ) : (

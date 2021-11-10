@@ -15,26 +15,28 @@ const OpenChat = ({
   recieverId,
   recieverName,
   resourceType,
+  onPress,
   children,
 }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const onPress = useCallback(() => {
+  const handlePress = useCallback(() => {
     dispatch(selectOrCreateConversation({
       recieverId,
       recieverName,
       resourceType,
     }));
+    onPress();
 
     navigation.navigate(Routes.CHAT);
-  }, [navigation, recieverId, recieverName, resourceType, dispatch]);
+  }, [navigation, recieverId, recieverName, resourceType, dispatch, onPress]);
 
 
   return (
     <TouchableOpacity style={[
       !enableIcon && styles.container, enableIcon && styles.iconContainer, containerStyle,
-    ]} onPress={onPress}>
+    ]} onPress={handlePress}>
       {enableIcon && (
         <Ionicons name="chatbox-outline" style={[styles.icon, style]} />
       )}

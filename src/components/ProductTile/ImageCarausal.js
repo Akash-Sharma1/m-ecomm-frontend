@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Colors, Mixins, Sizes } from 'styles';
 import BackgroundFloater from '../BackgroundFloater';
@@ -15,25 +16,24 @@ const ImageCard = ({ item, index, style, ...remainingProps }) => {
 
 const ImageCarausal = ({
   product,
-  tileColor=0,
   style,
   children,
   ...remainingProps
 }) => {
   const productImages = [product.image, product.image, product.image, product.image];
+  const accentColorIndex = useSelector((state) => state.general.accentColorIndex);
 
   return (
     <View
       productId={product.id}
       style={[
         styles.container,
-        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_2_PALLATE, tileColor),
+        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_2_PALLATE, accentColorIndex),
         style,
       ]}
       {...remainingProps}
     >
       <BackgroundFloater
-        tileColor={tileColor}
         containerStyle={styles.floaterContainerStyle}
         scale={1.4}
       />

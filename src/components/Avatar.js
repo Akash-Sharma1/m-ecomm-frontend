@@ -1,12 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Colors, Fonts, Sizes } from 'styles';
+import { Colors, Fonts, Mixins, Sizes } from 'styles';
 
 // TODO: USERNAME AUTO
-const Avatar = ({ username, style, rounded }) => {
+const Avatar = ({ username, style, rounded, accentColorIndex=0 }) => {
   return (
-    <View style={[styles.container, rounded && styles.rounded, style]}>
+    <View style={[
+      styles.container,
+      rounded && styles.rounded,
+      Mixins.populateStyleProperty('backgroundColor', Colors.LIGHT_PALLATE, accentColorIndex),
+      style,
+    ]}>
       <Text style={styles.text}>AK</Text>
     </View>
   );

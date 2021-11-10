@@ -5,9 +5,11 @@ import { DialCall } from 'actions';
 import { StyleSheet } from 'react-native';
 
 import { Sizes } from 'styles';
+import { useSelector } from 'react-redux';
 
 const ChatLeftHeaderItems = () => {
-  return <Avatar rounded />;
+  const accentColorIndex = useSelector((state) => state.general.accentColorIndex);
+  return <Avatar rounded accentColorIndex={accentColorIndex} />;
 };
 
 const ChatRightHeaderItems = () => {

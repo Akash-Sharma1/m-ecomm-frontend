@@ -5,6 +5,7 @@ import productsReducer from './products';
 import cartReducer from './cart';
 import chatReducer from './chats';
 import userReducer from './user';
+import generalReducer from './general';
 
 const rootReducer = combineReducers({
   home: homepageReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   chats: chatReducer,
   user: userReducer,
+  general: generalReducer,
 });
 
 export default rootReducer;

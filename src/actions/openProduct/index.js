@@ -6,17 +6,18 @@ import { useNavigation } from '@react-navigation/core';
 import { setCurrentProductId } from 'store/reducers/products';
 import { Routes } from 'constants';
 
-const OpenProduct = ({ productId, children, routeParams, ...remainingProps }) => {
+const OpenProduct = ({ productId, children, routeParams, onPress, ...remainingProps }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const onPress = useCallback(() => {
+  const handlePress = useCallback(() => {
     dispatch(setCurrentProductId(productId));
+    onPress();
     navigation.navigate(Routes.PRODUCT, routeParams);
-  }, [navigation, productId, dispatch, routeParams]);
+  }, [navigation, productId, dispatch, routeParams, onPress]);
 
   return (
-    <Pressable {...remainingProps} onPress={onPress} >
+    <Pressable onPress={handlePress} {...remainingProps}>
       {children}
     </Pressable>
   );

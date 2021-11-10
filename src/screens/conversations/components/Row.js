@@ -1,22 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { Avatar, ChatTicks } from 'components';
 import { OpenChat } from 'actions';
 import { Colors, Fonts, Mixins, Sizes } from 'styles';
+import { setAccentColorIndex } from 'store/reducers/general';
 
 const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
+  const dispatch = useDispatch();
   const lastMessage = conversation.messages[0];
+
+  const handlePress = React.useCallback(() => {
+    dispatch(setAccentColorIndex(accentColorIndex));
+  }, [dispatch, accentColorIndex]);
+
 
   return (
     <OpenChat
+      onPress={handlePress}
       containerStyle={[styles.container, style]}
       resourceId={conversation.resourceId}
       resourceType={conversation.resourceType}
       receiverName={conversation.receiverName}
     >
-      <Avatar rounded style={[styles.avatar,
-        Mixins.populateStyleProperty('backgroundColor', Colors.LIGHT_PALLATE, accentColorIndex)]} />
+      <Avatar rounded style={styles.avatar} accentColorIndex={accentColorIndex} />
 
       <View style={styles.textContainer}>
         <View style={styles.topRow}>

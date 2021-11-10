@@ -7,14 +7,14 @@ import { Colors, ComponentAttributes, Layout, Sizes } from 'styles';
 import Description from './components/Description';
 import Footer from './components/Footer';
 
-const ProductDetails = ({ route }) => {
+const ProductDetails = () => {
   const currentProductId = useSelector(
     (state) => state.products.currentProductId);
 
+  const accentColorIndex = useSelector((state) => state.general.accentColorIndex);
+
   const products = useSelector((state) => state.products.products);
   const product = products[currentProductId];
-
-  const { tileColor } = route?.params || {};
 
   if (currentProductId == null) {
     return null;
@@ -26,7 +26,7 @@ const ProductDetails = ({ route }) => {
         <ProductTile.ImageCarausal
           style={styles.image}
           product={product}
-          tileColor={tileColor}
+          tileColor={accentColorIndex}
         >
           <Header
             productId={product.id}

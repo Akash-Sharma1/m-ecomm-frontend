@@ -3,7 +3,7 @@ import { Image, StyleSheet, View } from 'react-native';
 
 import BackgroundFloater from '../../BackgroundFloater';
 import Carausal from '../../Carausal';
-import { Colors, Sizes } from 'styles';
+import { Sizes } from 'styles';
 
 const ImageCard = ({ item, index, style, ...remainingProps }) => {
   return (
@@ -14,7 +14,6 @@ const ImageCard = ({ item, index, style, ...remainingProps }) => {
 };
 
 const ProductTileCarausal = ({
-  tileColor,
   product,
   containerStyle,
 }) => {
@@ -23,7 +22,6 @@ const ProductTileCarausal = ({
   return (
     <View style={[styles.container, containerStyle]}>
       <BackgroundFloater
-        tileColor={tileColor}
         containerStyle={styles.floaterContainerStyle}
         scale={1.4}
       />

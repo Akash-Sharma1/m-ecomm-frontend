@@ -1,22 +1,24 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Colors, Mixins, Sizes } from 'styles';
 
 const BackgroundFloater = ({
   containerStyle,
   style,
-  tileColor=0,
   scale=1,
   children,
 }) => {
+  const accentColorIndex = useSelector((state) => state.general.accentColorIndex);
+
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[
         styles.floater,
         scaleSize(scale),
-        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_PALLATE, tileColor),
-        availableTransform[tileColor % availableTransform.length],
+        Mixins.populateStyleProperty('backgroundColor', Colors.MUTED_PALLATE, accentColorIndex),
+        availableTransform[accentColorIndex % availableTransform.length],
         style,
       ]}>
         {children}
