@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StatusBar } from 'react-native';
+import { Dimensions, StatusBar } from 'react-native';
 import Mixins from './mixins';
 
 const { scaleFont } = Mixins;

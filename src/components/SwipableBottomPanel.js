@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, withSpring, withTiming,
@@ -7,7 +7,13 @@ import Animated, {
 
 import { Colors, Sizes } from 'styles';
 
-const FULL_SCREEN_HEIGHT = Sizes.SCREEN_HEIGHT - Sizes.size(50) - Sizes.STATUS_BAR_SIZE;
+// eslint-disable-next-line max-len
+const FULL_SCREEN_HEIGHT = (
+  Sizes.SCREEN_HEIGHT -
+  Sizes.size(50) -
+  (Platform.OS === 'ios' ? Sizes.STATUS_BAR_SIZE : 0)
+);
+
 const INTIAL_HEIGHT = Sizes.size(180);
 const TOGGLE_THRESHOLD = Sizes.size(50);
 const CLOSED_HEIGHT = Sizes.size(180);

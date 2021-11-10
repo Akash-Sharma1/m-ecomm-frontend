@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: ComponentAttributes.FOOTER_HEIGHT,
-    paddingTop: Sizes.PADDING_2,
+    paddingVertical: Sizes.PADDING,
     backgroundColor: Colors.WHITE,
     alignItems: 'center',
   },

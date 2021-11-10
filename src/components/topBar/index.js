@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { Platform, SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
 import { Colors, ComponentAttributes, Fonts, Sizes } from 'styles';
 import WelcomeUserAvatar from './WelcomeUserAvatar';
@@ -40,10 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     paddingVertical: Sizes.PADDING,
-    // eslint-disable-next-line max-len
-    paddingTop: Platform.OS === 'android' ? (Sizes.STATUS_BAR_SIZE + Sizes.size(15)) : 0,
     height: ComponentAttributes.TOP_BAR_HEIGHT,
     zIndex: ComponentAttributes.TOP_BAR_Z_INDEX,
   },

@@ -2,9 +2,7 @@ import { Platform } from 'react-native';
 import Sizes from './sizes';
 
 // COMPONENTS > TOPBAR
-const TOP_BAR_HEIGHT = Platform.OS == 'android' ? (
-  Sizes.size(40 + 30) + Sizes.STATUS_BAR_SIZE
-) : Sizes.size(40 + 30);
+const TOP_BAR_HEIGHT = Sizes.size(40 + 30);
 const TOP_BAR_Z_INDEX = 9;
 
 // COMPONENT > BANNER
@@ -15,7 +13,7 @@ const FOOTER_HEIGHT = Sizes.size(70);
 
 // BOTTOM_TABS
 const BOTTOM_TABS_SCREEN_BOTTOM_MARGIN = Platform.OS === 'ios' ? Sizes.size(70) : Sizes.size(90);
-const BOTTOM_TABS_HEIGHT = Sizes.size(70);
+const BOTTOM_TABS_HEIGHT = Sizes.size(80);
 const BOTTOM_TABS_ABSOLUTE_BOTTOM = Platform.OS === 'ios' ? Sizes.size(25) : Sizes.size(15);
 
 export default {

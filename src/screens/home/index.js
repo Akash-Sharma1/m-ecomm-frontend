@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: Sizes.RADIUS,
   },
   marginedContainer: {
+    flex: 1,
     marginHorizontal: Sizes.EDGE_HORIZONTAL_MARGIN,
   },
   tile: {
