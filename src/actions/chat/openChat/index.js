@@ -12,8 +12,8 @@ const OpenChat = ({
   style,
   containerStyle,
   enableIcon=false,
-  recieverId,
-  recieverName,
+  receiverName,
+  resourceId,
   resourceType,
   onPress,
   children,
@@ -23,14 +23,14 @@ const OpenChat = ({
 
   const handlePress = useCallback(() => {
     dispatch(selectOrCreateConversation({
-      recieverId,
-      recieverName,
+      resourceId,
       resourceType,
+      receiverName,
     }));
     onPress && onPress();
 
     navigation.navigate(Routes.CHAT);
-  }, [navigation, recieverId, recieverName, resourceType, dispatch, onPress]);
+  }, [navigation, resourceId, receiverName, resourceType, dispatch, onPress]);
 
 
   return (

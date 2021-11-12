@@ -21,13 +21,14 @@ const Conversations = () => {
         <Header label="Messages" />
         <Input
           containerStyle={styles.search}
+          placeholder="Search for chats & messages"
         />
         <View style={styles.conversations}>
           <List
-            data={conversations}
+            data={Object.keys(conversations)}
             renderItem={({ item, index }) => (
               <ConverationRow
-                conversation={item}
+                conversation={conversations[item]}
                 style={styles.conversation}
                 accentColorIndex={index}
               />

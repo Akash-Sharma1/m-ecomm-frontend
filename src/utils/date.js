@@ -1,4 +1,24 @@
 /**
+ *
+ * @param {ISO string} dateString
+ * @returns {date object}
+ */
+export const convertDateStringToObject = (dateString) => {
+  return new Date(dateString);
+};
+
+
+/**
+ *
+ * @param {date object} dateobject
+ * @returns {ISO string}
+ */
+export const convertDateObjectToString = (dateobject) => {
+  return dateobject.toISOString();
+};
+
+
+/**
  * @param {date object} date
  * @param {date object} currentDateObj
  * @return {string}
@@ -68,40 +88,21 @@ export const compareDateObjs = (dateObj1, dateObj2) => {
   };
 };
 
-/**
- *
- * @param {ISO string} dateString
- * @returns {date object}
- */
-export const convertDateStringToObject = (dateString) => {
-  return new Date(dateString);
-};
-
-/**
- *
- * @param {date object} dateobject
- * @returns {ISO string}
- */
-export const convertDateObjectToString = (dateobject) => {
-  return dateobject.toISOString();
-};
-
-
-export const extractFromDate = (date) => {
+export const extractFromDate = (dateObj) => {
   let dateProperties = {
-    date: date.getDate(),
-    year: date.getYear(),
-    fullYear: date.getFullYear(),
-    month: date.getMonth(),
-    monthName: MONTH_NAMES[date.getMonth()],
-    hours: date.getHours(),
-    minutes: date.getMinutes(),
-    seconds: date.getSeconds(),
-    milliseconds: date.getMilliseconds(),
-    day: date.getDay(),
-    dayName: DAY_NAMES[date.getDay()],
-    dateString: date.toLocaleDateString(),
-    totalMilliseconds: date.getTime(),
+    date: dateObj.getDate(),
+    year: dateObj.getYear(),
+    fullYear: dateObj.getFullYear(),
+    month: dateObj.getMonth(),
+    monthName: MONTH_NAMES[dateObj.getMonth()],
+    hours: dateObj.getHours(),
+    minutes: dateObj.getMinutes(),
+    seconds: dateObj.getSeconds(),
+    milliseconds: dateObj.getMilliseconds(),
+    day: dateObj.getDay(),
+    dayName: DAY_NAMES[dateObj.getDay()],
+    dateString: dateObj.toLocaleDateString(),
+    totalMilliseconds: dateObj.getTime(),
   };
 
   dateProperties = {
@@ -110,6 +111,12 @@ export const extractFromDate = (date) => {
   };
 
   return dateProperties;
+};
+
+export const timeFromDateObj = (dateObj) => {
+  const { hours, minutes } = extractFromDate(dateObj);
+
+  return `${hours}:${minutes}`;
 };
 
 export const MONTH_NAMES = [

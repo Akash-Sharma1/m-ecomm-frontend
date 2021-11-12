@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    ...Fonts.H4,
+    ...Fonts.H5,
     ...Fonts.BOLD,
   },
   icon: {

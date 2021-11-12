@@ -24,7 +24,7 @@ const SwipableBottomPanel = ({
   maxHeight = FULL_SCREEN_HEIGHT,
   topMargin = 0,
   closedHeight = CLOSED_HEIGHT,
-  rebounce = true,
+  rebounce = false,
   toggleThreshold = TOGGLE_THRESHOLD,
   hideTouchBar=false,
   style,
@@ -67,7 +67,7 @@ const SwipableBottomPanel = ({
       }
     },
   }, [
-    maxHeight, closedHeight, rebounce, toggleThreshold, topMargin,
+    maxHeight, closedHeight, toggleThreshold, topMargin, rebounce,
   ]);
 
   const animatedStyle = useAnimatedStyle(() => {

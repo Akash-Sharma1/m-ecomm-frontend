@@ -52,7 +52,8 @@ const simpleShadow = (
   },
   shadowOpacity: 0.25 * scale,
   shadowRadius: shadowRadius * scale,
-  elevation: 5 * scale,
+  elevation: 10 * scale,
+  backgroundColor: Colors.WHITE,
 });
 
 const populateStyleProperty = (keyName, values, index) => ({

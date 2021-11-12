@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import { Avatar, ChatTicks } from 'components';
 import { OpenChat } from 'actions';
-import { Colors, Fonts, Mixins, Sizes } from 'styles';
+import { Colors, Fonts, Sizes } from 'styles';
 import { setAccentColorIndex } from 'store/reducers/general';
 
 const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
   const dispatch = useDispatch();
-  const lastMessage = conversation.messages[0];
+  const messageIds = Object.keys(conversation.messages);
+  const lastMessageId = (messageIds && messageIds.length > 0) ? messageIds[0] : null;
+  const lastMessage = conversation.messages[lastMessageId];
 
   const handlePress = React.useCallback(() => {
     dispatch(setAccentColorIndex(accentColorIndex));
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
     ...Fonts.H4,
     ...Fonts.BOLD,
     textTransform: 'capitalize',
-    marginRight: Sizes.size(5),
+    marginRight: 2 * Sizes.MARGIN,
     flex: 1,
   },
   ticks: {

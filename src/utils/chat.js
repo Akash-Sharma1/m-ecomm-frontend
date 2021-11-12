@@ -48,6 +48,31 @@ export const generateNewConversationObj = ({
   };
 };
 
-export const conversationIdGenerator = ( message ) => {
-  return;
+export const conversationIdGenerator = ({ resourceType, resourceId, receiverName }) => {
+  return `${resourceType}/${resourceId}/receiverId/${receiverName}`;
+};
+
+export const tranformConversationsData = (conversationsArray) => {
+  const conversationsMap = {};
+
+  conversationsArray.map((conversation) => {
+    const conversationId = conversationIdGenerator(conversation);
+    conversationsMap[conversationId] = {
+      conversationId,
+      ...conversation,
+      messages: tranformMessagesData(conversation.messages),
+    };
+  });
+
+  return conversationsMap;
+};
+
+export const tranformMessagesData = (messagesArray) => {
+  const messagesMap = {};
+
+  messagesArray.map((message) => {
+    messagesMap[message.id] = message;
+  });
+
+  return messagesMap;
 };

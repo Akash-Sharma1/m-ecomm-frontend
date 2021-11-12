@@ -27,7 +27,7 @@ const Dot = ({ style, activeStyle, active }) => {
         Extrapolate.CLAMP,
       ),
     };
-  });
+  }, []);
 
   React.useEffect(() => {
     if (active) {

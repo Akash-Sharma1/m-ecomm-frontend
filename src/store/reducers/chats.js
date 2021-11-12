@@ -1,6 +1,13 @@
-import { generateNewConversationObj, generateNewTextMessageObj } from 'utils/chat';
 import { batch } from 'react-redux';
 import chatApi from 'apis/chat';
+import conversationsApi from 'apis/conversations';
+import {
+  conversationIdGenerator,
+  generateNewConversationObj,
+  generateNewTextMessageObj,
+  tranformConversationsData,
+  tranformMessagesData,
+} from 'utils/chat';
 
 // ACTIONS
 const prefix = 'products';
@@ -30,11 +37,12 @@ export const fetchConversations = () => {
       const userId = getState().user.userId;
       dispatch({ type: FETCH_CONVERSATIONS_INIT });
 
-      const response = await chatApi.fetchConversations({ userId });
+      const response = await conversationsApi.fetchConversations({ userId });
+      const transformedResponse = tranformConversationsData(response);
 
       dispatch({
         type: FETCH_CONVERSATIONS_DONE,
-        payload: response,
+        payload: transformedResponse,
       });
     } catch (error) {
       dispatch({ type: FETCH_CONVERSATIONS_ERROR, error });
@@ -42,18 +50,21 @@ export const fetchConversations = () => {
   };
 };
 
-export const fetchMessages = ({ conversationId, from }) => {
-  return async (dispatch) => {
+export const fetchMessages = ({ conversationId, from = (new Date()).toISOString() }) => {
+  return async (dispatch, getState) => {
     try {
       dispatch({ type: FETCH_MESSAGES_INIT });
+      const conversations = getState().chats.conversations;
+      const conversation = conversations[conversationId];
 
-      const response = await chatApi.fetchMessage({ conversationId, from });
+      const response = await chatApi.fetchMessages({ conversation, from });
+      const transformedResponse = tranformMessagesData(response);
 
       dispatch({
         type: FETCH_MESSAGES_DONE,
         payload: {
-          conversationId,
-          messages: response,
+          conversationId: conversationId,
+          messages: transformedResponse,
         },
       });
     } catch (error) {
@@ -91,32 +102,25 @@ export const sendMessage = ({ to, text, conversationId }) => {
 export const selectOrCreateConversation = ({ resourceId, resourceType, receiverName }) => {
   return (dispatch, getState) => {
     const conversations = getState().chats.conversations;
-    const isNewConversation = conversations.find((conversation) => (
-      conversation.resourceId === resourceId &&
-      conversation.resourceType === resourceType &&
-      conversation.receiverName === receiverName
-    ));
+    const generatedConversationId = conversationIdGenerator({
+      resourceId, resourceType, receiverName,
+    });
+
+    const conversationObj = conversations[generatedConversationId] && generateNewConversationObj({
+      resourceId, resourceType, receiverName,
+    });
 
     dispatch({ type: SELECT_OR_CREATE_CONVERSATION, payload: {
-      isNewConversation,
-      newConversation: generateNewConversationObj({
-        resourceId, resourceType, receiverName,
-      }),
-      currentConversationResouces: {
-        resourceId, resourceType, receiverName,
-      },
+      conversation: conversationObj,
+      currentConversationId: generatedConversationId,
     } });
   };
 };
 
 
 /**
- * For new product:
- * @return {product/{productId}/user/{user-id}} conversationId
- * For new custom product:
- * @return {customProduct/{customProductId}/user/{user-id}} conversationId
- * For general conversations:
- * @return {general/{seller / support}/user/{user-id}} conversationId
+ * conversationId template
+ * @return {resourceType/{resourceId}/receiverName/{user-id}} conversationId
  */
 
 
@@ -124,7 +128,7 @@ export const selectOrCreateConversation = ({ resourceId, resourceType, receiverN
 
 /**
  * Message
- * {
+ * <id>: {
  *  id: <string>
  *  from: <user_id>
  *  to: <'seller' / 'support'>
@@ -139,20 +143,22 @@ export const selectOrCreateConversation = ({ resourceId, resourceType, receiverN
 
 /**
   conversations: [
-    {
+    <conversationId>: {
       receiverName: <seller / support>
       resourceId: <(null / productId / customerProductId>
       resourceType: <null / product / customProduct>
       avatarUrl: <null / url string>
-      messages: []
+      messages: {}
     }
   ]
+  currentConversationId:
+    {resourceType}/{resourceId}/receiverName/{user-id}
  */
 const initialState = {
   isLoading: false,
   loadError: null,
-  currentConversation: null,
-  conversations: [],
+  currentConversationId: null,
+  conversations: {},
 };
 
 
@@ -162,11 +168,11 @@ export default (state = initialState, action) => {
   case SELECT_OR_CREATE_CONVERSATION:
     return {
       ...state,
-      conversations: action.payload.isNewConversation ? [
+      conversations: action.payload.isNewConversation ? {
         ...state.conversations,
-        action.payload.newConversation,
-      ] : state.conversations,
-      currentConversation: action.payload.currentConversationResouces,
+        [action.payload.currentConversationId]: action.payload.newConversation,
+      } : state.conversations,
+      currentConversationId: action.payload.currentConversationId,
     };
   case FETCH_CONVERSATIONS_INIT:
     return {
@@ -179,10 +185,10 @@ export default (state = initialState, action) => {
       ...state,
       isLoading: false,
       loadError: null,
-      conversations: [
+      conversations: {
         ...state.conversations,
         ...action.payload,
-      ],
+      },
     };
   case FETCH_CONVERSATIONS_ERROR:
     return {
@@ -201,17 +207,16 @@ export default (state = initialState, action) => {
       ...state,
       isLoading: false,
       loadError: null,
-      conversations: state.conversations.map((conversation) => {
-        if (conversation.id === action.payload.conversationId) {
-          return {
-            ...conversation,
-            messages: [
-              ...action.payload.messages,
-              ...conversation.messages,
-            ],
-          };
-        } else return conversation;
-      }),
+      conversations: {
+        ...state.conversations,
+        [action.payload.conversationId]: {
+          ...state.conversations[action.payload.conversationId],
+          messages: {
+            ...action.payload.messages,
+            ...state.conversations[action.payload.conversationId].messages,
+          },
+        },
+      },
     };
   case FETCH_MESSAGES_ERROR:
     return {
@@ -230,17 +235,16 @@ export default (state = initialState, action) => {
       ...state,
       isLoading: false,
       loadError: null,
-      conversations: state.conversations.map((conversation) => {
-        if (conversation.id === action.payload.conversationId) {
-          return {
-            ...conversation,
-            messages: [
-              ...conversation.messages,
-              action.payload.message,
-            ],
-          };
-        } else return conversation;
-      }),
+      conversations: {
+        ...state.conversations,
+        [action.payload.conversationId]: {
+          ...state.conversations[action.payload.conversationId],
+          messages: {
+            ...action.payload.messages,
+            ...state.conversations[action.payload.conversationId].messages,
+          },
+        },
+      },
     };
   case SEND_MESSAGES_ERROR:
     return {

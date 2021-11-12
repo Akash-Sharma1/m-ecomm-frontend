@@ -40,7 +40,6 @@ const ProductDetails = () => {
 
         <SwipableBottomPanel
           hideTouchBar
-          rebounce={false}
           topMargin={2 * PRODUCT_PAGE_HEADER_HEIGHT}
           style={styles.body}
         >
