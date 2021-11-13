@@ -13,13 +13,12 @@ const Message = ({ message, style }) => {
       <LinearGradient
         colors={[
           Colors.LIGHT_PALLATE[accentColorIndex],
-          Colors.MUTED_PALLATE[accentColorIndex],
           Colors.MUTED_2_PALLATE[accentColorIndex],
         ]}
         style={styles.card}
       >
         <Text style={styles.text}>
-          {message.text}
+          {message.content}
         </Text>
       </LinearGradient>
     </View>

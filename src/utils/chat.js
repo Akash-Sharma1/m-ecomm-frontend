@@ -32,47 +32,24 @@ export const generateNewTextMessageObj = ({
   };
 };
 
-export const generateNewConversationObj = ({
-  receiverName,
-  resourceId,
-  resourceType,
-  avatarUrl,
-  messages=[],
-}) => {
-  return {
-    receiverName,
-    resourceId,
-    resourceType,
-    avatarUrl,
-    messages,
-  };
-};
-
-export const conversationIdGenerator = ({ resourceType, resourceId, receiverName }) => {
-  return `${resourceType}/${resourceId}/receiverId/${receiverName}`;
-};
-
-export const tranformConversationsData = (conversationsArray) => {
-  const conversationsMap = {};
-
-  conversationsArray.map((conversation) => {
-    const conversationId = conversationIdGenerator(conversation);
-    conversationsMap[conversationId] = {
-      conversationId,
-      ...conversation,
-      messages: tranformMessagesData(conversation.messages),
-    };
+/**
+ * Takes messagesMap and returns list of messageIds
+ * in order of recent first
+ * @param {object} messagesMap
+ * @return {messageIds} sorted by recent first
+ */
+export const sortMessagesByRecentFirst = (messagesArray = []) => {
+  messagesArray.sort((a, b) => {
+    return ((a.sentOn || a.createdOn) - (b.sentOn || b.createdOn));
   });
 
-  return conversationsMap;
+  return [...messagesArray];
 };
 
-export const tranformMessagesData = (messagesArray) => {
-  const messagesMap = {};
+export const getLastMessage = (messagesArray = []) => {
+  return messagesArray && messagesArray[0];
+};
 
-  messagesArray.map((message) => {
-    messagesMap[message.id] = message;
-  });
-
-  return messagesMap;
+export const getOtherParticipantInConversation = (participants = [], userId) => {
+  return participants.find((participant) => participant !== userId);
 };

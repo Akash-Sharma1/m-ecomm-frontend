@@ -6,15 +6,16 @@ import { useDispatch } from 'react-redux';
 
 import { Colors, Fonts, Sizes } from 'styles';
 import { Routes } from 'constants';
-import { selectOrCreateConversation } from 'store/reducers/chats';
+import { selectConversation, setNewConversationResource } from 'store/reducers/conversations';
 
 const OpenChat = ({
   style,
   containerStyle,
   enableIcon=false,
-  receiverName,
+  receiverId,
   resourceId,
   resourceType,
+  conversationId=null,
   onPress,
   children,
 }) => {
@@ -22,15 +23,21 @@ const OpenChat = ({
   const dispatch = useDispatch();
 
   const handlePress = useCallback(() => {
-    dispatch(selectOrCreateConversation({
-      resourceId,
-      resourceType,
-      receiverName,
-    }));
+    dispatch(selectConversation({ conversationId }));
+
+    if (conversationId === null) {
+      dispatch(setNewConversationResource({
+        receiverId, resourceId, resourceType,
+      }));
+    }
+
     onPress && onPress();
 
     navigation.navigate(Routes.CHAT);
-  }, [navigation, resourceId, receiverName, resourceType, dispatch, onPress]);
+  }, [
+    navigation, conversationId, dispatch, onPress,
+    receiverId, resourceId, resourceType,
+  ]);
 
 
   return (

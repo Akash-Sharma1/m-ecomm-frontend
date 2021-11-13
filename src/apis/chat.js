@@ -1,5 +1,39 @@
-const sendMessage = async () => {
-  return null;
+const sendMessageToNewConversation = async ({
+  resourceId,
+  resourceType,
+  receiverId,
+  senderId,
+  createdOn,
+  content,
+}) => {
+  return {
+    id: (Math.random() * 100),
+    conversationId: (Math.random() * 100),
+    status: 'sent',
+    content,
+    receiverId,
+    senderId,
+    createdOn,
+  };
+};
+
+const sendMessageToExistingConversation = async ({
+  conversationId,
+  receiverId,
+  senderId,
+  createdOn,
+  content,
+}) => {
+  return {
+    id: (Math.random() * 100),
+    status: 'sent',
+    content: content,
+    conversationId,
+    receiverId,
+    senderId,
+    createdOn,
+    sentOn: (new Date()).toISOString(),
+  };
 };
 
 
@@ -7,17 +41,19 @@ const sendMessage = async () => {
  * This function takes last loaded message's sent time and loads
  * last X number of messages
  * @param {fromDateTime} <date-string>
- * @param {receiverId} <int>
- * @param {resourceType} <null / string>
- * @param {resourceId} <null / int>
+ * @param {conversationId} <int>
  *
  * @return {messages}
   [
     {
       id: <int>,
+      conversation_id: <int>,
+      sender_id: <int>,
       receiver_id: <int>,
+
       text: 'Shriman Narayan, Narayan, Hari Hari',
       status: <string>,
+
       created_on: <date-string>,
       sentOn: <date-string>,
       delivered_on: <date-string> / null,
@@ -27,15 +63,16 @@ const sendMessage = async () => {
  */
 const fetchMessages = async ({
   fromDateTime,
-  receiverId,
-  resourceType,
-  resourceId,
+  conversationId,
 }) => {
-  return [...Array(5)].map((_, index) => (
+  return [...Array(10)].map((_, index) => (
     {
-      id: index,
+      id: Math.random() * 1000,
       status: 'sent',
-      text: 'Shriman Narayan, Narayan, Hari Hari',
+      conversationId,
+      senderId: index % 2 ? 'Seller' : 123,
+      recieverId: index % 2 ? 123 : 'Seller',
+      content: 'Shriman Narayan, Narayan, Hari Hari',
       created_on: (new Date()).toISOString(),
       sentOn: (new Date()).toISOString(),
       delivered_on: (new Date()).toISOString(),
@@ -46,6 +83,7 @@ const fetchMessages = async ({
 
 
 export default {
-  sendMessage,
+  sendMessageToExistingConversation,
+  sendMessageToNewConversation,
   fetchMessages,
 };

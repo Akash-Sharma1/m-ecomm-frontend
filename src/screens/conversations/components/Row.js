@@ -1,37 +1,37 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Avatar, ChatTicks } from 'components';
 import { OpenChat } from 'actions';
 import { Colors, Fonts, Sizes } from 'styles';
 import { setAccentColorIndex } from 'store/reducers/general';
+import { getLastMessage, getOtherParticipantInConversation } from 'utils/chat';
 
 const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
   const dispatch = useDispatch();
-  const messageIds = Object.keys(conversation.messages);
-  const lastMessageId = (messageIds && messageIds.length > 0) ? messageIds[0] : null;
-  const lastMessage = conversation.messages[lastMessageId];
+
+  const allConversationMessages = useSelector((state) => state.chats.conversationMessages);
+  const lastMessage = getLastMessage(allConversationMessages[conversation.id]) || {};
+
+  const otherParticipant = getOtherParticipantInConversation(conversation.participants);
 
   const handlePress = React.useCallback(() => {
     dispatch(setAccentColorIndex(accentColorIndex));
   }, [dispatch, accentColorIndex]);
 
-
   return (
     <OpenChat
       onPress={handlePress}
       containerStyle={[styles.container, style]}
-      resourceId={conversation.resourceId}
-      resourceType={conversation.resourceType}
-      receiverName={conversation.receiverName}
+      conversationId={conversation.id}
     >
       <Avatar rounded style={styles.avatar} accentColorIndex={accentColorIndex} />
 
       <View style={styles.textContainer}>
         <View style={styles.topRow}>
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
-            {conversation.receiverName}
+            {otherParticipant}
           </Text>
 
           <ChatTicks
@@ -43,7 +43,7 @@ const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
 
         <View style={styles.secondRow}>
           <Text style={styles.subtext} numberOfLines={1} ellipsizeMode="tail">
-            {lastMessage.text}
+            {lastMessage?.content}
           </Text>
         </View>
       </View>

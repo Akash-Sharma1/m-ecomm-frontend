@@ -50,6 +50,8 @@ const StatusIcon = ({ status, highlightColorIndex=0, iconStyle }) => {
         ]}
       />
     );
+  default:
+    return null;
   }
 };
 

@@ -1,5 +1,5 @@
 // ACTIONS
-const prefix = 'products';
+const prefix = 'cart';
 
 const CHANGE_ITEM_QUANTITY = `${prefix}/CHANGE_ITEM_QUANTITY`;
 

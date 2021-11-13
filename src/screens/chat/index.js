@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { Colors, Sizes } from 'styles';
-import { fetchMessages } from 'store/reducers/chats';
 import ChatTopHeader from './components/ChatTopHeader';
 import ChatBottomHeader from './components/ChatBottomHeader';
 import ChatFooter from './components/ChatFooter';
@@ -12,14 +11,10 @@ import MessageList from './components/MessageList';
 
 
 const Chat = () => {
-  const dispatch = useDispatch();
-  const { currentConversationId, conversations } = useSelector((state) => state.chats);
-  const conversation = conversations[currentConversationId];
-  const messages = conversation.messages;
+  const currentConversationId = useSelector((state) => state.conversations.currentConversationId);
+  const allConversationMessages = useSelector((state) => state.chats.conversationMessages);
 
-  React.useEffect(() => {
-    dispatch(fetchMessages({ conversationId: currentConversationId }));
-  }, [dispatch, currentConversationId]);
+  const messages = allConversationMessages[currentConversationId];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,7 +27,10 @@ const Chat = () => {
         {(!messages || messages.length === 0) ? (
           <EmptyConversation />
         ) : (
-          <MessageList messages={messages} />
+          <MessageList
+            messages={messages}
+            currentConversationId={currentConversationId}
+          />
         )}
       </View>
 

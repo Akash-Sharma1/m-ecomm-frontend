@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Colors, Sizes } from 'styles';
 import { Header, Input, List } from 'components';
-import { fetchConversations } from 'store/reducers/chats';
+import { fetchConversations } from 'store/reducers/conversations';
 import ConverationRow from './components/Row';
 
 const Conversations = () => {
   const dispatch = useDispatch();
-  const conversations = useSelector((state) => state.chats.conversations);
+  const conversations = useSelector((state) => state.conversations.conversations);
 
   useEffect(() => {
     dispatch(fetchConversations());
