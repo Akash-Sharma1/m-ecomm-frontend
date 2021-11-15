@@ -17,58 +17,25 @@ export const convertDateObjectToString = (dateobject) => {
   return dateobject.toISOString();
 };
 
-
-/**
- * @param {date object} date
- * @param {date object} currentDateObj
- * @return {string}
- * eg: 16:30
- * eg: yesterday
- * eg: 2 days ago
- * eg a month ago
- * eg an year ago
- * eg: 2 days from now
- */
-export const convertDateTimeToRealtiveCasualLanguage = (
-  dateObj, currentDateObj = new Date(), fromNowString = 'fromNow',
-) => {
-  const comparedDates = compareDateObjs(dateObj, currentDateObj);
-  const agoOrFromNowString = dateObj < currentDateObj ? 'ago' : fromNowString;
-
-  if (comparedDates.isSameMinute) {
-    return `${comparedDates.secondsInBetween} seconds ${agoOrFromNowString}`;
-  } else if (comparedDates.isSameHour) {
-    return `${comparedDates.minutesInBetween} minutes ${agoOrFromNowString}`;
-  } else if (comparedDates.isSameDate) {
-    return `${comparedDates.hoursInBetween} hours ${agoOrFromNowString}`;
-  } else if (comparedDates.isSameMonth) {
-    return `${comparedDates.daysInBetween} days ${agoOrFromNowString}`;
-  } else if (comparedDates.isSameYear) {
-    return `${comparedDates.monthsInBetween} months ${agoOrFromNowString}`;
-  } else if (comparedDates.isSameYear) {
-    return `${comparedDates.yearsInBetween} years ${agoOrFromNowString}`;
-  }
-};
-
-
 /**
  *
- * @param {date object`} dateObj1
+ * @param {date object} dateObj1
  * @param {date object} dateObj2
  * date2 > date1 in every case
  * @returns
  */
 export const compareDateObjs = (dateObj1, dateObj2) => {
-  const timeDifference = dateObj1.getTime() - dateObj2.getTime();
+  const timeDifference = Math.abs(dateObj2.getTime() - dateObj1.getTime());
   // eslint-disable-next-line max-len
-  const { date: date1, month: month1, fullYear: fullYear1, hour: hour1, minutes: minutes1 } = extractFromDate(dateObj1);
+  const { date: date1, month: month1, fullYear: fullYear1, hour: hour1, minutes: minutes1 } = extractDateProperties(dateObj1);
   // eslint-disable-next-line max-len
-  const { date: date2, month: month2, fullYear: fullYear2, hour: hour2, minutes: minutes2 } = extractFromDate(dateObj2);
+  const { date: date2, month: month2, fullYear: fullYear2, hour: hour2, minutes: minutes2 } = extractDateProperties(dateObj2);
 
   let monthsInBetween;
   monthsInBetween = (dateObj2.getFullYear() - dateObj1.getFullYear()) * 12;
   monthsInBetween -= dateObj1.getMonth();
   monthsInBetween += dateObj2.getMonth();
+  monthsInBetween = Math.abs(monthsInBetween);
 
   return {
     // eslint-disable-next-line max-len
@@ -79,16 +46,17 @@ export const compareDateObjs = (dateObj1, dateObj2) => {
     isSameMonth: (month1 === month2 && fullYear1 === fullYear2),
     isSameYear: (fullYear1 === fullYear2),
     millisecondsInBetween: timeDifference,
-    secondsInBetween: Math.abs(Math.floor(timeDifference / 1000)),
-    minutesInBetween: Math.abs(Math.floor(timeDifference / (1000 / 60))),
-    hoursInBetween: Math.abs(Math.floor(timeDifference / (1000 / 60 / 60))),
-    daysInBetween: Math.abs(Math.floor(timeDifference / (1000 / 60 / 60 / 24))),
-    monthsInBetween: Math.abs(Math.floor(monthsInBetween)),
+    secondsInBetween: Math.floor(timeDifference / 1000),
+    minutesInBetween: Math.floor(timeDifference / (1000 * 60)),
+    hoursInBetween: Math.floor(timeDifference / (1000 * 60 * 60)),
+    daysInBetween: Math.floor(timeDifference / (1000 * 60 * 60 * 24)),
+    monthsInBetween: Math.floor(monthsInBetween),
     yearsInBetween: Math.abs(Math.floor(dateObj1.getFullYear() - dateObj2.getFullYear())),
   };
 };
 
-export const extractFromDate = (dateObj) => {
+
+export const extractDateProperties = (dateObj) => {
   let dateProperties = {
     date: dateObj.getDate(),
     year: dateObj.getYear(),
@@ -114,13 +82,26 @@ export const extractFromDate = (dateObj) => {
 };
 
 export const timeFromDateObj = (dateObj) => {
-  const { hours, minutes } = extractFromDate(dateObj);
+  const { hours, minutes } = extractDateProperties(dateObj);
 
   return `${hours}:${minutes}`;
 };
 
+export const dateFromDateObj = (dateObj, monthInWords = false) => {
+  const { date, month, fullYear } = extractDateProperties(dateObj);
+
+  if (monthInWords) {
+    return `${date}, ${MONTH_NAMES[month]}, ${fullYear}`;
+  } else {
+    return `${date}/${month}/${fullYear}`;
+  }
+};
+
 export const MONTH_NAMES = [
-  'Monday', 'Tuesday', ' Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
+  'January', 'February', 'March',
+  'April', 'May', 'June', 'July',
+  'August', 'September', 'October',
+  'November', 'December',
 ];
 export const DAY_NAMES = [
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',

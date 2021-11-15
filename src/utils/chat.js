@@ -1,3 +1,10 @@
+import {
+  compareDateObjs,
+  convertDateStringToObject,
+  dateFromDateObj,
+  extractDateProperties,
+} from './date';
+
 export const CHAT_MESSAGE_STATUSES = {
   PENDING: 'pending',
   SENT: 'sent',
@@ -40,7 +47,8 @@ export const generateNewTextMessageObj = ({
  */
 export const sortMessagesByRecentFirst = (messagesArray = []) => {
   messagesArray.sort((a, b) => {
-    return ((a.sentOn || a.createdOn) - (b.sentOn || b.createdOn));
+    return (convertDateStringToObject(b.sentOn || b.createdOn) -
+    convertDateStringToObject(a.sentOn || a.createdOn));
   });
 
   return [...messagesArray];
@@ -52,4 +60,30 @@ export const getLastMessage = (messagesArray = []) => {
 
 export const getOtherParticipantInConversation = (participants = [], userId) => {
   return participants.find((participant) => participant !== userId);
+};
+
+export const getChatDateString = (messageDateTimeString) => {
+  const dateObj = convertDateStringToObject(messageDateTimeString);
+  const currentDateObj = new Date();
+  const { date: givenDate } = extractDateProperties(dateObj);
+  const { date: currentDate } = extractDateProperties(currentDateObj);
+
+  const comapredProperties = compareDateObjs(dateObj, currentDateObj);
+
+  if (comapredProperties.isSameDate) {
+    return 'Today';
+  } else if (comapredProperties.isSameMonth && currentDate - givenDate === 1) {
+    return 'Yesterday';
+  } else {
+    return dateFromDateObj(dateObj, true);
+  }
+};
+
+export const hasDateChangedInNextMessage = (currentMessageString, nextMessageString) => {
+  const dateObj1 = convertDateStringToObject(currentMessageString);
+  const dateObj2 = convertDateStringToObject(nextMessageString);
+
+  const { isSameDate } = compareDateObjs(dateObj1, dateObj2);
+
+  return !isSameDate;
 };

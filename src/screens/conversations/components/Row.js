@@ -38,6 +38,7 @@ const ConverationRow = ({ conversation, style, accentColorIndex=0 }) => {
             message={lastMessage}
             highlightColorIndex={accentColorIndex}
             iconStyle={styles.ticks}
+            casualDateTime
           />
         </View>
 

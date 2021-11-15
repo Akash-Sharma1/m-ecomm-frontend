@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { CHAT_MESSAGE_STATUSES } from '../utils/chat';
+import { CHAT_MESSAGE_STATUSES } from '../../utils/chat';
 
-import { Colors, Fonts, Mixins, Sizes } from 'styles';
-import { convertDateStringToObject, convertDateTimeToRealtiveCasualLanguage } from 'utils/date';
+import { Colors, Fonts, Mixins } from 'styles';
 
-const StatusIcon = ({ status, highlightColorIndex=0, iconStyle }) => {
+const MessageStatusTickIcon = ({ status, highlightColorIndex=0, iconStyle }) => {
   switch (status) {
   case CHAT_MESSAGE_STATUSES.PENDING:
     return (
@@ -55,35 +54,11 @@ const StatusIcon = ({ status, highlightColorIndex=0, iconStyle }) => {
   }
 };
 
-const ChatTicks = ({ message, containerStyle, iconStyle, textStyle }) => {
-  const getRelativeCasualTime = convertDateTimeToRealtiveCasualLanguage(
-    convertDateStringToObject(message.sentOn));
-
-  return (
-    <View style={[styles.container, containerStyle]}>
-      <StatusIcon status={message.status} iconStyle={iconStyle} />
-      {message.sentOn && (
-        <Text style={[styles.timeText, textStyle]}>
-          {getRelativeCasualTime}
-        </Text>
-      )}
-    </View>
-  );
-};
-
-export default ChatTicks;
+export default MessageStatusTickIcon;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   icon: {
     ...Fonts.H2,
     ...Fonts.BOLD,
-  },
-  timeText: {
-    ...Fonts.H5,
-    paddingLeft: Sizes.size(5),
   },
 });

@@ -70,13 +70,13 @@ const fetchMessages = async ({
       id: Math.random() * 1000,
       status: 'sent',
       conversationId,
-      senderId: index % 2 ? 'Seller' : 123,
+      senderId: index % 2 ? 'Seller' : '123',
       recieverId: index % 2 ? 123 : 'Seller',
       content: 'Shriman Narayan, Narayan, Hari Hari',
-      created_on: (new Date()).toISOString(),
-      sentOn: (new Date()).toISOString(),
-      delivered_on: (new Date()).toISOString(),
-      read_on: (new Date()).toISOString(),
+      createdOn: (new Date(2021, 10, 16 - index/2)).toISOString(),
+      sentOn: (new Date(2021, 10, 16 - index/2)).toISOString(),
+      deliveredOn: (new Date(2021, 10, 16 - index/2)).toISOString(),
+      readOn: (new Date(2021, 10, 16 - index)).toISOString(),
     }
   ));
 };
