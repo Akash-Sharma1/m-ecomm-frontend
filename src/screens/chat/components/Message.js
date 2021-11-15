@@ -26,7 +26,6 @@ const Message = ({ message, style }) => {
       >
         <Text style={styles.text}>
           {message.content}
-          {message.sentOn}
           <Text style={styles.invisibleText}>
             placholder
           </Text>
